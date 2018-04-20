@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>云API</title>
+    <link rel="stylesheet" type="text/css" href="../css/api.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/style.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/aui.css" />
+    <link rel="stylesheet" type="text/css" href="../css/aui-flex.css" />
+    <link rel="stylesheet" type="text/css" href="../css/aui-slide.css" />
+    <style>
+    body{
+      background: #fff;
+    }
+    .aui-searchbar{
+      background-color: #fff;
+    }
+    .aui-searchbar-input{
+      font-family: SimHei;
+      border: 1px solid #999;
+    }
+    img.icon {
+        display: block;
+        margin: 0 auto;
+        width: 60%;
+    }
+    .aui-grid-label {
+        padding-top: 0.5rem;
+        font-size: 0.7rem !important;
+    }
+    .goods-item {
+        border: 1px solid #eee;
+        text-align: center;
+        padding: 0.5rem;
+    }
+    .goods-item img {
+        display: block;
+        width: 100%;
+        height: 7rem;
+    }
+    .title {
+        color: #666;
+        font-size: 0.8rem;
+        text-align: center;
+    }
+    .title p {
+        font-size: 0.6rem;
+        color: #ccc;
+    }
+    .goods-title {
+        font-size: 0.7rem;
+        color: #333 !important;
+    }
+    .hot img {
+        width: 3rem;
+        display: block;
+        margin: 0 auto;
+    }
+    </style>
+</head>
+<body>
+    <div class="aui-searchbar" id="search">
+            <div class="aui-searchbar-input aui-border-radius">
+                <i class="aui-iconfont aui-icon-search"></i>
+                <input type="search" placeholder="请输入搜索内容" id="search-input">
+                <div class="aui-searchbar-clear-btn">
+                    <i class="aui-iconfont aui-icon-close"></i>
+                </div>
+            </div>
+            <div class="aui-searchbar-btn" tapmode>取消</div>
+        </div>
+        <section class="aui-content">
+            <div id="aui-slide">
+                <div class="aui-slide-wrap" >
+                    <div class="aui-slide-node">
+                        <img src="../image/demo/b1.jpg" />
+                    </div>
+                    <div class="aui-slide-node">
+                        <img src="../image/demo/b2.jpg" />
+                    </div>
+                    <div class="aui-slide-node">
+                        <img src="../image/demo/b3.jpg" />
+                    </div>
+                </div>
+                <div class="aui-slide-page-wrap"><!--分页容器--></div>
+            </div>
+        </section>
+        <section class="aui-content aui-margin-b-15">
+            <div class="aui-grid aui-padded-l-10 aui-padded-r-10">
+                <div class="aui-row aui-row-padded">
+                    <div class="aui-col-5">
+                        <img src="../image/Lh-img1.png" class="icon">
+                        <div class="aui-grid-label">二手信息</div>
+                    </div>
+                    <div class="aui-col-5">
+                        <img src="../image/Lh-img2.png" class="icon">
+                        <div class="aui-grid-label">本地服务</div>
+                    </div>
+                    <div class="aui-col-5">
+                        <img src="../image/Lh-img3.png" class="icon">
+                        <div class="aui-grid-label">求职招聘</div>
+                    </div>
+                    <div class="aui-col-5">
+                        <img src="../image/Lh-img4.png" class="icon">
+                        <div class="aui-grid-label">房屋出租</div>
+                    </div>
+                    <div class="aui-col-5">
+                        <img src="../image/Lh-img5.png" class="icon">
+                        <div class="aui-grid-label">购物</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+      <script type="text/javascript" src="../script/api.js"></script>
+      <script type="text/javascript" src="../script/aui-slide.js"></script>
+      <script type="text/javascript">
+          var slide = new auiSlide({
+              container:document.getElementById("aui-slide"),
+              "height":200,
+              "speed":300,
+              "pageShow":true,
+              "pageStyle":'dot',
+              "loop":true,
+              'dotPosition':'center'
+          })
+    
+      </script>
+</body>
+</html>
