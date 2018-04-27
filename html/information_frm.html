@@ -1,0 +1,77 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="../css/aui.css" />
+	<style>
+        .aui-card-list {
+            margin-bottom: 0;
+        }
+        .aui-font-size-14{
+     text-overflow: ellipsis;
+     white-space: nowrap;
+     overflow: hidden;
+     position: relative;
+     padding: 0.3rem 0.1rem;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+    justify-content: space-between;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+}
+.aui-card-list-footer{
+  min-height: 0;
+   padding:0 0.1rem;
+}
+.price{
+  color: #f00
+}
+.time{
+  color: #212121;
+}
+	</style>
+</head>
+<body>
+    <section class="aui-content aui-padded-l-5 aui-padded-r-10 aui-padded-t-5">
+        <div class="aui-row aui-row-padded">
+            <div class="aui-col-xs-6">
+                <div class="aui-card-list">
+                    <div class="aui-card-list-content">
+                        <img src="../image/demo3.png">
+                    </div>
+                    <div class="aui-font-size-14">文字描述文字描述文字描述文字描述文字描述文字描述文字描述文字描述文字描述文字描述</div>
+                    <div class="aui-card-list-footer">
+                      <div class="price">价格：100</div>
+                      <div class="time">刚刚来过</div>
+                  </div>
+                </div>
+            </div>
+            <div class="aui-col-xs-6">
+                <div class="aui-card-list">
+                    <div class="aui-card-list-content">
+                        <img src="../image/demo3.png">
+                    </div>
+                    <div class="aui-font-size-14">文字描述文字描述文字描述文字描述文字描述文字描述文字描述文字描述文字描述文字描述</div>
+                    <div class="aui-card-list-footer">
+              <div class="price">价格：100</div>
+              <div class="time">刚刚来过</div>
+          </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript">
+    apiready = function(){
+        api.parseTapmode();
+    };
+</script>
+</html>

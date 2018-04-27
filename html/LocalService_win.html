@@ -1,0 +1,114 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <link rel="stylesheet" type="text/css" href="../css/aui.css" />
+    <style type="text/css">
+    body{
+      background: #eeeeee;
+    }
+        #classify-list {
+            width: 5rem;
+            height: 100%;
+            background-color: #ffffff;
+            overflow-x: hidden;
+        }
+        #classify-list .aui-list {
+            overflow-y: scroll;
+        }
+        .aui-list .aui-list-item-title {
+            font-size: 0.7rem;
+        }
+        .aui-list .aui-list-item {
+          border-bottom: none;
+        }
+        @media screen and (-webkit-min-device-pixel-ratio: 1.5){
+          .aui-list .aui-list-item{
+    background-image:none;
+        }
+        }
+        .tuurw .aui-list-item-inner .aui-list-item-title{
+        color: #fe467a !important;
+        }
+        .tuurw{
+            border-bottom: 1px solid #dddddd !important;
+            background: #eeeeee;
+        }
+    </style>
+</head>
+<body>
+    <header class="aui-bar aui-bar-nav" id="aui-header">
+        <a class="aui-btn aui-pull-left" tapmode onclick="closeWin()">
+            <span class="aui-iconfont aui-icon-left"></span>
+        </a>
+        <div class="aui-title">本地服务</div>
+    </header>
+    <section class="aui-content" id="classify-list">
+        <ul class="aui-list aui-list-noborder">
+            <li class="aui-list-item  tuurw" onclick="randomTab( this );" tapmode='hoveer'>
+                <div class="aui-list-item-inner">
+                    <div class="aui-list-item-title">商务服务</div>
+                </div>
+            </li>
+            <li class="aui-list-item" onclick="randomTab( this );" tapmode='hoveer'>
+                <div class="aui-list-item-inner">
+                    <div class="aui-list-item-title">礼品</div>
+                </div>
+            </li>
+            <li class="aui-list-item" onclick="randomTab( this );" tapmode='hoveer'>
+                <div class="aui-list-item-inner">
+                    <div class="aui-list-item-title">婚庆</div>
+                </div>
+            </li>
+
+        </ul>
+    </section>
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript">
+    apiready = function(){
+        api.parseTapmode();
+        var header = $api.byId('aui-header');
+        $api.fixStatusBar(header);
+        var headerPos = $api.offset(header);
+        var body_h = $api.offset($api.dom('body')).h;
+        var classifyListH = $api.offset($api.byId('classify-list')).w;
+        document.getElementById("classify-list").style.height = api.winHeight-headerPos.h+"px";
+        api.openFrame({
+            name: 'LocalService_frm',
+            url: 'LocalService_frm.html',
+            bounces: true,
+            rect: {
+                x: classifyListH+5,
+                y: headerPos.h,
+                w: api.winWidth-classifyListH-5,
+                h: 'auto'
+            }
+        })
+    };
+    // 切换按钮
+    function randomTab( tag ) {
+        if( tag == $api.dom('#classify-list li.tuurw') )return;
+        var eFootLis = $api.domAll('#classify-list li'),
+            index = 0;
+        for (var i = 0,len = eFootLis.length; i < len; i++) {
+            if( tag == eFootLis[i] ){
+                index = i;
+            }else{
+                $api.removeCls(eFootLis[i], 'tuurw');
+            }
+        }
+        $api.addCls( eFootLis[index], 'tuurw');
+        api.setFrameGroupIndex({
+            name: 'group',
+            index: index
+        });
+    }
+    function closeWin(){
+        api.closeWin({
+        });
+    }
+</script>
+</html>

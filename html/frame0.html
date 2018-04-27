@@ -88,6 +88,19 @@
      z-index: 99;
     background: transparent;
   }
+  .Aui_ca{
+    text-align: center;
+    width: 100%;
+    padding-bottom:1rem;
+  }
+  .Aui_ca img{
+    display: block;
+    margin: 0 auto;
+    width: 66%
+  }
+  .aui-margin-b-15{
+    margin-bottom: 0 !important;
+  }
     </style>
 </head>
 <body>
@@ -120,11 +133,11 @@
         <section class="aui-content aui-margin-b-15">
             <div class="aui-grid aui-padded-l-10 aui-padded-r-10">
                 <div class="aui-row aui-row-padded">
-                    <div class="aui-col-5">
+                    <div class="aui-col-5" onclick="fnInfomation();">
                         <img src="../image/Lh-img1.png" class="icon">
                         <div class="aui-grid-label">二手信息</div>
                     </div>
-                    <div class="aui-col-5">
+                    <div class="aui-col-5" onclick="fnLocalService();">
                         <img src="../image/Lh-img2.png" class="icon">
                         <div class="aui-grid-label">本地服务</div>
                     </div>
@@ -136,7 +149,7 @@
                         <img src="../image/Lh-img4.png" class="icon">
                         <div class="aui-grid-label">房屋出租</div>
                     </div>
-                    <div class="aui-col-5">
+                    <div class="aui-col-5" onclick="fnShopping();">
                         <img src="../image/Lh-img5.png" class="icon">
                         <div class="aui-grid-label">购物</div>
                     </div>
@@ -144,6 +157,9 @@
             </div>
         </section>
         <!-- 猜你喜欢 -->
+        <div class="Aui_ca">
+          <img src="../image/Aui_ca.png" alt="">
+        </div>
     <ul class="aui-list aui-media-list">
             <li class="aui-list-item">
                 <div class="aui-media-list-item-inner">
@@ -224,6 +240,37 @@
               "loop":true,
               'dotPosition':'center'
           })
+          function fnInfomation() {
+            // 打开二手信息窗口
+            api.openWin({
+                name: 'information_win',
+                url: './information_win.html',
+                pageParam: {
+                    name: 'test'
+                }
+            });
+          }
+          function fnLocalService() {
+            // 打开本地服务
+            api.openWin({
+                name: 'LocalService_win',
+                url: './LocalService_win.html',
+                pageParam: {
+                    name: 'test'
+                }
+            });
+          }
+          function fnShopping() {
+            // 打开购物
+            api.openWin({
+                name: 'Shopping_win',
+                url: './Shopping_win.html',
+                pageParam: {
+                    name: 'test'
+                }
+            });
+
+          }
       </script>
 </body>
 </html>
