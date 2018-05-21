@@ -27,5 +27,8 @@
 	<permission name="fileSystem" />
 	<permission name="internet" />
 	<permission name="bootCompleted" />
-	<permission name="hardware" />
+	<permission name="hardware" />  <feature name="bMap">
+     <param name="android_api_key" value="f7Is0dWLom2q6rV3ZfFPZ1aa" />
+     <param name="ios_api_key" value="81qz3dBYB5q2nGji4IYrawr1" />
+   </feature>
 </widget>

@@ -11,11 +11,11 @@
                     background: #fff;
                      }
                      .gambit_recommend .list{
-                       height: 42px !important;
+                       /*height: 42px !important;*/
                      }
                     .gambit_head {
                         width: 100%;
-                        height: 43px;
+                        /*height: 43px;*/
                         display: flex;
                         display: -webkit-flex;
                         display: -webkit-box;
@@ -34,8 +34,8 @@
                         flex: 1;
                         -webkit-flex: 1;
                         -webkit-box-flex: 1;
-                        height: 43px;
-                        line-height: 43px;
+                        /*height: 43px;
+                        line-height: 43px;*/
                         box-sizing: border-box;
                         color: #222;
                         font-size: 15px;
@@ -46,7 +46,7 @@
                     }
 
                     .gambit_recommend .list {
-                        height: 40px;
+                        /*height: 40px;*/
                         display: inline-block;
                     }
 
@@ -54,9 +54,9 @@
                         margin-left: 50px;
                     }
                     .header {
-                        height: 43px;
+
                         width: 100%;
-                        line-height: 43px;
+                        /*line-height: 43px;*/
                     }
 
                     .header.active {
@@ -70,9 +70,17 @@
                      color: #2d2d2d;
                      font-weight: bold;
                    }
+                   .aui-bar-tab .aui-bar-tab-item{
+                     font-size: 18px;
+                     padding-top: 8px
+                   }
+                   .aui-text-comment,.icon{
+                     color: #2d2d2d
+                   }
     </style>
 </head>
 <body>
+  <div id="wrap" class="flex-wrap flex-vertical">
     <header class="aui-bar aui-bar-nav" id="aui-header">
       <div class="topic gambit_head header">
         <a class="aui-pull-left aui-btn" class="back" tapmode onclick="api.closeWin();">
@@ -83,11 +91,30 @@
               <div class="list em2" tapmode onclick="fnChange(1);">详情</div>
               <div class="list em2" tapmode onclick="fnChange(2);">评价</div>
           </div>
-          <a class="aui-pull-right aui-btn" class="share" tapmode  onclick="fnOpenThemeChoose();">
+          <a class="aui-pull-right aui-btn" class="share" tapmode  onclick="fnOpenShareFrame()">
               <span class="aui-iconfont aui-icon-share"></span>
           </a>
       </div>
     </header>
+    <!--底部-->
+  <footer class="aui-bar aui-bar-tab">
+            <div class="aui-bar-tab-item" tapmode style="width:3rem;">
+                <i class="aui-iconfont aui-icon-home aui-text-home icon"></i>
+                <div class="aui-bar-tab-label aui-text-comment">店铺</div>
+            </div>
+            <div class="aui-bar-tab-item" tapmode style="width:3rem;">
+                <i class="aui-iconfont aui-icon-comment aui-text-comment icon"></i>
+                <div class="aui-bar-tab-label aui-text-comment">客服</div>
+            </div>
+            <div class="aui-bar-tab-item" tapmode style="width: 3rem;">
+                <i class="aui-iconfont aui-icon-cart aui-text-cart icon"></i>
+                <div class="aui-bar-tab-label aui-text-comment">购物车</div>
+            </div>
+            <div class="aui-bar-tab-item aui-bg-warning aui-text-white" tapmode style="width: auto;">加入购物车</div>
+            <div class="aui-bar-tab-item aui-bg-danger aui-text-white" tapmode style="width: auto;">立即购买</div>
+        </footer>
+</div>
+
 </body>
 <script type="text/javascript" src="../script/api.js"></script>
 <!-- <script src="../script/common.js"></script> -->
@@ -95,8 +122,43 @@
 apiready = function() {
   changeStyle(0);
   fnInitShoplist();
+  fnInitEvent();
 };
-
+// 分享
+function fnInitEvent() {
+    api.addEventListener({
+        name: 'keyback'
+    }, function(ret, err) {
+        if (shareStatus) {
+            fnOpenShareFrame();
+        } else {
+            api.closeWin();
+        }
+    });
+};
+var shareStatus = false;
+function fnOpenShareFrame() {
+    shareStatus = !shareStatus;
+    if (shareStatus) {
+        api.openFrame({
+            name: 'share_frame',
+            url: './share_frame.html',
+            bounces: false,
+            vScrollBarEnabled: false,
+            hScrollBarEnabled: false,
+            rect: {
+                x: 0,
+                y: 0,
+                w: 'auto',
+                h: 'auto'
+            },
+        });
+    } else {
+        api.closeFrame({
+            name: 'share_frame'
+        });
+    }
+};
 function changeStyle(index) {
     var topMenu = $api.byId('top-menu');
     var divs = $api.domAll(topMenu, 'div');
@@ -124,7 +186,6 @@ function fnInitShoplist() {
             vScrollBarEnabled: false,
             hScrollBarEnabled: false,
             bgColor: '#f0f0f0',
-
         });
     }
 
@@ -135,9 +196,11 @@ function fnInitShoplist() {
             x: 0,
             y: $api.dom('header').offsetHeight,
             w: 'auto',
-            h: 'auto'
+            h: 'auto',
+            marginBottom:55,
         },
-  
+
+        // index:0,
         frames: frames
     }, function(ret, err) {
           changeStyle(ret.index);

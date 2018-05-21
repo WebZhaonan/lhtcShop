@@ -1,0 +1,163 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <link rel="stylesheet" type="text/css" href="../css/aui.css" />
+    <style type="text/css">
+                    .aui-bar-nav {
+                    /*line-height: 43px;*/
+                    background: #fff;
+                     }
+                     .gambit_recommend .list{
+                       /*height: 42px !important;*/
+                     }
+                    .gambit_head {
+                        width: 100%;
+                        /*height: 43px;*/
+                        display: flex;
+                        display: -webkit-flex;
+                        display: -webkit-box;
+                        flex-flow: row;
+                        -webkit-flex-flow: row;
+                        -webkit-box-orient: horizontal;
+                        background-color: #fff;
+                        position: relative;
+                        box-sizing: border-box;
+                        padding-left: 3px;
+                        padding-right: 3px;
+                        border-bottom: 1px solid #d8d8d8;
+                    }
+
+                    .gambit_menu {
+                        flex: 1;
+                        -webkit-flex: 1;
+                        -webkit-box-flex: 1;
+                        /*height: 43px;
+                        line-height: 43px;*/
+                        box-sizing: border-box;
+                        color: #222;
+                        font-size: 15px;
+                    }
+
+                    .gambit_recommend {
+                        text-align: center;
+                    }
+
+                    .gambit_recommend .list {
+                        /*height: 40px;*/
+                        display: inline-block;
+                    }
+
+                    .gambit_recommend .em2 {
+                        margin-left: 50px;
+                    }
+                    .header {
+
+                        width: 100%;
+                        /*line-height: 43px;*/
+                    }
+
+                    .header.active {
+                        display: block;
+                    }
+
+                   .aui-bar-nav .aui-btn .aui-iconfont{
+                     color: #2d2d2d;
+                     font-weight: bold;
+                   }
+                   .aui-bar-tab .aui-bar-tab-item{
+                     font-size: 18px;
+                     padding-top: 8px
+                   }
+                   .aui-text-comment,.icon{
+                     color: #2d2d2d
+                   }
+                   #top-menu .list{
+                     width: 32.3%;
+                     padding: 10px 0;
+                   }
+                   .gambit_menu>div.active{
+                     color: #fe467a;
+                     border-bottom: 2px solid #fe467a;
+                     font-weight: bold;
+                   }
+    </style>
+</head>
+<body>
+  <div id="wrap" class="flex-wrap flex-vertical">
+    <div class="gambit_menu gambit_recommend" id="top-menu">
+        <div class="list active" tapmode onclick="fnChange(0);">为您推荐</div>
+        <div class="list" tapmode onclick="fnChange(1);">高薪职位</div>
+        <div class="list" tapmode onclick="fnChange(2);">福利专区</div>
+        </div>
+    </div>
+</div>
+
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<!-- <script src="../script/common.js"></script> -->
+<script type="text/javascript">
+apiready = function() {
+  changeStyle(0);
+  fnInitShoplist();
+};
+function changeStyle(index) {
+    var topMenu = $api.byId('top-menu');
+    var divs = $api.domAll(topMenu, 'div');
+    api.setFrameGroupIndex({
+        name: frameNames[2],
+        index: index,
+        scroll: true
+    });
+    for (var i = 0; i < divs.length; i++) {
+        if (i == index) {
+            $api.addCls(divs[i], 'active');
+        } else {
+            $api.removeCls(divs[i], 'active');
+        }
+    }
+}
+var frameNames = ['Job', 'Job0','Job1'];
+function fnInitShoplist() {
+    var frames = [];
+    for (var i = 0; i < frameNames.length; i++) {
+        frames.push({
+            name: frameNames[i],
+            url: './' + frameNames[i] + '.html',
+            bounces: true,
+            vScrollBarEnabled: false,
+            hScrollBarEnabled: false,
+            bgColor: '#f0f0f0',
+        });
+    }
+    api.openFrameGroup({
+        name: 'Job_group',
+        scrollEnabled: true,
+        rect: {
+            x: 0,
+            y: 130,
+            w: 'auto',
+            h: 'auto',
+        },
+
+        // index:0,
+        frames: frames
+    }, function(ret, err) {
+          changeStyle(ret.index);
+    });
+};
+
+function fnChange(index) {
+      changeStyle(index);
+
+    api.setFrameGroupIndex({
+        name: 'Job_group',
+        index: index,
+        scroll: true
+    });
+};
+
+</script>
+</html>

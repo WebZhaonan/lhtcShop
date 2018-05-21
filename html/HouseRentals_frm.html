@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <link rel="stylesheet" type="text/css" href="../css/aui.css" />
+    <link rel="stylesheet" type="text/css" href="../css/aui-slide.css" />
+    <style type="text/css">
+      .text-light {
+        color: #999;
+      }
+      .text-dark {
+        color: #333 !important;
+      }
+      .bg-white {
+        background: #ffffff;
+      }
+      .aui-list .aui-list-item-label-icon.label-text {
+        line-height: 2.1rem;
+        align-items: baseline;
+        -webkit-align-items: baseline;
+      }
+      .aui-tab-item {
+        width: 2rem;
+        margin: 0 auto;
+      }
+
+    </style>
+</head>
+<body>
+    <section class="aui-card-list">
+      <div class="aui-card-list-content" id="aui-slide">
+        <div class="aui-slide-wrap" >
+            <div class="aui-slide-node bg-dark">
+                <img src="http://img10.360buyimg.com/n1/s450x450_jfs/t4276/257/2416766721/125228/ba72a107/58d1d078N20e18b62.jpg" />
+            </div>
+            <div class="aui-slide-node bg-dark">
+                <img src="http://img10.360buyimg.com/n1/s450x450_jfs/t4276/257/2416766721/125228/ba72a107/58d1d078N20e18b62.jpg" />
+            </div>
+            <div class="aui-slide-node bg-dark">
+                <img src="http://img10.360buyimg.com/n1/s450x450_jfs/t4276/257/2416766721/125228/ba72a107/58d1d078N20e18b62.jpg" />
+            </div>
+        </div>
+        <div class="aui-slide-page-wrap"><!--分页容器--></div>
+      </div>
+  
+
+
+</body>
+<script type="text/javascript" src="../script/aui-slide.js"></script>
+<script type="text/javascript" src="../script/aui-tab.js"></script>
+<script type="text/javascript">
+    var slide = new auiSlide({
+        container:document.getElementById("aui-slide"),
+        // "width":300,
+        "height":360,
+        "speed":300,
+        "pageShow":true,
+        "pageStyle":'dot',
+        "loop":true,
+        'dotPosition':'center',
+        // currentPage:currentFun
+    })
+    var tab = new auiTab({
+        element:document.getElementById("tab"),
+    },function(ret){
+        if(ret.index == 1){
+          document.getElementById("goods-detail").classList.remove("aui-hide");
+          document.getElementById("comment-list").classList.add("aui-hide");
+        }else{
+          document.getElementById("goods-detail").classList.add("aui-hide");
+          document.getElementById("comment-list").classList.remove("aui-hide");
+        }
+    });
+</script>
+</html>

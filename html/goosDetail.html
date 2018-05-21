@@ -1,144 +1,124 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
     <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
-    <title>AUI快速完成布局</title>
     <link rel="stylesheet" type="text/css" href="../css/aui.css" />
+    <link rel="stylesheet" type="text/css" href="../css/aui-slide.css" />
     <style type="text/css">
-        .aui-list .aui-list-item-media {
-            width: 3rem;
-        }
+      .text-light {
+        color: #999;
+      }
+      .text-dark {
+        color: #333 !important;
+      }
+      .bg-white {
+        background: #ffffff;
+      }
+      .aui-list .aui-list-item-label-icon.label-text {
+        line-height: 2.1rem;
+        align-items: baseline;
+        -webkit-align-items: baseline;
+      }
+      .aui-tab-item {
+        width: 2rem;
+        margin: 0 auto;
+      }
+    .aui-label-danger{
+      background-color: #fe467a;
+    }
+
     </style>
 </head>
 <body>
-    <section class="aui-content">
+    <section class="aui-card-list">
+      <div class="aui-card-list-content" id="aui-slide">
+        <div class="aui-slide-wrap" >
+            <div class="aui-slide-node bg-dark">
+                <img src="http://img10.360buyimg.com/n1/s450x450_jfs/t4276/257/2416766721/125228/ba72a107/58d1d078N20e18b62.jpg" />
+            </div>
+            <div class="aui-slide-node bg-dark">
+                <img src="http://img10.360buyimg.com/n1/s450x450_jfs/t4276/257/2416766721/125228/ba72a107/58d1d078N20e18b62.jpg" />
+            </div>
+            <div class="aui-slide-node bg-dark">
+                <img src="http://img10.360buyimg.com/n1/s450x450_jfs/t4276/257/2416766721/125228/ba72a107/58d1d078N20e18b62.jpg" />
+            </div>
+        </div>
+        <div class="aui-slide-page-wrap"><!--分页容器--></div>
+      </div>
+      <div class="aui-card-list-header aui-padded-b-0">
+        <div>
+          <span class="aui-label aui-label-danger aui-margin-r-5">乐航</span>Apple iPhone 7 128G玫瑰金色 移动联通电信4G手机
+        </div>
+      </div>
+      <div class="aui-card-list-footer aui-text-danger aui-font-size-12 aui-padded-t-0 aui-padded-b-0" style="min-height:1.6rem;">iPhone7，现以红色呈现！购买红色特别版请点击！</div>
+      <div class="aui-card-list-header aui-padded-t-0">
+        <div class="aui-text-danger"><small>￥</small><big class="aui-font-size-20">5688</big></div>
+      </div>
+      <div class="aui-card-list-content">
         <ul class="aui-list aui-media-list">
-            <li class="aui-list-item">
-                <div class="aui-media-list-item-inner">
-                    <div class="aui-list-item-media">
-                        <img src="../image/demo1.png"/>
-                    </div>
-                    <div class="aui-list-item-inner">
-                        <div class="aui-list-item-text">
-                            <div class="aui-list-item-title" style="color:#4c5276">流浪男11111</div>
-                        </div>
-                        <div class="aui-list-item-text" style="color:#333;">
-                            如果谈及中国在技术领域的短板，那么大家可能想到的是发动机，其实还有一样：高级电子芯片！人们通常所说的CPU，所谓CPU即中央处理器，就是其代表产品，它可是为电子信息产品的心脏
-                        </div>
-                        <div class="aui-list-item-text">
-                            <div class="aui-row-padded" style="max-width:90%;">
-                                <div class="aui-col-xs-4">
-                                    <img src="../image/demo/1.jpeg" />
-                                </div>
-                                <div class="aui-col-xs-4">
-                                    <img src="../image/demo/2.jpeg" />
-                                </div>
-                                <div class="aui-col-xs-4">
-                                    <img src="../image/demo/3.jpeg" />
-                                </div>
-                                <div class="aui-col-xs-4">
-                                    <img src="../image/demo/2.jpeg" />
-                                </div>
-                                <div class="aui-col-xs-4">
-                                    <img src="../image/demo/1.jpeg" />
-                                </div>
-                                <div class="aui-col-xs-4">
-                                    <img src="../image/demo/3.jpeg" />
-                                </div>
-                            </div>
-                        </div>
-                        <p class="aui-margin-t-5 aui-font-size-12">山东潍坊</p>
-                        <div class="aui-info aui-font-size-12" style="padding-top:0; padding-bottom:0">
-                            <div class="aui-info-item">1小时前</div>
-                            <div class="aui-info-item">
-                                <i class="aui-iconfont aui-icon-comment"  style="color:#4c5276"></i>
-                            </div>
-                        </div>
+          <li class="aui-list-item">
+              <div class="aui-media-list-item-inner">
+                <div class="aui-list-item-label-icon label-text aui-font-size-14">促销</div>
+                <div class="aui-list-item-inner aui-padded-t-10 aui-padded-b-10">
+                    <div>
+                        <p class="aui-margin-b-10 aui-font-size-12 aui-ellipsis"><span class="aui-text-danger aui-margin-r-5">满赠</span>满99.00元即送热销商品,送完为止</p>
+                        <p class="aui-margin-b-10 aui-font-size-12 aui-ellipsis"><span class="aui-text-danger aui-margin-r-5">满赠</span>满19.00元即送热销商品,送完为止</p>
+                        <p class="aui-margin-b-10 aui-font-size-12 aui-ellipsis"><span class="aui-text-danger aui-margin-r-5">满额返券</span>订单完成后赠送80元电信上网卡话费</p>
                     </div>
                 </div>
-            </li>
-            <li class="aui-list-item">
-                <div class="aui-media-list-item-inner">
-                    <div class="aui-list-item-media">
-                        <img src="../image/demo3.png" />
-                    </div>
-                    <div class="aui-list-item-inner">
-                        <div class="aui-list-item-text">
-                            <div class="aui-list-item-title" style="color:#4c5276">AUI</div>
-                        </div>
-                        <div class="aui-list-item-text" style="color:#333;">
-                            中国拥有世界顶级航天芯片产品：俄罗斯造不出来了只能求中国分享
-                        </div>
-                        <div class="aui-info aui-font-size-12 aui-padded-t-0 aui-padded-b-0">
-                            <div class="aui-info-item">1小时前</div>
-                            <div class="aui-info-item">
-                                <i class="aui-iconfont aui-icon-comment"  style="color:#4c5276"></i>
-                            </div>
-                        </div>
-                    </div>
+              </div>
+          </li>
+          <li class="aui-list-item aui-list-item-arrow">
+              <div class="aui-media-list-item-inner">
+                <div class="aui-list-item-label-icon aui-font-size-12" style="width:2rem">
+                  <i class="aui-iconfont aui-icon-cert"></i>
                 </div>
-            </li>
-            <li class="aui-list-item">
-                <div class="aui-media-list-item-inner">
-                    <div class="aui-list-item-media">
-                        <img src="../image/liulangnan.png" />
-                    </div>
-                    <div class="aui-list-item-inner">
-                        <div class="aui-list-item-text">
-                            <div class="aui-list-item-title" style="color:#4c5276">流浪男</div>
-                        </div>
-                        <div class="aui-list-item-text" style="color:#333;">
-                            网传“贴吧之父”俞军加入滴滴
-                        </div>
-                        <div class="aui-list-item-text">
-                            <div class="aui-row-padded" style="max-width:90%;">
-                                <div class="aui-col-xs-4">
-                                    <img src="../image/l1.png" />
-                                </div>
-                                <div class="aui-col-xs-4">
-                                    <img src="../image/l2.png" />
-                                </div>
-                                <div class="aui-col-xs-4">
-                                    <img src="../image/l3.png" />
-                                </div>
-                            </div>
-                        </div>
-                        <div class="aui-info aui-font-size-12 aui-padded-t-0 aui-padded-b-0">
-                            <div class="aui-info-item">1小时前</div>
-                            <div class="aui-info-item">
-                                <i class="aui-iconfont aui-icon-comment"  style="color:#4c5276"></i>
-                            </div>
-                        </div>
-                    </div>
+                <div class="aui-list-item-inner">
+                  <div class="aui-list-item-text">
+                      <div class="aui-list-item-title aui-font-size-14">以旧换新<small class="aui-margin-l-10 text-light">最高抵5000</small></div>
+                  </div>
                 </div>
-            </li>
-            <li class="aui-list-item">
-                <div class="aui-media-list-item-inner">
-                    <div class="aui-list-item-media">
-                        <img src="../image/liulangnan.png" />
-                    </div>
-                    <div class="aui-list-item-inner">
-                        <div class="aui-list-item-text">
-                            <div class="aui-list-item-title" style="color:#4c5276">流浪男</div>
-                        </div>
-                        <div class="aui-list-item-text" style="color:#333;">
-                            美团、饿了么外卖小哥斗殴：约架中关村
-                        </div>
-                        <div class="aui-info aui-font-size-12 aui-padded-t-0 aui-padded-b-0">
-                            <div class="aui-info-item">1小时前</div>
-                            <div class="aui-info-item">
-                                <i class="aui-iconfont aui-icon-comment"  style="color:#4c5276"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </li>
+              </div>
+          </li>
         </ul>
+      </div>
+    </section>
+    <section class="aui-content aui-margin-b-15">
+      <ul class="aui-list aui-media-list">
+        <li class="aui-list-item">
+            <div class="aui-media-list-item-inner">
+              <div class="aui-list-item-label-icon label-text aui-font-size-14">已选</div>
+              <div class="aui-list-item-inner">
+                  <div class="aui-list-item-text text-dark aui-font-size-14">
+                      玫瑰金，公开版，128G，非合约机，1件，增值服务
+                  </div>
+              </div>
+              <div class="aui-list-item-label-icon aui-font-size-14">
+                <i class="aui-iconfont aui-icon-more"></i>
+              </div>
+            </div>
+        </li>
+      </ul>
     </section>
 </body>
-<script type="text/javascript" src="../script/api.js" ></script>
+<script type="text/javascript" src="../script/aui-slide.js"></script>
+<script type="text/javascript" src="../script/aui-tab.js"></script>
 <script type="text/javascript">
+    var slide = new auiSlide({
+        container:document.getElementById("aui-slide"),
+        // "width":300,
+        "height":400,
+        "speed":300,
+        "pageShow":true,
+        "pageStyle":'dot',
+        "loop":true,
+        'dotPosition':'center',
+        "speed":500, //速度
+        "autoPlay": 3000, //自动播放
+        // currentPage:currentFun
+    })
+
 </script>
 </html>
