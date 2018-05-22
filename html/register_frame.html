@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>登录Frame</title>
+    <link rel="stylesheet" type="text/css" href="../css/api.css" />
+    <link rel="stylesheet" href="../css/aui.css">
+    <link rel="stylesheet" href="../css/common.css">
+    <style media="screen">
+    .aui-bg-info{
+     background: #eee !important
+    }
+    .mob{
+      position: relative;
+    }
+    .mob .aui-btn{
+      background: #fe467a;
+      color: #fff;
+      position: absolute;
+      right: 0;
+      top: 40px
+    }
+    </style>
+</head>
+
+<body>
+  <div class="aui-list aui-media-list aui-list-noborder aui-bg-info user-info">
+      <div class="aui-list-item aui-list-item-middle user-header">
+        <img src="../image/user_img1.png" alt="">
+          </div>
+      </div>
+    <div class="row mob">
+        <input id="mobile" class="input" type="number" placeholder="手机号" style="border-bottom: 1px solid #fe467a !important">
+        <div class="aui-btn">获取验证码</div>
+    </div>
+    <div class="row">
+        <input id="code" class="input" type="password" placeholder="验证码" style="border-bottom: 1px solid #fe467a !important">
+    </div>
+    <div class="row">
+        <input id="password" class="input" type="password" placeholder="密码" style="border-bottom: 1px solid #fe467a !important">
+    </div>
+    <div class="btn" tapmode="highlight" onclick="fnLogin();">登录</div>
+
+
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript">
+apiready = function() {
+    fnInitUIInput();
+};
+
+var UIInput;
+var mobileUIInputId;
+var passwordUIInputId;
+var codeUIInputId;
+var mobileValue;
+var passwordValue;
+var codeValue
+
+
+function fnInitUIInput() {
+    // 用户名输入框模块
+    var username = $api.byId('mobile');
+    var usernameRect = $api.offset(username);
+    UIInput = api.require('UIInput');
+    UIInput.open({
+        rect: {
+            x: usernameRect.l,
+            y: usernameRect.t,
+            w: usernameRect.w,
+            h: usernameRect.h
+        },
+        styles: {
+            bgColor: '#fff',
+            size: 16,
+            color: '#000',
+            placeholder: {
+                color: '#ccc'
+            },
+        },
+        autoFocus: false,
+        maxRows: 1,
+        placeholder: '手机号',
+        keyboardType: 'default',
+        fixedOn: api.frameName
+    }, function(ret, err) {
+        if (ret) {
+            mobileUIInputId = ret.id;
+            if (ret && ret.eventType == "show") {
+                setTimeout(function() {
+                    UIInput.popupKeyboard({
+                        id: mobileUIInputId
+                    });
+                }, 200);
+            } else if (ret.eventType == "change") {
+                UIInput.value({
+                    id: mobileUIInputId
+                }, function(ret, err) {
+                    if (ret) {
+                        if (ret.status) {
+                            mobileValue = ret.msg;
+                        }
+                    }
+                });
+            }
+        }
+    });
+     // 验证码输入框
+     var code = $api.byId('code');
+     var codeRect = $api.offset(code);
+     UIInput.open({
+         rect: {
+             x: codeRect.l,
+             y: codeRect.t,
+             w: codeRect.w,
+             h: codeRect.h
+         },
+         styles: {
+             bgColor: '#fff',
+             size: 16,
+             color: '#000',
+             placeholder: {
+                 color: '#ccc'
+             }
+         },
+         autoFocus: false,
+         maxRows: 1,
+         placeholder: '验证码',
+         keyboardType: 'default',
+         fixedOn: api.frameName
+     }, function(ret, err) {
+         if (ret) {
+             codeUIInputId = ret.id;
+             if (ret.eventType == "change") {
+                 UIInput.value({
+                     id: codeUIInputId
+                 }, function(ret, err) {
+                     if (ret) {
+                         if (ret.status) {
+                             codeValue = ret.msg;
+                         }
+                     }
+                 });
+             }
+         }
+     });
+
+    // 密码输入框模块
+    var password = $api.byId('password');
+    var passwordRect = $api.offset(password);
+    UIInput.open({
+        rect: {
+            x: passwordRect.l,
+            y: passwordRect.t,
+            w: passwordRect.w,
+            h: passwordRect.h
+        },
+        styles: {
+            bgColor: '#fff',
+            size: 16,
+            color: '#000',
+            placeholder: {
+                color: '#ccc'
+            }
+        },
+        autoFocus: false,
+        maxRows: 1,
+        placeholder: '密码',
+        keyboardType: 'default',
+        inputType: 'password',
+        fixedOn: api.frameName
+    }, function(ret, err) {
+        if (ret) {
+            passwordUIInputId = ret.id;
+            if (ret.eventType == "change") {
+                UIInput.value({
+                    id: passwordUIInputId
+                }, function(ret, err) {
+                    if (ret) {
+                        if (ret.status) {
+                            passwordValue = ret.msg;
+                        }
+                    }
+                });
+            }
+        }
+    });
+}
+
+// 登录
+function fnLogin() {
+    usernameValue = $api.val($api.byId('mobile'))
+    passwordValue = $api.val($api.byId('password'))
+
+    if (!usernameValue) {
+        if (api.systemType == 'android') {
+            setTimeout(function() {
+                UIInput.popupKeyboard({
+                    id: mobileUIInputId
+                });
+            }, 200);
+        } else {
+            UIInput.popupKeyboard({
+                id: mobileUIInputId
+            });
+        }
+        return;
+    }
+    if (!passwordValue) {
+        if (api.systemType == 'android') {
+            setTimeout(function() {
+                UIInput.popupKeyboard({
+                    id: passwordUIInputId
+                });
+            }, 200);
+        } else {
+            UIInput.popupKeyboard({
+                id: passwordUIInputId
+            });
+        }
+        return;
+    }
+
+    api.ajax({
+        url: 'http://d.apicloud.com/mcm/api/user/login',
+        method: 'post',
+        headers: {
+            "X-APICloud-AppId": "A6921544633372",
+            "X-APICloud-AppKey": "2672b5911d8551540c1ea598e01c87fee217a1e5.1482500122476"
+        },
+        data: {
+            values: {
+                "username": usernameValue,
+                "password": passwordValue
+            }
+        }
+    }, function(ret, err) {
+        if (ret) {
+            // 保存用户信息
+            $api.setStorage('userInfo', ret);
+
+            api.alert({
+                title: '提示',
+                msg: '登录成功',
+            }, function(ret, err) {
+                if (ret) {
+                    api.closeWin();
+                }
+            });
+        } else {
+            api.toast({
+                msg: '登录失败，用户名或密码错误',
+                duration: 2000,
+                location: 'middle'
+            });
+        }
+    });
+}
+
+// 被注册页面调用，用于从注册页面传递用户名
+function fnSetUsername(username_) {
+    usernameValue = username_;
+    UIInput.value({
+        id: usernameUIInputId,
+        msg: username_
+    }, function(ret, err) {});
+}
+</script>
+
+</html>

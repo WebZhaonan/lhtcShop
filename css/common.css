@@ -1,0 +1,173 @@
+body {
+    text-align: center;
+}
+
+.row {
+    width: auto;
+    height: 70px;
+    box-sizing: border-box;
+    margin-left: 32px;
+    margin-right: 32px;
+    padding-top: 40px;
+
+}
+.forget{
+width: auto;
+box-sizing: border-box;
+margin-left: 32px;
+margin-right: 32px;
+padding-top: 20px;
+height: 60px
+}
+.forget a{
+display: inline-block;
+color: #999;
+font-size: 16px
+}
+.aui-pull-left{
+float: left;
+}
+.aui-pull-right{
+float: right;
+}
+.input {
+    width: 100%;
+    height: 40px;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    line-height: 20px;
+
+}
+
+.btn {
+    width: auto;
+    height: 40px;
+    margin-left: 32px;
+    margin-right: 32px;
+    margin-top:50px;
+    background-color: #fe467a;
+    line-height: 40px;
+    color: #fff;
+    font-size: 20px;
+    text-align: center;
+    border-radius: 0px;
+    font-family: SimHei
+}
+
+.btn-third-party {
+    display: inline-block;
+    width: auto;
+    height: 50px;
+    box-sizing: border-box;
+    margin-top: 32px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 8px 8px 8px 36px;
+    font-size: 20px;
+    color: #888;
+    line-height: 32px;
+    text-align: left;
+    border: 1px solid #aaa;
+    background-image: url(../image/share_friend.png);
+    background-repeat: no-repeat;
+    background-size: auto 20px;
+    background-position: 8px center;
+    border-radius: 8px;
+}
+
+.highlight {
+    opacity: 0.7;
+}
+.aui-list .user-header{
+  min-height: 6.2rem;
+  padding-left: 0;
+  text-align: center;
+}
+.aui-list .user-header img{
+  width: 80px;
+  margin: 0 auto;
+  padding: 50px 0 20px 0;
+}
+
+.aui-list .aui-list-item .aui-btn{
+ margin: 0 auto;
+ padding: 0 1.6rem;
+ background: #b16afe;
+ color: #fff
+}
+.aui-col-5 {
+ text-align: center;
+}
+.aui-col-5 img{
+ width: 30px;
+ height: 30px;
+ margin: 0 auto;
+}
+
+.aui-list-item-inner{
+ border-bottom: 1px solid #eee;
+}
+.aui-list-item-arrow:before{
+border: 1px solid #999;
+border-top: none;
+border-right: none;
+}
+@media screen and (-webkit-min-device-pixel-ratio: 1.5)
+ {
+   .aui-list{
+     background-image: none;
+   }
+ }
+.list img{
+   width: 30px;
+   height:26px;
+ }
+ .list_li{
+   min-height:2.6rem !important;
+ }
+ .other{
+ padding-top:50px
+ }
+ .ange{
+   color: #999;
+   font-size: 16px
+ }
+.aui-col-xs-4 .wechat{
+  color: #62b900
+}
+.aui-col-xs-4 .qq{
+  color: #4DAFEA
+}
+.aui-col-xs-4 .weibo{
+  color: #DF4D69
+}
+.aui-grid {
+    width: 100%;
+    background-color: #ffffff;
+    display: table;
+    table-layout: fixed;
+}
+.aui-row {
+    overflow: hidden;
+    margin: 0;
+}
+.aui-grid [class*=aui-col-] {
+    display: table-cell;
+    position: relative;
+    text-align: center;
+    vertical-align: middle;
+    padding: 1rem 0;
+}
+
+.aui-col-xs-4 {
+    width: 33.33333333%;
+}
+.aui-grid .aui-iconfont {
+    position: relative;
+    z-index: 20;
+    top: 0;
+    height: 1.4rem;
+    font-size: 1.4rem;
+    line-height: 1.4rem;
+}
