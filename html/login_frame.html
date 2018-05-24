@@ -30,7 +30,7 @@
     </div>
     <div class="btn" tapmode="highlight" onclick="fnLogin();">登录</div>
     <div class="forget">
-      <a class="aui-pull-left  bage">忘记密码</a>
+      <a class="aui-pull-left  bage" onclick="fnOpenforgetPassword()">忘记密码</a>
       <a class="aui-pull-right  bage">短信登录</a>
       </div>
       <div class="other">
@@ -224,7 +224,16 @@ function fnLogin() {
         }
     });
 }
-
+// 打开忘记密码win
+function fnOpenforgetPassword() {
+  api.openWin({
+      name: 'forgetPassword',
+      url: './forgetPassword.html',
+      pageParam: {
+          name: 'test'
+      },
+  });
+}
 // 被注册页面调用，用于从注册页面传递用户名
 function fnSetUsername(username_) {
     usernameValue = username_;
