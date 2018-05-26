@@ -23,10 +23,10 @@
           </div>
       </div>
     <div class="row">
-        <input id="username" class="input" type="text" placeholder="用户名" style="border-bottom: 1px solid #fe467a !important">
+        <input id="username" class="input" type="text" placeholder="用户名" style="border-bottom: 1px solid #fe467a !important" name="user">
     </div>
     <div class="row">
-        <input id="password" class="input" type="password" placeholder="密码" style="border-bottom: 1px solid #fe467a !important">
+        <input id="password" class="input" type="password" placeholder="密码" style="border-bottom: 1px solid #fe467a !important" name="pswd">
     </div>
     <div class="btn" tapmode="highlight" onclick="fnLogin();">登录</div>
     <div class="forget">
@@ -53,9 +53,11 @@
       </div>
 </body>
 <script type="text/javascript" src="../script/api.js"></script>
+<script src="../script/common.js"></script>
 <script type="text/javascript">
 apiready = function() {
     fnInitUIInput();
+    init();
 };
 
 var UIInput;
@@ -157,9 +159,6 @@ function fnInitUIInput() {
 
 // 登录
 function fnLogin() {
-    usernameValue = $api.val($api.byId('username'))
-    passwordValue = $api.val($api.byId('password'))
-
     if (!usernameValue) {
         if (api.systemType == 'android') {
             setTimeout(function() {
@@ -188,36 +187,49 @@ function fnLogin() {
         }
         return;
     }
-
     api.ajax({
-        url: 'http://d.apicloud.com/mcm/api/user/login',
+        url: hname.hname.name + '/public/index/Create/app_login',
         method: 'post',
         headers: {
-            "X-APICloud-AppId": "A6921544633372",
-            "X-APICloud-AppKey": "2672b5911d8551540c1ea598e01c87fee217a1e5.1482500122476"
+            "X-APICloud-AppId": "A6079750662654",
+            "X-APICloud-AppKey": "4B3AB3D8-C633-6D3E-F6C3-37EDFE6978AB"
         },
         data: {
             values: {
-                "username": usernameValue,
-                "password": passwordValue
+                user: usernameValue,
+                pswd: passwordValue
             }
         }
     }, function(ret, err) {
         if (ret) {
             // 保存用户信息
             $api.setStorage('userInfo', ret);
-
+            console.log(JSON.stringify(ret))
             api.alert({
                 title: '提示',
-                msg: '登录成功',
-            }, function(ret, err) {
-                if (ret) {
+                msg: ret.Msg,
+            }, function() {
+                if (ret.code == 'success') {
+                   api.openWin({
+                       name: 'index',
+                       url: '../index.html',
+                       pageParam: {
+                           name: 'test'
+                       }
+                   });
+
+                  // api.execScript({
+                  //       name: 'index',//你要刷新winName
+                  //       script: "location.reload(); "
+                  //   });
                     api.closeWin();
+                }else{
+
                 }
             });
         } else {
             api.toast({
-                msg: '登录失败，用户名或密码错误',
+                msg:ret.Msg,
                 duration: 2000,
                 location: 'middle'
             });
