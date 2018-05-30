@@ -11,8 +11,8 @@
     <style>
         /*.empty{ text-align: center; padding: 120px 0; }*/
         .aui-img{
-          width: 42px !important;
-          height: 42px;
+          width: 35px !important;
+          height: 35px;
         }
     </style>
 </head>
@@ -22,7 +22,7 @@
                 <ul class="aui-list aui-media-list">
                     <li class="aui-list-item aui-list-item-middle"  onclick="fnOpenList1();">
                         <div class="aui-media-list-item-inner">
-                            <div class="aui-list-item-media" style="width: 3rem;">
+                            <div class="aui-list-item-media" style="width: 2.5rem;">
                                 <img src="../image/Suitcase1.png" class="aui-img" >
                             </div>
                             <div class="aui-list-item-inner aui-list-item-arrow">
@@ -32,10 +32,10 @@
                             </div>
                         </div>
                     </li>
-                    <li class="aui-list-item aui-list-item-middle">
+                    <li class="aui-list-item aui-list-item-middle" onclick="fnOpenResume();">
                         <div class="aui-media-list-item-inner">
-                            <div class="aui-list-item-media" style="width: 3rem;">
-                                <img src="../image/WordDocument.png" class="" style="width:40px;height:48px;">
+                            <div class="aui-list-item-media" style="width: 2.5rem;">
+                                <img src="../image/WordDocument.png" class="" style="width:31px;height:37px;">
                             </div>
                             <div class="aui-list-item-inner aui-list-item-arrow">
                                 发简历找工作
@@ -44,8 +44,8 @@
                     </li>
                     <li class="aui-list-item aui-list-item-middle" onclick="fnOpenList3()">
                         <div class="aui-media-list-item-inner">
-                            <div class="aui-list-item-media" style="width: 3rem;">
-                                <img src="../image/Bag.png" class="" style="width:42px;height:48px;">
+                            <div class="aui-list-item-media" style="width: 2.5rem;">
+                                <img src="../image/Bag.png" class="" style="width:31px;height:33px;">
                             </div>
                             <div class="aui-list-item-inner aui-list-item-arrow">
                                 二手物品
@@ -54,8 +54,8 @@
                     </li>
                     <li class="aui-list-item aui-list-item-middle" onclick="fnOpenList4();">
                         <div class="aui-media-list-item-inner">
-                            <div class="aui-list-item-media" style="width: 3rem;">
-                                <img src="../image/Home.png" class="" style="height:42px;width:42px">
+                            <div class="aui-list-item-media" style="width: 2.5rem;">
+                                <img src="../image/Home.png" class="" style="height:33px;width:39px;margin-left:-3px">
                             </div>
                             <div class="aui-list-item-inner aui-list-item-arrow">
                                 本地服务
@@ -64,11 +64,11 @@
                     </li>
                     <li class="aui-list-item aui-list-item-middle" onclick="fnOpenList5()">
                         <div class="aui-media-list-item-inner">
-                            <div class="aui-list-item-media" style="width: 3rem;">
-                                <img src="../image/Myspace.png" class="" style="width:42px;height:48px;">
+                            <div class="aui-list-item-media" style="width: 2.5rem;">
+                                <img src="../image/Myspace.png" class="" style="width:32px;height:32px;">
                             </div>
                             <div class="aui-list-item-inner aui-list-item-arrow">
-                                求租求购物服务
+                                租房服务
                             </div>
                         </div>
                     </li>
@@ -86,6 +86,17 @@
                 name: 'test'
             }
         });
+         }
+         function fnOpenResume() {
+          //  打开发简历找工作窗口
+          api.openWin({
+              name: 'Resume_win',
+              url: './Resume_win.html',
+              pageParam: {
+                  name: 'test'
+              }
+          });
+
          }
          function fnOpenList4() {
         // 打开本地服务窗口

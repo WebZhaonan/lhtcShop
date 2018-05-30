@@ -155,6 +155,7 @@ function fnInitUIInput() {
 
 // 登录
 function fnLogin() {
+    $api.setStorage('userInfo', ret);
     if (!usernameValue) {
         if (api.systemType == 'android') {
             setTimeout(function() {
@@ -197,37 +198,31 @@ function fnLogin() {
             }
         }
     }, function(ret, err) {
-        if (ret) {
+        if (ret.code=='error') {
+              api.toast({
+                  msg:ret.Msg,
+                  duration: 2000,
+                  location: 'middle'
+              });
+        } else {
             api.alert({
                 title: '提示',
-                msg: ret.Msg,
+                msg: '登录成功！',
             }, function() {
-                if (ret) {
-                  // 保存用户信息
-                  $api.setStorage('user', ret.user);
-                  $api.setStorage('id', ret.id);
-                   api.openWin({
-                       name: 'index',
-                       url: '../index.html',
-                       pageParam: {
-                           name: 'test'
-                       }
-                   });
 
-                  api.execScript({
-                        name: 'frame4',//你要刷新winName
-                        script: "location.reload(); "
-                    });
-                    api.closeWin();
-                }else{
+              api.execScript({
+                    name: 'index',//你要刷新winName
+                    script: "location.reload(); "
+                });
+               api.openWin({
+                   name: 'index',
+                   url: '../index.html',
+                   pageParam: {
+                       name: 'test'
+                   },
 
-                }
-            });
-        } else {
-            api.toast({
-                msg:ret.Msg,
-                duration: 2000,
-                location: 'middle'
+               });
+
             });
         }
     });
