@@ -15,13 +15,15 @@
     }
     .mob{
       position: relative;
+      z-index: 1;
     }
     .mob .aui-btn{
       background: #fe467a;
       color: #fff;
       position: absolute;
       right: 0;
-      top: 40px
+      top: 40px;
+      z-index: 9
     }
     </style>
 </head>
@@ -68,13 +70,13 @@ function fnInitUIInput() {
     UIInput = api.require('UIInput');
     UIInput.open({
         rect: {
-            x: usernameRect.l,
+            x:usernameRect.l ,
             y: usernameRect.t,
-            w: usernameRect.w,
+            w: usernameRect.w-120,
             h: usernameRect.h
         },
         styles: {
-            bgColor: '#fff',
+            // bgColor: '#fff',
             size: 16,
             color: '#000',
             placeholder: {
