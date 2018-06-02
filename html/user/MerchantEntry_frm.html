@@ -1,0 +1,187 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,aItemress=no">
+    <title>设置</title>
+    <link rel="stylesheet" type="text/css" href="../../css/aui.css" />
+    <link rel="stylesheet" href="../../css/ydui.css"/>
+    <style media="screen">
+      .clearLogin{
+        background: #fe467a;
+        color: #fff;
+        width: 80%;
+        margin: 20px auto;
+        height: 2rem;
+        line-height: 2rem
+      }
+      .aui-list-item-arrow:before{
+        border: 1px solid #ccc;
+        border-top: none;
+        border-right: none;
+      }
+       .aui-label-info{
+         background: #fe467a;
+         border-radius: 3px
+       }
+       .cityselect-item-box > a {
+         font-size: 16px;
+       }
+       .cityselect-nav > a {
+         font-size: 16px
+       }
+       .cityselect-title{
+         font-size: 16px
+       }
+       .Login{
+         background: #fe467a;
+         color: #fff;
+         width: 80%;
+         margin: 20px auto;
+         height: 2rem;
+         line-height: 2rem
+       }
+    </style>
+</head>
+<body>
+   <ul class="aui-list aui-list-in">
+            <li class="aui-list-item">
+                <div class="aui-list-item-inner">
+                    <div class="aui-list-item-label">
+                        商家名称
+                    </div>
+                    <div class="aui-list-item-input">
+                        <input type="text" placeholder="商家名称">
+                    </div>
+                </div>
+            </li>
+            <li class="aui-list-item">
+                <div class="aui-list-item-inner">
+                    <div class="aui-list-item-label">
+                        行业分类
+                    </div>
+                    <div class="aui-list-item-input">
+                        <select>
+                            <option>请选择</option>
+                            <option>互联网1</option>
+                            <option>互联网1</option>
+                            <option>互联网1</option>
+                        </select>
+                    </div>
+                </div>
+            </li>
+            <li class="aui-list-item">
+                <div class="aui-list-item-inner">
+                    <div class="aui-list-item-label">
+                        经营品牌
+                    </div>
+                    <div class="aui-list-item-input">
+                        <select>
+                            <option>请选择</option>
+                            <option>互联网1</option>
+                            <option>互联网1</option>
+                            <option>互联网1</option>
+                        </select>
+                    </div>
+                </div>
+            </li>
+            <li class="aui-list-item">
+                <div class="aui-list-item-inner">
+                    <div class="aui-list-item-label">
+                        商家地址
+                    </div>
+                    <div class="aui-list-item-input">
+                        <input type="text" placeholder="" id="J_Address" readonly="readonly">
+                    </div>
+                </div>
+            </li>
+            <li class="aui-list-item">
+                <div class="aui-list-item-inner">
+                    <div class="aui-list-item-title">银行卡实名</div>
+                    <div class="aui-list-item-right">
+                        <div class="aui-label aui-label-info">去认证</div>
+                    </div>
+                </div>
+            </li>
+            <li class="aui-list-item">
+                <div class="aui-list-item-inner">
+                    <div class="aui-list-item-title">网关认证</div>
+                    <div class="aui-list-item-right">
+                        <div class="aui-label aui-label-info">去认证</div>
+                    </div>
+                </div>
+            </li>
+            <li class="aui-list-item">
+                <div class="aui-list-item-inner">
+                    <div class="aui-list-item-title">芝麻实名认证</div>
+                    <div class="aui-list-item-right">
+                        <div class="aui-label aui-label-info">去认证</div>
+                    </div>
+                </div>
+            </li>
+            <li class="aui-list-item">
+                <div class="aui-list-item-inner">
+                    <div class="aui-list-item-title">人脸认证</div>
+                    <div class="aui-list-item-right">
+                        <div class="aui-label aui-label-info">去认证</div>
+                    </div>
+                </div>
+            </li>
+            <li class="aui-list-item">
+                <div class="aui-list-item-inner">
+                    <div class="aui-list-item-label">
+                        申请人姓名
+                    </div>
+                    <div class="aui-list-item-input">
+                        <input type="text" placeholder="">
+                    </div>
+                </div>
+            </li>
+            <li class="aui-list-item">
+                <div class="aui-list-item-inner">
+                    <div class="aui-list-item-label">
+                      联系电话
+                    </div>
+                    <div class="aui-list-item-input">
+                        <input type="text" placeholder="">
+                    </div>
+                </div>
+            </li>
+            <li class="aui-list-item">
+                <div class="aui-list-item-inner">
+                    <div class="aui-list-item-label">
+                        电子邮箱
+                    </div>
+                    <div class="aui-list-item-input">
+                        <input type="text" placeholder="">
+                    </div>
+                </div>
+            </li>
+        </ul>
+  <div class="aui-btn aui-btn-block Login">确认</div>
+</body>
+<script src="../../script/api.js"></script>
+<script src="../../script/jquery-1.9.1.min.js"></script>
+<script src="../../script/city.js"></script>
+<script src="../../script/ydui.js"></script>
+<script type="text/javascript">
+    apiready = function(){
+        api.parseTapmode();
+    }
+    !function () {
+    var $target = $('#J_Address');
+
+    $target.citySelect();
+
+    $target.on('click', function (event) {
+        event.stopPropagation();
+        $target.citySelect('open');
+    });
+
+    $target.on('done.ydui.cityselect', function (ret) {
+        $(this).val(ret.provance + ' ' + ret.city + ' ' + ret.area);
+    });
+}();
+</script>
+</html>

@@ -155,7 +155,6 @@ function fnInitUIInput() {
 
 // 登录
 function fnLogin() {
-    $api.setStorage('userInfo', ret);
     if (!usernameValue) {
         if (api.systemType == 'android') {
             setTimeout(function() {
@@ -185,45 +184,48 @@ function fnLogin() {
         return;
     }
     api.ajax({
-        url: hname.hname.name + '/public/index/Create/app_login',
+        url:'http://lhtcshop.com/public/index/Create/app_login',
         method: 'post',
         headers: {
-            "X-APICloud-AppId": "A6079750662654",
-            "X-APICloud-AppKey": "4B3AB3D8-C633-6D3E-F6C3-37EDFE6978AB"
+            "X-APICloud-AppId":"A6079750662654",
+            "X-APICloud-AppKey":"4B3AB3D8-C633-6D3E-F6C3-37EDFE6978AB"
         },
+        dataType:'json',
         data: {
             values: {
                 user: usernameValue,
                 pswd: passwordValue
             }
         }
-    }, function(ret, err) {
-        if (ret.code=='error') {
-              api.toast({
-                  msg:ret.Msg,
-                  duration: 2000,
-                  location: 'middle'
+    }, function(ret,err) {
+          $api.setStorage('userInfo', ret);
+          console.log(JSON.stringify(ret))
+        if (ret&&ret.id) {
+          api.alert({
+              title: '提示',
+              msg: '登陆成功',
+          }, function(){
+
+            api.execScript({
+                  name: 'index',//你要刷新winName
+                  script: "location.reload(); "
               });
+             api.openWin({
+                 name: 'index',
+                 url: '../index.html',
+                 pageParam: {
+                     name: 'test'
+                 },
+
+             });
+
+          });
         } else {
-            api.alert({
-                title: '提示',
-                msg: '登录成功！',
-            }, function() {
-
-              api.execScript({
-                    name: 'index',//你要刷新winName
-                    script: "location.reload(); "
-                });
-               api.openWin({
-                   name: 'index',
-                   url: '../index.html',
-                   pageParam: {
-                       name: 'test'
-                   },
-
-               });
-
-            });
+          api.toast({
+              msg:ret.Msg,
+              duration: 2000,
+              location: 'middle'
+          });
         }
     });
 }
