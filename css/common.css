@@ -1,7 +1,7 @@
 body {
     text-align: center;
 }
-
+input[type=button], input[type=submit], input[type=file], button { cursor: pointer; -webkit-appearance: none; } 
 .row {
     width: auto;
     height: 70px;
@@ -132,7 +132,7 @@ border-right: none;
  .ange{
    color: #999;
    font-size: 16px;
-   background: #fff
+   /*background: #fff*/
  }
 .aui-col-xs-4 .wechat{
   color: #62b900

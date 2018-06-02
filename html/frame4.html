@@ -70,14 +70,19 @@
          padding-left: 0
        }
        .aui-list .user-header{
-         min-height: 6.2rem;
+         min-height: 5.2rem;
          padding-left: 0;
          text-align: center;
+         padding: 0px 0;
+       }
+       .username{
+         padding-top: 40px
        }
        .aui-list .user-header img{
-         width: 70%;
-         margin: 0 auto;
-         padding: 50px 0 20px 0;
+         width: 80px;
+         margin: 15px auto;
+          border-radius: 50%
+
        }
       .aui-bg-info{
         background: #eee !important
@@ -118,6 +123,20 @@
         .list_li{
           min-height:2.6rem !important;
         }
+
+ #icon {
+    display: inline-block;
+    box-sizing: border-box;
+    width: 86px;
+    height: 86px;
+    /*border: 3px solid #b10063;*/
+    border-radius: 86px;
+    background-image: url(../image/user_img1.png);
+    background-size: 100% 100%;
+    background-position: center center;
+    background-repeat: no-repeat;
+    margin-top: 10px
+}
     </style>
 </head>
 <body>
@@ -125,8 +144,11 @@
     <section class="aui-content bg-white aui-margin-b-15">
         <div class="aui-list aui-media-list aui-list-noborder aui-bg-info user-info">
             <div class="aui-list-item aui-list-item-middle user-header">
-              <img src="../image/user-banner.png" alt="">
-                  <div class="aui-btn" onclick="fnLogin()">马上登录</div>
+                <div class="username">白毛浮绿水</div>
+                <div class="icon-panel" tapmode onclick="fnSetAvatar()">
+                    <div id="icon" class="icon"></div>
+                </div>
+                  <!-- <div class="aui-btn" onclick="fnLogin()">马上登录</div> -->
                 </div>
             </div>
         </div>
@@ -164,6 +186,14 @@
                 <img src="../image/user-icon6.png" alt="">
                 </div>
                 <div class="aui-list-item-inner aui-list-item-arrow">
+                    购物车
+                </div>
+            </li>
+            <li class="aui-list-item list_li">
+                <div class="aui-list-item-label-icon list">
+                <img src="../image/user-icon6.png" alt="">
+                </div>
+                <div class="aui-list-item-inner aui-list-item-arrow">
                     我的发布
                 </div>
             </li>
@@ -183,25 +213,158 @@
                     历史记录
                 </div>
             </li>
+            <li class="aui-list-item list_li">
+                <div class="aui-list-item-label-icon list">
+                    <img src="../image/dingyue.png" alt="">
+                </div>
+                <div class="aui-list-item-inner aui-list-item-arrow" style="border-bottom:none;">
+                    我的订阅
+                </div>
+            </li>
         </ul>
 </body>
 <script type="text/javascript" src="../script/api.js" ></script>
+<script type="text/javascript" src='../script/common.js'>
+
+</script>
 <script type="text/javascript">
     apiready = function () {
+      init();
+        // getUserInfo();
+              var userInfo = $api.getStorage('user');
     }
-    // 点击按钮登陆
-    function fnLogin() {
-      api.openWin({
-          name: 'login',
-          url: './login.html',
-          pageParam: {
-              name: 'test'
-          },
-          animation: {
-              type: "fade",
-          }
-      });
+    // 获取个人信息
+    // function getUserInfo() {
+    //     var userInfo = $api.getStorage('userInfo');
+    //     api.ajax({
+    //         url: 'https://d.apicloud.com/mcm/api/user/' + userInfo.userId,
+    //         method: 'get',
+    //         headers: {
+    //             "X-APICloud-AppId": "A6921544633372",
+    //             "X-APICloud-AppKey": "2672b5911d8551540c1ea598e01c87fee217a1e5.1482500122476",
+    //             "Authorization": userInfo.id
+    //         }
+    //     }, function(ret, err) {
+    //         if (ret) {
+    //             fnUpdateLocalAvatar(ret);
+    //         } else {
+    //             alert(JSON.stringify(err));
+    //         }
+    //     });
+    // }
 
+    // 更新头像显示
+    // function fnUpdateLocalAvatar(data_) {
+    //     if (!data_.avatar) {
+    //         return;
+    //     }
+    //
+    //     // 缓存头像
+    //     var icon = $api.byId('icon');
+    //     api.imageCache({
+    //         url: data_.avatar.url
+    //     }, function(ret, err) {
+    //         if (ret) {
+    //             icon.style.backgroundImage = 'url(' + ret.url + ')';
+    //         } else {
+    //             api.toast({
+    //                 msg: '获取头像失败',
+    //                 duration: 2000,
+    //                 location: 'bottom'
+    //             });
+    //         }
+    //     });
+    // }
+
+    // 选择头像
+    function fnSetAvatar() {
+        api.actionSheet({
+            title: '选择',
+            cancelTitle: '取消',
+            buttons: ['拍照', '相册']
+        }, function(ret, err) {
+            if (ret) {
+                var sourceTypes = [
+                    'camera',
+                    'album'
+                ];
+                var encodingType = [
+                    'jpg',
+                    'png'
+                ];
+                if (ret.buttonIndex == (sourceTypes.length + 1)) {
+                    return;
+                }
+                api.getPicture({
+                    sourceType: sourceTypes[ret.buttonIndex - 1],
+                    encodingType:encodingType,
+                    destinationType:'url',
+                    mediaValue:'pic',
+                    allowEdit: true,
+                    quality: 50, // 指定图片质量
+                }, function(ret, err) {
+                    if (ret) {
+                    console.log(ret.data)
+                       fnUploadAtavar(ret.data);
+                    }else {
+                      {
+                        //  alert(JSON.stringify());
+                      }
+                    }
+                });
+            }
+        });
     }
+
+    // 上传头像文件
+    function fnUploadAtavar(avatarUrl_) {
+        api.ajax({
+            url: hname.hname.name + '/public/index/Index/user_image',
+            method: 'post',
+            headers: {
+                "X-APICloud-AppId": "A6079750662654",
+                "X-APICloud-AppKey": "4B3AB3D8-C633-6D3E-F6C3-37EDFE6978AB"
+            },
+            data: {
+              values: {
+                  filename: 'icon'
+              },
+                files: {
+                    file: avatarUrl_
+                }
+            }
+        }, function(ret, err) {
+            if (ret) {
+                console.log(JSON.stringify(ret));
+            } else {
+                console.log(JSON.stringify(err));
+            }
+        });
+    }
+
+    // 更新用户头像
+    // function fnUpdateUserAtavar(avatar_) {
+    //     var userInfo = $api.getStorage('userInfo');
+    //     api.ajax({
+    //         url: hname.hname.name +'/public/index/Create/user_image' + userInfo.userId,
+    //         method: 'put',
+    //         headers: {
+    //             "X-APICloud-AppId": "A6079750662654",
+    //             "X-APICloud-AppKey": "4B3AB3D8-C633-6D3E-F6C3-37EDFE6978AB",
+    //             "Authorization": userInfo.id
+    //         },
+    //         data: {
+    //             values: {
+    //                 avatar: avatar_
+    //             }
+    //         }
+    //     }, function(ret, err) {
+    //         if (ret) {
+    //             fnUpdateLocalAvatar(ret);
+    //         } else {
+    //             alert(JSON.stringify(err));
+    //         }
+    //     });
+    // }
 </script>
 </html>

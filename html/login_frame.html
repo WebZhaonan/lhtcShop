@@ -35,21 +35,17 @@
       </div>
       <div class="other">
           <div class="ange">其他方式登陆</div>
-          <section class="aui-grid">
+          <!-- <section class="aui-grid">
             <div class="aui-row">
                 <div class="aui-col-xs-4">
                     <i class="aui-iconfont aui-icon-wechat wechat"></i>
                     <div class="aui-grid-label">微信</div>
                 </div>
-                <div class="aui-col-xs-4">
-                    <i class="aui-iconfont aui-icon-qq qq"></i>
-                    <div class="aui-grid-label">QQ</div>
-                </div>
-                <div class="aui-col-xs-4">
-                    <i class="aui-iconfont aui-icon-weibo weibo"></i>
-                    <div class="aui-grid-label">新浪微博</div>
-                </div>
-        </section>
+        </section> -->
+          <div class="btn-third-party">
+              <i class="aui-iconfont aui-icon-wechat wechat" style="font-size:24px;color:#62b900" ></i>
+            使用微信登录
+          </div>
       </div>
 </body>
 <script type="text/javascript" src="../script/api.js"></script>
@@ -202,14 +198,14 @@ function fnLogin() {
         }
     }, function(ret, err) {
         if (ret) {
-            // 保存用户信息
-            $api.setStorage('userInfo', ret);
-            console.log(JSON.stringify(ret))
             api.alert({
                 title: '提示',
                 msg: ret.Msg,
             }, function() {
-                if (ret.code == 'success') {
+                if (ret) {
+                  // 保存用户信息
+                  $api.setStorage('user', ret.user);
+                  $api.setStorage('id', ret.id);
                    api.openWin({
                        name: 'index',
                        url: '../index.html',
