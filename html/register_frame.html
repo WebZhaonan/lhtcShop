@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
@@ -21,10 +20,11 @@
       background: #fe467a;
       color: #fff;
       position: absolute;
-      right: 0;
-      top: 40px;
+      right: 10px;
+      top:45px;
       z-index: 9
     }
+
     </style>
 </head>
 
@@ -35,8 +35,8 @@
           </div>
       </div>
     <div class="row mob">
-        <input id="mobile" class="input" type="number" placeholder="手机号" style="border-bottom: 1px solid #fe467a !important">
-        <div class="aui-btn" onclick="fnsend_code()">获取验证码</div>
+        <input id="mobile" class="input" type="number" placeholder="手机号"  name='phone' style="background:#fff">
+        <div class="aui-btn" onclick="fnsend_code()" id="btn">获取验证码</div>
     </div>
     <div class="row">
         <input id="code" class="input" type="password" placeholder="验证码" style="border-bottom: 1px solid #fe467a !important">
@@ -49,21 +49,22 @@
 
 </body>
 <script type="text/javascript" src="../script/api.js"></script>
+
 <script type="text/javascript">
-var hname;
+var hname = 0;
 apiready = function() {
     fnInitUIInput();
     init();
+    console.log(JSON.stringify(hname.hname.name ))
 };
 //初始化
-  function init() {
-    api.readFile({
-        sync:false,
+function init() {
+  var data_=  api.readFile({
+        sync:true,
         path: 'widget://res/common.json'
-    }, function(ret){
-        hname = ret;
-    });
-  }
+    })
+    hname = JSON.parse(data_)
+}
 var UIInput;
 var usernameUIInputId;
 var passwordUIInputId;
@@ -96,7 +97,7 @@ function fnInitUIInput() {
         autoFocus: false,
         maxRows: 1,
         placeholder: '手机号',
-        keyboardType: 'default',
+        keyboardType: 'number',
         fixedOn: api.frameName
     }, function(ret, err) {
         if (ret) {
@@ -141,7 +142,7 @@ function fnInitUIInput() {
          autoFocus: false,
          maxRows: 1,
          placeholder: '验证码',
-         keyboardType: 'default',
+         keyboardType: 'number',
          fixedOn: api.frameName
      }, function(ret, err) {
          if (ret) {
@@ -202,104 +203,94 @@ function fnInitUIInput() {
     });
 }
 // 注册
-function fnRegister() {
-    if (!usernameValue) {
-        if (api.systemType == 'android') {
-            setTimeout(function() {
-                UIInput.popupKeyboard({
-                    id: usernameUIInputId
-                });
-            }, 200);
-        } else {
-            UIInput.popupKeyboard({
-                id: usernameUIInputId
-            });
-        }
-        return;
-    }
-    if (!passwordValue) {
-        if (api.systemType == 'android') {
-            setTimeout(function() {
-                UIInput.popupKeyboard({
-                    id: passwordUIInputId
-                });
-            }, 200);
-        } else {
-            UIInput.popupKeyboard({
-                id: passwordUIInputId
-            });
-        }
-        return;
-    }
-
-    api.ajax({
-        url: 'https://d.apicloud.com/mcm/api/user',
-        method: 'post',
-        headers: {
-            "X-APICloud-AppId": "A6079750662654",
-            "X-APICloud-AppKey": "4B3AB3D8-C633-6D3E-F6C3-37EDFE6978AB"
-        },
-        data: {
-            values: {
-                "username": usernameValue,
-                "password": passwordValue
-            }
-        }
-    }, function(ret, err) {
-        if (ret && ret.id) {
-            api.alert({
-                title: '提示',
-                msg: '注册成功',
-            }, function(ret, err) {
-                if (ret) {
-                    // 跨窗口执行Script, 将用户名传给登录页面
-                    api.execScript({
-                        name: 'login',
-                        frameName: 'login_frame',
-                        script: 'fnSetUsername(\"' + usernameValue + '\");'
-                    });
-                    api.closeWin();
-                }
-            });
-        } else {
-            api.toast({
-                msg: '注册失败，用户名已被占用',
-                duration: 2000,
-                location: 'middle'
-            });
-        }
-    });
-}
+// function fnRegister() {
+//     if (!usernameValue) {
+//         if (api.systemType == 'android') {
+//             setTimeout(function() {
+//                 UIInput.popupKeyboard({
+//                     id: usernameUIInputId
+//                 });
+//             }, 200);
+//         } else {
+//             UIInput.popupKeyboard({
+//                 id: usernameUIInputId
+//             });
+//         }
+//         return;
+//     }
+//     if (!passwordValue) {
+//         if (api.systemType == 'android') {
+//             setTimeout(function() {
+//                 UIInput.popupKeyboard({
+//                     id: passwordUIInputId
+//                 });
+//             }, 200);
+//         } else {
+//             UIInput.popupKeyboard({
+//                 id: passwordUIInputId
+//             });
+//         }
+//         return;
+//     }
+//
+//     api.ajax({
+//         url: 'https://d.apicloud.com/mcm/api/user',
+//         method: 'post',
+//         headers: {
+//             "X-APICloud-AppId": "A6079750662654",
+//             "X-APICloud-AppKey": "4B3AB3D8-C633-6D3E-F6C3-37EDFE6978AB"
+//         },
+//         data: {
+//             values: {
+//                 "username": usernameValue,
+//                 "password": passwordValue
+//             }
+//         }
+//     }, function(ret, err) {
+//         if (ret && ret.id) {
+//             api.alert({
+//                 title: '提示',
+//                 msg: '注册成功',
+//             }, function(ret, err) {
+//                 if (ret) {
+//                     // 跨窗口执行Script, 将用户名传给登录页面
+//                     api.execScript({
+//                         name: 'login',
+//                         frameName: 'login_frame',
+//                         script: 'fnSetUsername(\"' + usernameValue + '\");'
+//                     });
+//                     api.closeWin();
+//                 }
+//             });
+//         } else {
+//             api.toast({
+//                 msg: '注册失败，用户名已被占用',
+//                 duration: 2000,
+//                 location: 'middle'
+//             });
+//         }
+//     });
+// }
 // 验证码
    function fnsend_code() {
-    //  var inputValue = $api.byId('mobile');
-    UIInput.value({
-        id:  usernameUIInputId
-    });
-    var str = JSON.stringify(hname);
-    str = eval("("+str+")");
-    // data  status
-    str = str['data'];
-    //data
-    str = eval("("+str+")");
-    //js
-    console.log(str['hname']['sb']);
-    return;
      api.ajax({
-         url: hname.hname.name+'/public/index/Create/send_sms',
+         url:'http://lhtcshop.com/public/index/Create/send_sms',
          method: 'post',
          data: {
-              "phone":usernameValue
+           values:{
+             phone: usernameValue
+           }
          }
      },function(ret, err){
-         if (ret) {
-             alert( JSON.stringify( ret ) );
+         if (ret)
+         {
+             console.log(JSON.stringify(ret));
          } else {
-             alert( JSON.stringify( err ) );
+              console.log(JSON.stringify(err));
          }
      });
-
    }
+
 </script>
 
 </html>
