@@ -26,7 +26,7 @@
         #footer ul li:nth-child(5){ background-image: url(./image/bottombtn0501.png); }
         #footer ul li:nth-child(1).active{ background-image: url(./image/bottombtn0102.png); }
         #footer ul li:nth-child(2).active{ background-image: url(./image/bottombtn0202.png); }
-        #footer ul li:nth-child(3).active{ background-image: url(./image/bottombtn0301.png); }
+        #footer ul li:nth-child(5).active{ background-image: url(./image/bottombtn0502.png); }
         #footer ul li:nth-child(4).active{ background-image: url(./image/bottombtn0402.png); }
 
         .border-t:before{
@@ -38,6 +38,7 @@
             left: 0;
             width: 100px;
             height: 50px;
+
         }
 
         header .left .arrow {
@@ -114,24 +115,19 @@ apiready = function () {
     });
     funIniGroup();
     // 初始化事件监听
-    initEventListenner()
-    // 判断网络状况
-    // api.addEventListener({
-    //    name:'offline'
-    //  }, function(ret, err){
-    //   alert('断网了');
-    // });
+    initEventListenner();
+    api.parseTapmode();
 }
 
 function funIniGroup(){
     var eHeaderLis = $api.domAll('header li'),
         frames = [];
     for (var i = 0,len = eHeaderLis.length; i < len; i++) {
-            frames.push( {
+              frames.push( {
                 name: 'frame'+i,
                 url: './html/frame'+i+'.html',
                 bgColor : '#fff',
-                bounces:false
+                bounces:true
             } )
     }
     api.openFrameGroup({
@@ -188,21 +184,31 @@ function initEventListenner() {
   //     }
   // });
     // 拦截Android的返回键，在首页点击返回键，提示退出应用
+    var flag = false;
     api.addEventListener({
         name: 'keyback'
     }, function(ret, err) {
-        api.confirm({
-            title: '提示',
-            msg: '是否退出应用',
-            buttons: ['确定', '取消']
-        }, function(ret, err) {
-            if (ret.buttonIndex == 1) {
-                // 关闭当前的主Widget，就可以实现推出APP的效果
-                api.closeWidget({
-                    silent: true //直接退出，无需提示
-                });
-            }
-        });
+        if (false == flag) {
+            api.toast({
+                msg: '再按一次退出',
+                duration: 2000,
+                location: 'bottom'
+            });
+            flag = true;
+            setTimeout(function() {
+                flag = false;
+            }, 2000);
+        } else {
+            api.closeWidget({
+                silent: true
+            });
+        }
+    });
+    // 判断网络状况
+    api.addEventListener({
+       name:'offline'
+     }, function(ret, err){
+      alert('断网了');
     });
 }
 // 打开城市选择Frame
