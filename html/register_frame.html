@@ -135,12 +135,12 @@ function fnRegister() {
         }
     }, function(ret, err) {
         api.hideProgress();
-        if (ret) {
+        if (ret.code != 'error') {
             api.alert({
               title: '提示',
               msg: ret.Msg,
             }, function(ret, err) {
-                if (ret.code == 'success') {
+                if (ret) {
                     // 跨窗口执行Script, 将用户名传给登录页面
                     api.execScript({
                         name: 'login',
@@ -148,8 +148,6 @@ function fnRegister() {
                         script: 'fnSetUsername(\"' + usernameValue + '\");'
                     });
                     api.closeWin();
-                }else {
-
                 }
             });
         } else {

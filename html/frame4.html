@@ -181,7 +181,7 @@
     </section>
 <!--  -->
   <ul class="aui-list aui-list-in">
-            <li class="aui-list-item list_li">
+            <li class="aui-list-item list_li" onclick="fnlogin()">
                 <div class="aui-list-item-label-icon list">
                 <img src="../image/user-icon6.png" alt="">
                 </div>
@@ -231,19 +231,27 @@
     apiready = function () {
       init();
         // getUserInfo();
-              var userInfo = $api.getStorage('user');
+    }
+    function fnlogin() {
+      api.openWin({
+          name: 'login',
+          url: './login.html',
+          pageParam: {
+              name: 'test'
+          }
+      });
+
     }
     // 获取个人信息
     // function getUserInfo() {
-    //     var userInfo = $api.getStorage('userInfo');
+    //     var userInfo = $api.getStorage('id');
     //     api.ajax({
-    //         url: 'https://d.apicloud.com/mcm/api/user/' + userInfo.userId,
+    //         url:  hname.hname.name +'/public/index/Create/user_image?userid=' + userInfo,
     //         method: 'get',
     //         headers: {
-    //             "X-APICloud-AppId": "A6921544633372",
-    //             "X-APICloud-AppKey": "2672b5911d8551540c1ea598e01c87fee217a1e5.1482500122476",
-    //             "Authorization": userInfo.id
-    //         }
+    //             "X-APICloud-AppId": "A6079750662654",
+    //             "X-APICloud-AppKey": "4B3AB3D8-C633-6D3E-F6C3-37EDFE6978AB"
+    //         },
     //     }, function(ret, err) {
     //         if (ret) {
     //             fnUpdateLocalAvatar(ret);
@@ -254,27 +262,24 @@
     // }
 
     // 更新头像显示
-    // function fnUpdateLocalAvatar(data_) {
-    //     if (!data_.avatar) {
-    //         return;
-    //     }
-    //
-    //     // 缓存头像
-    //     var icon = $api.byId('icon');
-    //     api.imageCache({
-    //         url: data_.avatar.url
-    //     }, function(ret, err) {
-    //         if (ret) {
-    //             icon.style.backgroundImage = 'url(' + ret.url + ')';
-    //         } else {
-    //             api.toast({
-    //                 msg: '获取头像失败',
-    //                 duration: 2000,
-    //                 location: 'bottom'
-    //             });
-    //         }
-    //     });
-    // }
+    function fnUpdateLocalAvatar(data_) {
+        // 缓存头像
+        var icon = $api.byId('icon');
+        api.imageCache({
+            url: data_
+        }, function(ret, err) {
+            if (ret) {
+                icon.style.backgroundImage = 'url('+ ret.url + ')';
+                // $api.css(icon,'background:url('+ ret.url +')')
+            } else {
+                api.toast({
+                    msg: '获取头像失败',
+                    duration: 2000,
+                    location: 'bottom'
+                });
+            }
+        });
+    }
 
     // 选择头像
     function fnSetAvatar() {
@@ -304,7 +309,6 @@
                     quality: 50, // 指定图片质量
                 }, function(ret, err) {
                     if (ret) {
-                    console.log(ret.data)
                        fnUploadAtavar(ret.data);
                     }else {
                       {
@@ -318,8 +322,9 @@
 
     // 上传头像文件
     function fnUploadAtavar(avatarUrl_) {
+        var userInfo = $api.getStorage('userInfo');
         api.ajax({
-            url: hname.hname.name + '/public/index/Index/user_image',
+            url: hname.hname.name +'/public/index/Index/user_image?userid='+userInfo.id,
             method: 'post',
             headers: {
                 "X-APICloud-AppId": "A6079750662654",
@@ -334,37 +339,14 @@
                 }
             }
         }, function(ret, err) {
-            if (ret) {
-                console.log(JSON.stringify(ret));
+            if (ret.Msg) {
+              alert(234)
+              fnUpdateLocalAvatar(ret.Msg);
             } else {
                 console.log(JSON.stringify(err));
             }
         });
     }
 
-    // 更新用户头像
-    // function fnUpdateUserAtavar(avatar_) {
-    //     var userInfo = $api.getStorage('userInfo');
-    //     api.ajax({
-    //         url: hname.hname.name +'/public/index/Create/user_image' + userInfo.userId,
-    //         method: 'put',
-    //         headers: {
-    //             "X-APICloud-AppId": "A6079750662654",
-    //             "X-APICloud-AppKey": "4B3AB3D8-C633-6D3E-F6C3-37EDFE6978AB",
-    //             "Authorization": userInfo.id
-    //         },
-    //         data: {
-    //             values: {
-    //                 avatar: avatar_
-    //             }
-    //         }
-    //     }, function(ret, err) {
-    //         if (ret) {
-    //             fnUpdateLocalAvatar(ret);
-    //         } else {
-    //             alert(JSON.stringify(err));
-    //         }
-    //     });
-    // }
 </script>
 </html>

@@ -122,21 +122,7 @@ apiready = function () {
 function funIniGroup(){
     var eHeaderLis = $api.domAll('header li'),
         frames = [];
-    for (var i = 0,len = eHeaderLis.length; i < len; i++) {
-              // 判断是否登陆
-              // 从缓存中获取用户信息
-              var username = $api.getStorage('user');
-              var url = './html/frame'+i+'.html';
-              if(i == 4 && !username){
-                url = './html/userWindow.html';
-              }
-              frames.push( {
-                name: 'frame'+i,
-                url: url,
-                bgColor : '#fff',
-                bounces:true
-            } )
-    }
+
     api.openFrameGroup({
         name: 'group',
         scrollEnabled: false,
