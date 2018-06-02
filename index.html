@@ -15,13 +15,14 @@
         #aui-header{ background-color: #fe467a; }
         header ul li { height: 50px; line-height: 50px; text-align: center; display: none; color: #fff; position: relative;font-size: 18px;  }
         header ul li.active{ display: block; }
-        #footer{  background: #fff;}
+        #footer{  background: #fff;
+        }
         #footer ul{background: url(./image/bottomBg.png) no-repeat 0 0;background-size: 100% 100%;padding-top: 6px;}
         #footer ul li{padding-top: 36px;color: #999;background: url() no-repeat center 11px;background-size: auto 25px;text-align: center;font-family: SimHei;font-size: 16px;height: 60px}
         #footer ul li.active{ color: #fe467a; }
         #footer ul li:nth-child(1){ background-image: url(./image/bottombtn0101.png); }
         #footer ul li:nth-child(2){ background-image: url(./image/bottombtn0201.png);background-size: 30px}
-        #footer ul li:nth-child(3){ background: url(./image/bottombtn0301.png) no-repeat center 0px;background-size: auto 30px;}
+          #footer ul li:nth-child(3){ background: url(./image/bottombtn0301.png) no-repeat center 0px;background-size: auto 30px;}
         #footer ul li:nth-child(4){ background-image: url(./image/bottombtn0401.png); }
         #footer ul li:nth-child(5){ background-image: url(./image/bottombtn0501.png); }
         #footer ul li:nth-child(1).active{ background-image: url(./image/bottombtn0102.png); }
@@ -78,16 +79,16 @@
 
 <div id="wrap" class="flex-wrap flex-vertical">
   <header class="aui-bar aui-bar-nav" id="aui-header">
-    <div class="left" tapmode onclick="fnOpenCitySelectorFrame();">
-        <div class="arrow" id="arrow"></div>
-        <div class="city" id="city">北京市</div>
+    <div class="left" tapmode>
+        <!-- <div class="arrow" id="arrow"></div> -->
+        <div class="city" id="city">庆阳市</div>
     </div>
     <ul class="flex-wrap" >
         <li tapmode="hover" onclick="randomSwitchBtn( this );" class="flex-con active" >乐航同城</li>
         <li tapmode="hover" onclick="randomSwitchBtn( this );" class="flex-con" >发现</li>
-        <li tapmode="hover" onclick="randomSwitchBtn( this );" class="flex-con" >发布</li>
+        <li tapmode="hover" onclick="randomSwitchBtn( this );" class="flex-con" >选择发布类型</li>
         <li tapmode="hover" onclick="randomSwitchBtn( this );" class="flex-con" >消息</li>
-        <li tapmode="hover" onclick="randomSwitchBtn( this );" class="flex-con" >个人中心</li>
+        <li tapmode="hover"  class="flex-con" >个人中心</li>
     </ul>
   </header>
     <div id="main" class="flex-con">
@@ -98,7 +99,7 @@
             <li tapmode="hover" onclick="randomSwitchBtn( this );" class="flex-con" >发现</li>
             <li tapmode="hover" onclick="randomSwitchBtn( this );" class="flex-con" >发布</li>
             <li tapmode="hover" onclick="randomSwitchBtn( this );" class="flex-con" >消息</li>
-            <li tapmode="hover" onclick="randomSwitchBtn( this );" class="flex-con" >个人中心</li>
+            <li tapmode="hover" onclick="randomSwitchBtn(this);" class="flex-con" >个人中心</li>
         </ul>
     </div>
 
@@ -118,14 +119,20 @@ apiready = function () {
     initEventListenner();
     api.parseTapmode();
 }
-
 function funIniGroup(){
     var eHeaderLis = $api.domAll('header li'),
         frames = [];
     for (var i = 0,len = eHeaderLis.length; i < len; i++) {
+              // 判断是否登陆
+              // 从缓存中获取用户信息
+              // var username = $api.getStorage('');
+              var url = './html/frame'+i+'.html';
+              // if(i == 4 && !username){
+              //   url = './html/userWindow.html';
+              // }
               frames.push( {
                 name: 'frame'+i,
-                url: './html/frame'+i+'.html',
+                url: url,
                 bgColor : '#fff',
                 bounces:true
             } )
@@ -139,9 +146,16 @@ function funIniGroup(){
             w: api.winWidth,
             h: $api.dom('#main').offsetHeight
         },
+        progress: {
+          type:'default',
+          title:'加载中',
+          tetx:'请稍后......'
+        },
         index: 0,
         frames: frames
     }, function (ret, err) {
+      if(ret.index == 4){
+      }
     });
 }
 
@@ -168,21 +182,6 @@ function randomSwitchBtn( tag ) {
 }
 // 初始化事件监听
 function initEventListenner() {
-  // 监听城市切换事件（自定义事件）
-  // api.addEventListener({
-  //     name: 'cityChange'
-  // }, function(ret, err) {
-  //     if (ret) {
-  //         // 更新城市名称
-  //         updateCityName(ret.value.currentCity.name);
-  //
-  //         // 更新箭头状态
-  //         resetArrowState();
-  //
-  //         // 打开商品列表等首页的Frames
-  //         openFrames();
-  //     }
-  // });
     // 拦截Android的返回键，在首页点击返回键，提示退出应用
     var flag = false;
     api.addEventListener({
@@ -211,37 +210,4 @@ function initEventListenner() {
       alert('断网了');
     });
 }
-// 打开城市选择Frame
-function fnOpenCitySelectorFrame() {
-    // 设置箭头状态
-    // setArrowStateActive();
-
-    // 根据UI架构设计（ui-architecture.xmind），打开城市选择Frame
-    api.openFrame({
-        name: 'cityselector_frame',
-        url: './html/cityselector_frame.html',
-        bgColor: 'rgba(0, 0, 0, 0.8)',
-        rect: {
-            x: 0,
-            y: $api.dom('header').offsetHeight,
-            w: 'auto', // 自动填充所在Window的宽度
-            h: 'auto' // 自动填充所在Window的高度
-        },
-        bounces: true // 打开弹动
-    });
-}
-// 箭头添加class
-// function setArrowStateActive() {
-//     var arrow = $api.byId('arrow');
-//     if (!$api.hasCls(arrow, 'active')) {
-//         $api.addCls(arrow, 'active');
-//     }
-// }
-// 箭头去掉class
-// function resetArrowState() {
-//     var arrow = $api.byId('arrow');
-//     if ($api.hasCls(arrow, 'active')) {
-//         $api.removeCls(arrow, 'active');
-//     }
-// }
 </script>

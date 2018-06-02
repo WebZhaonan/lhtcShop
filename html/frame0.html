@@ -104,7 +104,7 @@
     </style>
 </head>
 <body>
-    <div class="aui-searchbar" id="search">
+    <!-- <div class="aui-searchbar" id="search">
             <div class="aui-searchbar-input aui-border-radius">
                 <i class="aui-iconfont aui-icon-search"></i>
                 <input type="search" placeholder="请输入搜索内容" id="search-input">
@@ -113,7 +113,7 @@
                 </div>
             </div>
             <div class="aui-searchbar-btn" tapmode>取消</div>
-        </div>
+        </div> -->
         <section class="aui-content">
             <div id="aui-slide">
                 <div class="aui-slide-wrap" >
@@ -142,11 +142,11 @@
                         <div class="aui-grid-label">本地服务</div>
                     </div>
                     <div class="aui-col-5">
-                        <img src="../image/Lh-img3.png" class="icon">
+                        <img src="../image/Lh-img3.png" class="icon" onclick="fnJobHunting();">
                         <div class="aui-grid-label">求职招聘</div>
                     </div>
                     <div class="aui-col-5">
-                        <img src="../image/Lh-img4.png" class="icon">
+                        <img src="../image/Lh-img4.png" class="icon" onclick="fnHouseRentals();">
                         <div class="aui-grid-label">房屋出租</div>
                     </div>
                     <div class="aui-col-5" onclick="fnShopping();">
@@ -249,6 +249,7 @@
                     name: 'test'
                 }
             });
+
           }
           function fnLocalService() {
             // 打开本地服务
@@ -260,6 +261,16 @@
                 }
             });
           }
+          function fnJobHunting() {
+            // 打开求职招聘
+            api.openWin({
+                name: 'JobHunting_win',
+                url: './JobHunting_win.html',
+                pageParam: {
+                    name: 'test'
+                }
+          })
+          }
           function fnShopping() {
             // 打开购物
             api.openWin({
@@ -268,8 +279,17 @@
                 pageParam: {
                     name: 'test'
                 }
+          })
+        }
+          function fnHouseRentals() {
+            // 打开房屋出租
+            api.openWin({
+              name:'HouseRentals_win',
+              url: './HouseRentals_win.html',
+              pageParam: {
+                  name: 'test'
+              }
             });
-
           }
       </script>
 </body>
