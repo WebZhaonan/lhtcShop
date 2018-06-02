@@ -1,0 +1,219 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <link rel="stylesheet" type="text/css" href="../css/aui.css" />
+    <style type="text/css">
+        .aui-searchbar {
+            background: transparent;
+        }
+        .aui-bar-nav .aui-searchbar-input {
+            background-color: #fff;
+        }
+        #aui-header{background: #fe467a}
+        header ul li { height: 50px; line-height: 50px; text-align: center; display: none; color: #fff; position: relative;font-size: 18px;  }
+        header ul li.active{ display: block; }
+    </style>
+</head>
+<body>
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript">
+    apiready = function(){
+
+      // api.openFrame({
+      //     name: 'main_frm',
+      //     url: 'main_frm.html',
+      //     bounces: true,
+      //     rect: {
+      //         x: 0,
+      //         y: headerPos.h,
+      //         w: 'auto',
+      //         h: 'auto',
+      //         marginBottom:10
+      //     }
+      // })
+  //       var NVTabBar = api.require('NVTabBar');
+  // NVTabBar.open({
+  //     styles: {
+  //         bg: 'widget://image/bottomBg.png',
+  //         h: 70,
+  //         dividingLine: {
+  //             width:0,
+  //             color: '#fff'
+  //         },
+  //         badge: {
+  //             bgColor: '#000',
+  //             numColor: '#fff',
+  //             size:21.0,
+  //             centerX: 100,
+  //             centerY: 6
+  //         }
+  //     },
+  //     items: [{
+  //         w: api.winWidth / 5.0,
+  //         bg: {
+  //             marginB: -3,
+  //             image: 'rgba(0,0,0,0)'
+  //         },
+  //         iconRect: {
+  //             w: 25.0,
+  //             h: 25.0,
+  //         },
+  //         icon: {
+  //             normal: 'widget://image/bottombtn0102.png',
+  //             highlight: 'widget://image/bottombtn0102.png',
+  //             selected: 'widget://image/bottombtn0102.png'
+  //         },
+  //         title: {
+  //             text: '首页',
+  //             size: 14.0,
+  //             normal: '#999',
+  //             selected: "#fe467a",
+  //             marginB: 1.0
+  //         }
+  //     }, {
+  //         w: api.winWidth / 5.0,
+  //         bg: {
+  //             marginB: -3,
+  //             image: 'rgba(0,0,0,0)'
+  //         },
+  //         iconRect: {
+  //             w: 28.0,
+  //             h: 28.0,
+  //         },
+  //         icon: {
+  //             normal: 'widget://image/bottombtn0201.png',
+  //             highlight: 'widget://image/NVTabBar/guaned.png',
+  //             selected: 'widget://image/NVTabBar/guaned.png'
+  //         },
+  //         title: {
+  //             text: '发现',
+  //             size: 14.0,
+  //             normal: '#999',
+  //             selected: "#fe467a",
+  //             marginB: 1.0
+  //         }
+  //     }, {
+  //         w: api.winWidth / 5.0,
+  //         bg: {
+  //             marginB: 0,
+  //             image: 'rgba(0,0,0,0)'
+  //         },
+  //
+  //         iconRect: {
+  //             w: 40,
+  //             h: 40,
+  //         },
+  //         icon: {
+  //             normal: 'widget://image/bottombtn0301.png',
+  //             highlight: 'widget://image/bottombtn0301.png',
+  //             selected: 'widget://image/bottombtn0301.png'
+  //         },
+  //         title: {
+  //             text : '发布',
+  //             size: 14.0,
+  //             normal: '#999',
+  //             selected: "#fe467a",
+  //             marginB: 1.0
+  //         }
+  //     }, {
+  //         w: api.winWidth / 5.0,
+  //         bg: {
+  //             marginB: -4,
+  //             image: 'rgba(0,0,0,0)'
+  //         },
+  //         iconRect: {
+  //             w: 25.0,
+  //             h: 25.0,
+  //         },
+  //         icon: {
+  //             normal: 'widget://image/bottombtn0401.png',
+  //             highlight: 'widget://image/NVTabBar/faved.png',
+  //             selected: 'widget://image/NVTabBar/faved.png'
+  //         },
+  //         title: {
+  //             text: '消息',
+  //             size: 14.0,
+  //             normal: '#999',
+  //             selected: "#fe467a",
+  //             marginB: 1.0
+  //         }
+  //     }, {
+  //         w: api.winWidth / 5.0,
+  //         bg: {
+  //             marginB: -3,
+  //             image: 'rgba(0,0,0,0)'
+  //         },
+  //         iconRect: {
+  //             w: 25.0,
+  //             h: 25.0,
+  //         },
+  //         icon: {
+  //             normal: 'widget://image/bottombtn0501.png',
+  //             highlight: 'widget://image/NVTabBar/bired.png',
+  //             selected: 'widget://image/NVTabBar/bired.png'
+  //         },
+  //         title: {
+  //             text: '个人中心',
+  //             size: 14.0,
+  //             normal: '#999',
+  //             selected: "#fe467a",
+  //             marginB:1.0
+  //         }
+  //     }],
+  //     selectedIndex: 0
+  // }, function(ret, err) {
+  // });
+  //   funIniGroup();
+  //   };
+  //   function funIniGroup(){
+  //       var eHeaderLis = $api.domAll('header li'),
+  //           frames = [];
+  //       for (var i = 0,len = eHeaderLis.length; i < len; i++) {
+  //               frames.push( {
+  //                   name: 'frame'+i,
+  //                   url: './frame'+i+'.html',
+  //                   bgColor : 'rgba(0,0,0,.2)',
+  //                   bounces:true
+  //               } )
+  //       }
+  //       api.openFrameGroup({
+  //           name: 'group',
+  //           scrollEnabled: false,
+  //           rect: {
+  //               x: 0,
+  //               y: $api.dom('header').offsetHeight,
+  //               w: api.winWidth,
+  //               h: $api.dom('#main').offsetHeight
+  //           },
+  //           index: 0,
+  //           frames: frames
+  //       }, function (ret, err) {
+  //
+  //       });
+  //   }
+  //   function randomSwitchBtn( tag ) {
+  //       if( tag == $api.dom('#footer li.active') )return;
+  //       var eFootLis = $api.domAll('#footer li'),
+  //           eHeaderLis = $api.domAll('header li'),
+  //           index = 0;
+  //       for (var i = 0,len = eFootLis.length; i < len; i++) {
+  //           if( tag == eFootLis[i] ){
+  //               index = i;
+  //           }else{
+  //               $api.removeCls(eFootLis[i], 'active');
+  //               $api.removeCls(eHeaderLis[i], 'active');
+  //           }
+  //       }
+  //       $api.addCls( eFootLis[index], 'active');
+  //       $api.addCls( eHeaderLis[index], 'active');
+  //       api.setFrameGroupIndex({
+  //           name: 'group',
+  //           index: index
+  //       });
+    }
+</script>
+</html>
