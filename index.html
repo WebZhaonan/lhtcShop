@@ -12,10 +12,10 @@
     body{
      background: #fff;
     }
-      #aui-header{ background-color: #fe467a; }
+        #aui-header{ background-color: #fe467a; }
         header ul li { height: 50px; line-height: 50px; text-align: center; display: none; color: #fff; position: relative;font-size: 18px;  }
         header ul li.active{ display: block; }
-        #footer{  background: #fff;padding-top: 20px}
+        #footer{  background: #fff;}
         #footer ul{background: url(./image/bottomBg.png) no-repeat 0 0;background-size: 100% 100%;padding-top: 6px;}
         #footer ul li{padding-top: 36px;color: #999;background: url() no-repeat center 11px;background-size: auto 25px;text-align: center;font-family: SimHei;font-size: 16px;height: 60px}
         #footer ul li.active{ color: #fe467a; }
@@ -32,12 +32,55 @@
         .border-t:before{
           content: none;
         }
+        header .left {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100px;
+            height: 50px;
+        }
+
+        header .left .arrow {
+            position: absolute;
+            bottom: 21px;
+            right: 11px;
+            width: 13px;
+            height: 8px;
+            background: url(./image/arrow_down.png);
+            background-size: 13px 8px;
+            background-position: center center;
+            background-repeat: no-repeat;
+            -webkit-transition: 200ms;
+            transition: 200ms;
+        }
+
+        header .left .arrow.active {
+            -webkit-transform: rotate(180deg);
+            transform: rotate(180deg);
+        }
+
+        header .left .city {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            height: 50px;
+            padding-left: 27px;
+            box-sizing: border-box;
+            line-height: 50px;
+            font-size: 14px;
+            color: #fff;
+            text-align: left;
+        }
     </style>
 </head>
 <body>
 
 <div id="wrap" class="flex-wrap flex-vertical">
   <header class="aui-bar aui-bar-nav" id="aui-header">
+    <div class="left" tapmode onclick="fnOpenCitySelectorFrame();">
+        <div class="arrow" id="arrow"></div>
+        <div class="city" id="city">北京市</div>
+    </div>
     <ul class="flex-wrap" >
         <li tapmode="hover" onclick="randomSwitchBtn( this );" class="flex-con active" >乐航同城</li>
         <li tapmode="hover" onclick="randomSwitchBtn( this );" class="flex-con" >发现</li>
@@ -72,6 +115,12 @@ apiready = function () {
     funIniGroup();
     // 初始化事件监听
     initEventListenner()
+    // 判断网络状况
+    // api.addEventListener({
+    //    name:'offline'
+    //  }, function(ret, err){
+    //   alert('断网了');
+    // });
 }
 
 function funIniGroup(){
@@ -97,7 +146,6 @@ function funIniGroup(){
         index: 0,
         frames: frames
     }, function (ret, err) {
-
     });
 }
 
@@ -124,6 +172,21 @@ function randomSwitchBtn( tag ) {
 }
 // 初始化事件监听
 function initEventListenner() {
+  // 监听城市切换事件（自定义事件）
+  // api.addEventListener({
+  //     name: 'cityChange'
+  // }, function(ret, err) {
+  //     if (ret) {
+  //         // 更新城市名称
+  //         updateCityName(ret.value.currentCity.name);
+  //
+  //         // 更新箭头状态
+  //         resetArrowState();
+  //
+  //         // 打开商品列表等首页的Frames
+  //         openFrames();
+  //     }
+  // });
     // 拦截Android的返回键，在首页点击返回键，提示退出应用
     api.addEventListener({
         name: 'keyback'
@@ -142,5 +205,37 @@ function initEventListenner() {
         });
     });
 }
+// 打开城市选择Frame
+function fnOpenCitySelectorFrame() {
+    // 设置箭头状态
+    // setArrowStateActive();
 
+    // 根据UI架构设计（ui-architecture.xmind），打开城市选择Frame
+    api.openFrame({
+        name: 'cityselector_frame',
+        url: './html/cityselector_frame.html',
+        bgColor: 'rgba(0, 0, 0, 0.8)',
+        rect: {
+            x: 0,
+            y: $api.dom('header').offsetHeight,
+            w: 'auto', // 自动填充所在Window的宽度
+            h: 'auto' // 自动填充所在Window的高度
+        },
+        bounces: true // 打开弹动
+    });
+}
+// 箭头添加class
+// function setArrowStateActive() {
+//     var arrow = $api.byId('arrow');
+//     if (!$api.hasCls(arrow, 'active')) {
+//         $api.addCls(arrow, 'active');
+//     }
+// }
+// 箭头去掉class
+// function resetArrowState() {
+//     var arrow = $api.byId('arrow');
+//     if ($api.hasCls(arrow, 'active')) {
+//         $api.removeCls(arrow, 'active');
+//     }
+// }
 </script>

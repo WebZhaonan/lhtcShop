@@ -19,7 +19,30 @@
     }
     .aui-searchbar-input{
       font-family: SimHei;
-      border: 1px solid #999;
+      border: 1px solid #fff;
+      background: transparent;
+      margin: 0 1.5rem;
+      height: 1.6rem;
+      line-height: 1.6rem;
+    }
+    .aui-searchbar-input input{
+      color: #fff;
+      height: 1.6rem;
+    }
+    .aui-searchbar .aui-iconfont{
+      color: #fff !important;
+    }
+    .aui-searchbar-input input::-webkit-input-placeholder{
+        color: #fff;
+    }
+    .aui-searchbar-input input::-moz-placeholder{   /* Mozilla Firefox 19+ */
+        color:#fff;
+    }
+    .aui-searchbar-input input:-moz-placeholder{    /* Mozilla Firefox 4 to 18 */
+        color:#fff;
+    }
+    .aui-searchbar-input input:-ms-input-placeholder{  /* Internet Explorer 10-11 */
+        color:#fff;
     }
     img.icon {
         display: block;
@@ -58,6 +81,13 @@
         display: block;
         margin: 0 auto;
     }
+  .aui-searchbar{
+     position: absolute;
+     top: 20px;
+     left:0px;
+     z-index: 99;
+    background: transparent;
+  }
     </style>
 </head>
 <body>
@@ -113,19 +143,87 @@
                 </div>
             </div>
         </section>
+        <!-- 猜你喜欢 -->
+    <ul class="aui-list aui-media-list">
+            <li class="aui-list-item">
+                <div class="aui-media-list-item-inner">
+                    <div class="aui-list-item-media">
+                        <img src="../image/demo4.png">
+                    </div>
+                    <div class="aui-list-item-inner">
+                        <div class="aui-list-item-text">
+                            <div class="aui-list-item-title">文字描述</div>
+                            <div class="aui-list-item-right">08:00</div>
+                        </div>
+                        <div class="aui-list-item-text">
+                            在下方我们加入了aui-info信息条
+                        </div>
+                    </div>
+                </div>
+                <div class="aui-info" style="padding-top:0">
+                    <div class="aui-info-item">
+                        <img src="../image/demo4.png" style="width:1rem" class="aui-img-round" /><span class="aui-margin-l-5">价格</span>
+                        </div>
+                    <div class="aui-info-item">2015-07-14 10:31</div>
+                </div>
+            </li>
+            <li class="aui-list-item">
+                <div class="aui-media-list-item-inner">
+                    <div class="aui-list-item-media">
+                        <img src="../image/demo4.png">
+                    </div>
+                    <div class="aui-list-item-inner">
+                        <div class="aui-list-item-text">
+                            <div class="aui-list-item-title">文字描述</div>
+                            <div class="aui-list-item-right">08:00</div>
+                        </div>
+                        <div class="aui-list-item-text">
+                            在下方我们加入了aui-info信息条
+                        </div>
+                    </div>
+                </div>
+                <div class="aui-info" style="padding-top:0">
+                    <div class="aui-info-item">
+                        <img src="../image/demo4.png" style="width:1rem" class="aui-img-round" /><span class="aui-margin-l-5">价格</span>
+                        </div>
+                    <div class="aui-info-item">2015-07-14 10:31</div>
+                </div>
+            </li>
+            <li class="aui-list-item">
+                <div class="aui-media-list-item-inner">
+                    <div class="aui-list-item-media">
+                        <img src="../image/demo4.png">
+                    </div>
+                    <div class="aui-list-item-inner">
+                        <div class="aui-list-item-text">
+                            <div class="aui-list-item-title">文字描述</div>
+                            <div class="aui-list-item-right">08:00</div>
+                        </div>
+                        <div class="aui-list-item-text">
+                            在下方我们加入了aui-info信息条
+                        </div>
+                    </div>
+                </div>
+                <div class="aui-info" style="padding-top:0">
+                    <div class="aui-info-item">
+                        <img src="../image/demo4.png" style="width:1rem" class="aui-img-round" /><span class="aui-margin-l-5">价格</span>
+                        </div>
+                    <div class="aui-info-item">2015-07-14 10:31</div>
+                </div>
+            </li>
+        </ul>
       <script type="text/javascript" src="../script/api.js"></script>
       <script type="text/javascript" src="../script/aui-slide.js"></script>
       <script type="text/javascript">
           var slide = new auiSlide({
               container:document.getElementById("aui-slide"),
-              "height":200,
+              "height":250,
               "speed":300,
               "pageShow":true,
               "pageStyle":'dot',
               "loop":true,
               'dotPosition':'center'
           })
-    
       </script>
 </body>
 </html>
