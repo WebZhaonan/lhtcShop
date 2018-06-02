@@ -126,7 +126,7 @@
         <div class="aui-list aui-media-list aui-list-noborder aui-bg-info user-info">
             <div class="aui-list-item aui-list-item-middle user-header">
               <img src="../image/user-banner.png" alt="">
-                  <div class="aui-btn">马上登陆</div>
+                  <div class="aui-btn" onclick="fnLogin()">马上登录</div>
                 </div>
             </div>
         <div class="aui-grid aui-margin-t-15 aui-margin-b-15">
@@ -179,7 +179,7 @@
                     <img src="../image/user-icon8.png" alt="">
                 </div>
                 <div class="aui-list-item-inner aui-list-item-arrow" style="border-bottom:none;">
-                    历史记录
+                    历史记录111
                 </div>
             </li>
         </ul>
@@ -187,6 +187,20 @@
 <script type="text/javascript" src="../script/api.js" ></script>
 <script type="text/javascript">
     apiready = function () {
+    }
+    // 点击按钮登陆
+    function fnLogin() {
+      api.openWin({
+          name: 'login',
+          url: './login.html',
+          pageParam: {
+              name: 'test'
+          },
+          animation: {
+              type: "fade",
+          }
+      });
+
     }
 </script>
 </html>

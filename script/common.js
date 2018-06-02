@@ -32,3 +32,12 @@ function fnReadyFooter() {
         footerHeight = $api.offset(footer).h;
     }
 };
+var hname = 0;
+//初始化
+function init() {
+  var data_=  api.readFile({
+        sync:true,
+        path: 'widget://res/common.json'
+    })
+    hname = JSON.parse(data_)
+}
