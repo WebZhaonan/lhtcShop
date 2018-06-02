@@ -42,7 +42,7 @@
                             </div>
                         </div>
                     </li>
-                    <li class="aui-list-item aui-list-item-middle">
+                    <li class="aui-list-item aui-list-item-middle" onclick="fnOpenList3()">
                         <div class="aui-media-list-item-inner">
                             <div class="aui-list-item-media" style="width: 3rem;">
                                 <img src="../image/Bag.png" class="" style="width:42px;height:48px;">
@@ -52,7 +52,7 @@
                             </div>
                         </div>
                     </li>
-                    <li class="aui-list-item aui-list-item-middle">
+                    <li class="aui-list-item aui-list-item-middle" onclick="fnOpenList4();">
                         <div class="aui-media-list-item-inner">
                             <div class="aui-list-item-media" style="width: 3rem;">
                                 <img src="../image/Home.png" class="" style="height:42px;width:42px">
@@ -62,7 +62,7 @@
                             </div>
                         </div>
                     </li>
-                    <li class="aui-list-item aui-list-item-middle">
+                    <li class="aui-list-item aui-list-item-middle" onclick="fnOpenList5()">
                         <div class="aui-media-list-item-inner">
                             <div class="aui-list-item-media" style="width: 3rem;">
                                 <img src="../image/Myspace.png" class="" style="width:42px;height:48px;">
@@ -77,12 +77,41 @@
         </div>
         <script type="text/javascript" src="script/api.js"></script>
         <script type="text/javascript">
-
          function fnOpenList1() {
         // 打开发职位找人才窗口
         api.openWin({
             name: 'Frame2List_win',
             url: './Frame2List_win.html',
+            pageParam: {
+                name: 'test'
+            }
+        });
+         }
+         function fnOpenList4() {
+        // 打开本地服务窗口
+        api.openWin({
+            name: 'Frame1List_win',
+            url: './Frame1List_win.html',
+            pageParam: {
+                name: 'test'
+            }
+        });
+         }
+         function fnOpenList3() {
+        // 打开二手服务窗口
+        api.openWin({
+            name: 'Frame0List_win',
+            url: './Frame0List_win.html',
+            pageParam: {
+                name: 'test'
+            }
+        });
+         }
+         function fnOpenList5() {
+        // 打开二手服务窗口
+        api.openWin({
+            name: 'Frame3List_win',
+            url: './Frame3List_win.html',
             pageParam: {
                 name: 'test'
             }

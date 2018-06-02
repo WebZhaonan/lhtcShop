@@ -88,7 +88,7 @@
         <li tapmode="hover" onclick="randomSwitchBtn( this );" class="flex-con" >发现</li>
         <li tapmode="hover" onclick="randomSwitchBtn( this );" class="flex-con" >选择发布类型</li>
         <li tapmode="hover" onclick="randomSwitchBtn( this );" class="flex-con" >消息</li>
-        <li tapmode="hover"  class="flex-con" >个人中心</li>
+        <li tapmode="hover"  class="flex-con" onclick="randomSwitchBtn( this );" >个人中心</li>
     </ul>
   </header>
     <div id="main" class="flex-con">
@@ -126,7 +126,6 @@ function funIniGroup(){
               // 判断是否登陆
               // 从缓存中获取用户信息
               var username = $api.getStorage('userInfo');
-                    alert(JSON.stringify(username))
               var url = './html/frame'+i+'.html';
               if(i == 4 && !username){
 

@@ -35,6 +35,8 @@ function fnReadyFooter() {
 var hname = 0;
 //初始化
 function init() {
+  // 创建文件管理器
+
   var data_=  api.readFile({
         sync:true,
         path: 'widget://res/common.json'
