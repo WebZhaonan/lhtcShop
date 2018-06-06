@@ -12,41 +12,50 @@
             <span class="aui-iconfont aui-icon-left"></span>
         </a>
         <div class="aui-title">商家入驻</div>
-        <a class="aui-btn aui-pull-right" tapmode onclick="" style="font-size:16px">
+        <a class="aui-btn aui-pull-right" tapmode style="font-size:16px" onclick="fnopEneter();">
           企业入驻
         </a>
     </header>
 </body>
 <script src="../../script/api.js"></script>
 <script type="text/javascript">
-    apiready = function(){
-        api.parseTapmode();
-        var header = $api.byId('aui-header');
-        $api.fixStatusBar(header);
-        var headerPos = $api.offset(header);
-        var body_h = $api.offset($api.dom('body')).h;
-        api.openFrame({
-            name: 'MerchantEntry_frm',
-            url: 'MerchantEntry_frm.html',
-            bounces: true,
-            rect: {
-                x: 0,
-                y: headerPos.h,
-                w: 'auto',
-                h: 'auto'
-            },
-            progress: {
-                type:'default',
-                title:'加载中.....',
-                text:'先喝会儿茶~~~'
-              },
-        })
+apiready = function(){
+    api.parseTapmode();
+    var header = $api.byId('aui-header');
+    $api.fixStatusBar(header);
+    var headerPos = $api.offset(header);
+    var body_h = $api.offset($api.dom('body')).h;
+    api.openFrame({
+        name: 'MerchantEntry_frm',
+        url: 'MerchantEntry_frm.html',
+        bounces: true,
+        rect: {
+            x: 0,
+            y: headerPos.h,
+            w: 'auto',
+            h: 'auto'
+        },
+        progress: {
+            type:'default',
+            title:'加载中.....',
+            text:'先喝会儿茶~~~'
+          },
+    })
+};
+function fnopEneter() {
+  // 打开商家入驻平台
+  api.openWin({
+      name: 'EnterpriseEntry_win',
+      url: './EnterpriseEntry_win.html',
+      pageParam: {
+          name: 'test'
+      }
+  });
 
-
-    };
-    function closeWin(){
-        api.closeWin({
-        });
-    }
+}
+function closeWin(){
+    api.closeWin({
+    });
+}
 </script>
 </html>

@@ -42,7 +42,49 @@
          height: 2rem;
          line-height: 2rem;
          text-align: center;
-         border-radius: 3px
+         border-radius: 3px;
+         margin-bottom: 50px;
+       }
+       .photos img {
+           display: block;
+           width: 100%;
+       }
+       .add-photos > div {
+           width: 100%;
+           height:5.15rem;
+           line-height: 5.15rem;
+       }
+       .add-photos > div .aui-iconfont {
+           font-size: 2rem;
+           color: #ccc;
+       }
+       .image-item {
+           position: relative;
+           height: 5.3rem;
+           overflow: hidden;
+           background-color: #f0f0f0;
+       }
+       .image-item img {
+           display: block;
+           margin: 0 auto;
+           width: auto;
+           height: 100%;
+       }
+       .image-item .delete-btn {
+           position: absolute;
+           left: 50%;
+           top: 50%;
+           width: 28px;
+           height: 28px;
+           background-color: rgba(0,0,0,0.7);
+           margin-left: -14px;
+           margin-top: -14px;
+           color: #ffffff;
+           text-align: center;
+           border-radius: 50%;
+       }
+       .aui-list .aui-list-item-label{
+         width: 50%
        }
     </style>
 </head>
@@ -51,89 +93,17 @@
             <li class="aui-list-item">
                 <div class="aui-list-item-inner">
                     <div class="aui-list-item-label">
-                        商家名称
+                        企业名称
                     </div>
                     <div class="aui-list-item-input">
-                        <input type="text" placeholder="商家名称">
+                        <input type="text" placeholder="企业名称">
                     </div>
                 </div>
             </li>
             <li class="aui-list-item">
                 <div class="aui-list-item-inner">
                     <div class="aui-list-item-label">
-                        行业分类
-                    </div>
-                    <div class="aui-list-item-input">
-                        <select>
-                            <option>请选择</option>
-                            <option>互联网1</option>
-                            <option>互联网1</option>
-                            <option>互联网1</option>
-                        </select>
-                    </div>
-                </div>
-            </li>
-            <li class="aui-list-item">
-                <div class="aui-list-item-inner">
-                    <div class="aui-list-item-label">
-                        经营品牌
-                    </div>
-                    <div class="aui-list-item-input">
-                        <select>
-                            <option>请选择</option>
-                            <option>互联网1</option>
-                            <option>互联网1</option>
-                            <option>互联网1</option>
-                        </select>
-                    </div>
-                </div>
-            </li>
-            <li class="aui-list-item">
-                <div class="aui-list-item-inner">
-                    <div class="aui-list-item-label">
-                        商家地址
-                    </div>
-                    <div class="aui-list-item-input">
-                        <input type="text" placeholder="" id="J_Address" readonly="readonly">
-                    </div>
-                </div>
-            </li>
-            <li class="aui-list-item">
-                <div class="aui-list-item-inner">
-                    <div class="aui-list-item-title">银行卡实名</div>
-                    <div class="aui-list-item-right">
-                        <div class="aui-label aui-label-info">去认证</div>
-                    </div>
-                </div>
-            </li>
-            <li class="aui-list-item">
-                <div class="aui-list-item-inner">
-                    <div class="aui-list-item-title">网关认证</div>
-                    <div class="aui-list-item-right">
-                        <div class="aui-label aui-label-info">去认证</div>
-                    </div>
-                </div>
-            </li>
-            <li class="aui-list-item">
-                <div class="aui-list-item-inner">
-                    <div class="aui-list-item-title">芝麻实名认证</div>
-                    <div class="aui-list-item-right">
-                        <div class="aui-label aui-label-info">去认证</div>
-                    </div>
-                </div>
-            </li>
-            <li class="aui-list-item">
-                <div class="aui-list-item-inner">
-                    <div class="aui-list-item-title">人脸认证</div>
-                    <div class="aui-list-item-right">
-                        <div class="aui-label aui-label-info">去认证</div>
-                    </div>
-                </div>
-            </li>
-            <li class="aui-list-item">
-                <div class="aui-list-item-inner">
-                    <div class="aui-list-item-label">
-                        申请人姓名
+                        企业注册号
                     </div>
                     <div class="aui-list-item-input">
                         <input type="text" placeholder="">
@@ -143,7 +113,7 @@
             <li class="aui-list-item">
                 <div class="aui-list-item-inner">
                     <div class="aui-list-item-label">
-                      联系电话
+                        法人姓名
                     </div>
                     <div class="aui-list-item-input">
                         <input type="text" placeholder="">
@@ -153,7 +123,67 @@
             <li class="aui-list-item">
                 <div class="aui-list-item-inner">
                     <div class="aui-list-item-label">
-                        电子邮箱
+                        法人身份证号
+                    </div>
+                    <div class="aui-list-item-input">
+                        <input type="text" placeholder="">
+                    </div>
+                </div>
+            </li>
+            <li class="aui-list-item">
+                <div class="aui-list-item-inner">
+                    <div class="aui-list-item-label">
+                        银行开户名
+                    </div>
+                    <div class="aui-list-item-input">
+                        <input type="text" placeholder="">
+                    </div>
+                </div>
+            </li>
+            <li class="aui-list-item">
+                <div class="aui-list-item-inner">
+                    <div class="aui-list-item-label">
+                        注册号
+                    </div>
+                    <div class="aui-list-item-input">
+                        <input type="text" placeholder="">
+                    </div>
+                </div>
+            </li>
+            <li class="aui-list-item">
+                <div class="aui-list-item-inner">
+                    <div class="aui-list-item-label">
+                        对公账号
+                    </div>
+                    <div class="aui-list-item-input">
+                        <input type="text" placeholder="">
+                    </div>
+                </div>
+            </li>
+            <li class="aui-list-item">
+                <div class="aui-list-item-inner">
+                    <div class="aui-list-item-label">
+                        开户行
+                    </div>
+                    <div class="aui-list-item-input">
+                        <input type="text" placeholder="">
+                    </div>
+                </div>
+            </li>
+            <li class="aui-list-item">
+                <div class="aui-list-item-inner">
+                    <div class="aui-list-item-label">
+                        开户行所在地
+                    </div>
+                    <div class="aui-list-item-input">
+                        <input type="text" placeholder="">
+                    </div>
+                </div>
+            </li>
+            <li class="aui-list-item">
+                <div class="aui-list-item-inner">
+                    <div class="aui-list-item-label">
+                      开户行支行民称
                     </div>
                     <div class="aui-list-item-input">
                         <input type="text" placeholder="">
@@ -161,7 +191,24 @@
                 </div>
             </li>
         </ul>
-  <div class=" aui-btn-block Login">确认</div>
+        <p class="aui-text-center aui-margin-t-15">上传营业执照</p>
+        <section class="aui-content-padded">
+            <div class="aui-row aui-row-padded">
+              <div class="aui-col-xs-4 image-item">
+                  <input type="hidden" >
+                  <img src="../../image/demo1.png" class="notes-image">
+                  <div class="delete-btn">
+                      <i class="aui-iconfont aui-icon-trash"></i>
+                  </div>
+              </div>
+                <div class="aui-col-xs-4 add-photos">
+                    <div class="aui-border aui-text-center">
+                        <i class="aui-iconfont aui-icon-plus"></i>
+                    </div>
+                </div>
+            </div>
+        </section>
+  <div class="aui-btn aui-btn-block Login">确认</div>
 </body>
 <script src="../../script/api.js"></script>
 <script src="../../script/jquery-1.9.1.min.js"></script>

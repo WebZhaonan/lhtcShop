@@ -5,7 +5,7 @@
     <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
     <meta name="format-detection" content="telephone=no,email=no,date=no,aItemress=no">
     <title>设置</title>
-    <link rel="stylesheet" type="text/css" href="../css/aui.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/aui.css" />
     <style media="screen">
       .clearLogin{
         background: #fe467a;
@@ -24,14 +24,27 @@
 </head>
 <body>
 <ul class="aui-list aui-list-in">
+  <li class="aui-list-item">
+      <div class="aui-list-item-inner aui-list-item-arrow">
+          <div class="aui-list-item-label">
+              性别
+          </div>
+          <div class="aui-list-item-input">
+              <select>
+                  <option>男</option>
+                  <option>女</option>
+              </select>
+          </div>
+      </div>
+  </li>
             <li class="aui-list-item">
-                <div class="aui-list-item-inner aui-list-item-arrow">
-                  性别
-                </div>
-            </li>
-            <li class="aui-list-item">
-                <div class="aui-list-item-inner aui-list-item-arrow">
-                  生日
+                <div class="aui-list-item-inner aui-list-item-arrow" onclick="fnopenData()">
+                    <div class="aui-list-item-label">
+                      生日
+                    </div>
+                    <div class="aui-list-item-input">
+                        <input type="text" placeholder="" id="Data" readonly="readonly">
+                    </div>
                 </div>
             </li>
             <li class="aui-list-item">
@@ -45,12 +58,26 @@
                 </div>
             </li>
         </ul>
-        <div class="aui-btn aui-btn-block clearLogin">退出登录</div>
 </body>
-<script type="text/javascript" src="../script/api.js" ></script>
+<script type="text/javascript" src="../../script/api.js" ></script>
 <script type="text/javascript">
     apiready = function(){
         api.parseTapmode();
+    }
+    // 打开时间
+    function fnopenData() {
+      api.openPicker({
+    type: 'date',
+    date: '1990-05-01 12:30',
+    title: '选择时间'
+}, function(ret, err) {
+    if (ret) {
+        var userData = $api.byId('Data');
+        $api.val(userData,ret.year + '年' + ret.month + '月' + ret.day + '日');
+    } else {
+        alert(JSON.stringify(err));
+    }
+});
     }
 </script>
 </html>

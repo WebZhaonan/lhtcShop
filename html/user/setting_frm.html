@@ -20,25 +20,28 @@
         border-top: none;
         border-right: none;
       }
+      .aui-list .aui-list-item-inner{
+        min-height: 2.7rem !important
+      }
     </style>
 </head>
 <body>
 <ul class="aui-list aui-list-in">
-            <li class="aui-list-item">
+            <li class="aui-list-item" onclick="fnopenuserInfo();">
                 <div class="aui-list-item-inner aui-list-item-arrow">
                    个人资料设置
                 </div>
             </li>
-            <li class="aui-list-item">
+            <li class="aui-list-item" onclick="fnopenInfo()">
                 <div class="aui-list-item-inner aui-list-item-arrow">
                     消息管理
                 </div>
             </li>
-            <li class="aui-list-item">
+            <!-- <li class="aui-list-item">
                 <div class="aui-list-item-inner aui-list-item-arrow">
                     账户与安全
                 </div>
-            </li>
+            </li> -->
             <li class="aui-list-item">
                 <div class="aui-list-item-inner aui-list-item-arrow">
                     问题反馈
@@ -56,6 +59,27 @@
 <script type="text/javascript">
     apiready = function(){
         api.parseTapmode();
+    }
+     function fnopenuserInfo() {
+      //  打开个人资料设置页面
+      api.openWin({
+          name: 'userInfo_win',
+          url: './userInfo_win.html',
+          pageParam: {
+              name: 'test'
+          }
+      });
+     }
+    function fnopenInfo() {
+      // 打开消息管理
+      api.openWin({
+          name: 'infoSet_win',
+          url: './infoSet_win.html',
+          pageParam: {
+              name: 'test'
+          }
+      });
+
     }
 </script>
 </html>

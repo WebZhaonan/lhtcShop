@@ -151,35 +151,16 @@
                 </div>
             </div>
         </div>
-        <div class="aui-grid aui-margin-t-15 aui-margin-b-15">
-            <div class="aui-row">
-                <div class="aui-col-5">
-                    <img src="../image/user-icon1.png" alt="" style="width:35px">
-                    <div class="aui-grid-label aui-font-size-12">待付款</div>
-                </div>
-                <div class="aui-col-5">
-                    <div class="aui-dot"></div>
-                    <img src="../image/user-icon2.png" alt="">
-                    <div class="aui-grid-label aui-font-size-12">待发货</div>
-                </div>
-                <div class="aui-col-5">
-                    <div class="aui-dot"></div>
-                  <img src="../image/user-icon3.png" alt="">
-                    <div class="aui-grid-label aui-font-size-12">待收货</div>
-                </div>
-                <div class="aui-col-5">
-                  <img src="../image/user-icon4.png" alt="">
-                    <div class="aui-grid-label aui-font-size-12">待评价</div>
-                </div>
-                <div class="aui-col-5 aui-border-l">
-                  <img src="../image/user-icon5.png" alt="" style="width:30px;height:30px">
-                    <div class="aui-grid-label aui-font-size-12">退款/售后</div>
-                </div>
-            </div>
-        </div>
-    </section>
 <!--  -->
   <ul class="aui-list aui-list-in">
+    <li class="aui-list-item list_li" onclick="fnopenOrder()">
+        <div class="aui-list-item-label-icon list">
+        <img src="../image/user-icon6.png" alt="">
+        </div>
+        <div class="aui-list-item-inner aui-list-item-arrow">
+            我的订单
+        </div>
+    </li>
             <li class="aui-list-item list_li" onclick="fnlogin()">
                 <div class="aui-list-item-label-icon list">
                 <img src="../image/user-icon6.png" alt="">
@@ -325,6 +306,17 @@
                 console.log(JSON.stringify(err));
             }
         });
+    }
+    function fnopenOrder() {
+      //打开我的订单
+       api.openWin({
+           name: 'myorder',
+           url: './user/myorder.html',
+           pageParam: {
+               name: 'test'
+           }
+       });
+
     }
     function fnopenAdmission() {
       // 打开平台入驻平台
