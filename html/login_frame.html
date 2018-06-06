@@ -35,13 +35,6 @@
       </div>
       <div class="other">
           <div class="ange">其他方式登陆</div>
-          <!-- <section class="aui-grid">
-            <div class="aui-row">
-                <div class="aui-col-xs-4">
-                    <i class="aui-iconfont aui-icon-wechat wechat"></i>
-                    <div class="aui-grid-label">微信</div>
-                </div>
-        </section> -->
           <div class="btn-third-party">
               <i class="aui-iconfont aui-icon-wechat wechat" style="font-size:24px;color:#62b900" ></i>
             使用微信登录
@@ -199,13 +192,12 @@ function fnLogin() {
         }
     }, function(ret,err) {
           $api.setStorage('userInfo', ret);
-          console.log(JSON.stringify(ret))
+          console.log(JSON.stringify(ret));
         if (ret&&ret.id) {
           api.alert({
               title: '提示',
               msg: '登陆成功',
           }, function(){
-
             api.execScript({
                   name: 'index',//你要刷新winName
                   script: "location.reload(); "

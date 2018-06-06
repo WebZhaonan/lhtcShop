@@ -61,7 +61,6 @@
         -webkit-flex: 1;
         flex: 1;
         box-sizing: border-box;
-        padding-left: 30px;
         height: 40px;
         color: #444;
         font-size: 14px;
@@ -76,8 +75,8 @@
 
     nav .selected {
         font-weight: bolder;
-        color: #fe467a;
-        border-bottom: 2px solid #fe467a;
+        color: #ec3213;
+        border-bottom: 2px solid #ec3213;
     }
     </style>
 </head>
@@ -116,8 +115,8 @@ apiready = function() {
     for (var i=0; i<menus.length; i++) {
         var url = 'myorder_frame'+i+'.html';
         frames.push({
-            name: 'myorder_frame_' + i,
-            url: url,
+            name: 'myorder_frame' + i,
+            url:'./myorder_frame'+i+'.html',
         });
     }
     api.openFrameGroup({
@@ -136,7 +135,7 @@ apiready = function() {
         if (ret) {
             fnSetNavMenuSelected(ret.index);
         } else {
-            alert(JSON.stringify(err));
+            // alert(JSON.stringify(err));
         }
     });
 };

@@ -7,6 +7,7 @@
     <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
     <title>我的订单Frame</title>
     <link rel="stylesheet" type="text/css" href="../../css/api.css" />
+      <link rel="stylesheet" type="text/css" href="../../css/aui.css" />
     <style>
     html {
         height: 100%;
@@ -23,16 +24,71 @@
         width: 100%;
         height: auto;
     }
-
     .highlight {
         opacity: 0.7;
+    }
+    .dpName{
+      background: url(../../image/dipu.png) no-repeat 0 center;
+      background-size: 25px 25px;
+      padding-left: 35px
+    }
+    @media screen and (-webkit-min-device-pixel-ratio: 1.5){
+      .aui-list .aui-list-item {
+          border: none;
+          background-size:none;
+          background-repeat: no-repeat;
+          background-position:none;
+          background-image:none;
+          background-image: -webkit-none;
+      }
     }
     </style>
 </head>
 
 <body>
-    <section id="list" class="list">1</section>
-    <!-- <section id="empty" class="empty"></section> -->
+  <section class="aui-content">
+      <div class="aui-card-list aui-border-t aui-border-b">
+          <div class="aui-card-list-header aui-card-list-user">
+              <div class="aui-card-list-user-name">
+                  <div class="aui-font-size-16 dpName">陕十三肉夹馍</div>
+                  <small style="color:#ec3213">待付款</small>
+              </div>
+          </div>
+          <div class="aui-card-list-content aui-border-t">
+              <ul class="aui-list aui-media-list">
+                <li class="aui-list-item">
+                  <div class="aui-media-list-item-inner">
+                      <div class="aui-list-item-media">
+                          <img src="../../image/demo1.png">
+                      </div>
+                      <div class="aui-list-item-inner">
+                          <div class="aui-list-item-text">
+                              <div class="aui-list-item-title">带有媒体的列表二</div>
+                              <div class="aui-list-item-right" style="color:#ec3213">X1</div>
+                          </div>
+                          <div class="aui-list-item-text">
+                              分类：xxx
+                          </div>
+                      </div>
+                  </div>
+                  <div class="aui-info" style="padding-top:0">
+                      <div class="aui-info-item">
+                        <span class="aui-margin-l-5">价格：<span style="color:#ec3213">59</span> </span>
+                          </div>
+                      <div class="aui-info-item">1件商品共付:<span style="color:#333">￥59</span>（含运费:￥0.00）</div>
+                  </div>
+              </li>
+              </ul>
+          </div>
+          <div class="aui-card-list-footer aui-border-t">
+              <div></div>
+              <div>
+                  <div class="aui-btn aui-btn aui-btn-outlined aui-btn-info aui-margin-r-10" style="color:#2d2d2d !important;border:1px solid #999">取消订单</div>
+                  <div class="aui-btn aui-btn aui-btn-outlined aui-btn-warning" style="color:#fe467a !important;border:1px solid #fe467a">立即付款</div>
+              </div>
+          </div>
+      </div>
+  </section>
 </body>
 <script type="text/javascript" src="../../script/api.js"></script>
 <script type="text/javascript">

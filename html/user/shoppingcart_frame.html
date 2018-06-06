@@ -1,0 +1,212 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>购物车Frame</title>
+    <link rel="stylesheet" type="text/css" href="../../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/aui.css" />
+    <link rel="stylesheet" href="../../css/ydui.css"/>
+    <style media="screen">
+            .aui-radio:checked, .aui-radio.aui-checked, .aui-checkbox:checked, .aui-checkbox.aui-checked{
+              background-color: #ec3213;
+              border: solid 1px #ec3213;
+              width: 1rem;
+              height: 1rem;
+            }
+          .aui-radio{
+          width: 1rem;
+          height: 1rem;
+          }
+          .dpName{
+            background: url(../../image/dipu.png) no-repeat 0 center;
+            background-size: 25px 25px;
+            padding-left: 35px
+          }
+            .aui-card-list-header{
+                  padding: 0.5rem 0.8rem;
+            }
+            .aui-list.aui-select-list .aui-list-item-label{
+              min-width: 1.8rem;
+            }
+            .m-spinner > a {
+                float: left;
+                width: 1.5rem;
+                height: 1.5rem;
+                line-height: 1.5rem;
+                text-align: center;
+                font-weight: bold;
+                color: #666;
+                letter-spacing: 0;
+                background-color: #F8F8F8;
+            }
+            .m-spinner > input {
+                letter-spacing: 0;
+                float: left;
+                width: 1.75rem;
+                line-height:1.5rem;
+                text-align: center;
+                color: #fe467a;
+                border: none;
+                font-size: 1rem;
+                height: 1.5rem;
+            }
+            .m-spinner > a:after {
+              font-size: .5rem;
+              color: #fe467a
+            }
+            .m-spinner{
+              border-radius: 3px;
+              border: 1px solid #fe467a
+            }
+            aui-list-item{
+              position: relative;
+            }
+            .demo-spinner{
+              position: absolute;
+              right: 10px;
+              bottom:0px
+            }
+            .J_Del{
+              border-right: 1px solid #fe467a
+            }
+            .J_Add{
+              border-left:1px solid #fe467a
+            }
+            footer{
+              border-top: 1px solid #ddd;
+              line-height: 2.25rem
+            }
+            .f_qx{
+              padding: 0 1rem;
+              font-size: 16px;
+              color: #999
+            }
+            .f_qx input{
+              margin-right: 10px
+            }
+            .aui-pull-right .aui-btn{
+              background: #fe467a;
+              color: #fff;
+              border-radius: 0
+            }
+
+            .aui-div{
+              font-size: 16px;
+              display: inline-block;
+            }
+            .aui-div #amount{
+              color: #ec3213;
+              font-size: 20px;
+              margin-right: 10px
+            }
+    </style>
+</head>
+
+<body>
+    <section id="list" class="list">
+    <div class="aui-list aui-select-list">
+      <div class="contbox">
+        <divclass="aui-list-item">
+          <div class="aui-card-list-header aui-card-list-user">
+              <div class="aui-card-list-user-name">
+                  <div class="aui-font-size-16 dpName">陕十三肉夹馍</div>
+              </div>
+          </div>
+        </div>
+        <div class="aui-list-item">
+            <div class="aui-media-list-item-inner ">
+              <div class="aui-list-item-label" >
+                  <input class="aui-radio son" type="checkbox" name="checked_goods">
+              </div>
+                <div class="aui-list-item-media">
+                    <img src="../../image/demo1.png">
+                </div>
+                <div class="aui-list-item-inner">
+                    <div class="aui-list-item-text">
+                        <div class="aui-list-item-title">带有媒体的列表二</div>
+                    </div>
+                    <div class="aui-list-item-text">
+                        分类：xxx
+                    </div>
+                    <div class="aui-list-item-text total" style="color:#ec3213;font-size:22px;">
+                        ￥59.00
+                    </div>
+                </div>
+            </div>
+            <div class="demo-spinner demo-small-pitch">
+                    <span class="m-spinner" data-ydui-spinner="{input: '.J_Input', add: '.J_Add', minus: '.J_Del', longpress: false}">
+                        <a href="javascript:;" class="J_Del"></a>
+                        <input type="text" class="J_Input" placeholder=""/>
+                        <a href="javascript:;" class="J_Add"></a>
+                    </span>
+                </div>
+        </li>
+        </div>
+    </div>
+    </section>
+<footer class="aui-bar aui-bar-tab">
+  <div class="aui-pull-left f_qx">
+    <div class="aui-list-item-label">
+        <input class="aui-radio" type="checkbox" name="checkbox"  id="checkAll">
+        全部
+    </div>
+  </div>
+  <div class="aui-pull-right">
+        <div class="aui-pull-right—box">
+          <div class="aui-div">
+            <span>合计:</span>
+            <span id="amount">￥98.00</span>
+          </div>
+          <div class="aui-btn">结算 <span id="count">(1)</span></div>
+        </div>
+  </div>
+  </footer>
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/doT.min.js"></script>
+<script type="text/javascript" src="../../script/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="../../script/ydui.js"></script>
+<script type="text/javascript">
+apiready = function() {
+};
+$(document).ready(function () {
+    getAllPrice();
+    $("#checkAll").click(function () {
+        if(this.checked ==  true){
+            $('[type=checkbox]').prop('checked', true);
+        }else{
+            $('[type=checkbox]').prop('checked', false);
+        }
+        getAllPrice();
+    })
+$(".son").click(function () {
+    //总的checkbox的个数
+    var len =   $(".son").length;
+    //已选中的checkbox的个数
+    var checkedLen  =   $("input[type='checkbox'][name='checked_goods']:checked").length;
+    if(len  ==  checkedLen){
+        $('#checkAll').prop('checked', true);
+    }else{
+        $('#checkAll').prop('checked', false);
+    }
+    getAllPrice()
+})
+});
+function getAllPrice() {
+  // 计算总价格
+  var sum =  0;
+     $(".son").each(function () {
+       if(this.checked == true){
+           var id  =  $(this).parent().siblings('.aui-list-item-inner').children('.total').text();
+           sum += parseInt(id);
+       }
+       alert(sum)
+   })
+    $("#amount").text(sum);
+}
+</script>
+
+</html>

@@ -144,7 +144,7 @@
     <section class="aui-content bg-white aui-margin-b-15">
         <div class="aui-list aui-media-list aui-list-noborder aui-bg-info user-info">
             <div class="aui-list-item aui-list-item-middle user-header">
-                <div class="username" id="user">白毛浮绿水</div>
+                <div class="username" id="user">加载中.....</div>
                 <div class="icon-panel" tapmode onclick="fnSetAvatar()">
                     <div id="icon" class="icon"></div>
                 </div>
@@ -161,7 +161,7 @@
             我的订单
         </div>
     </li>
-            <li class="aui-list-item list_li" onclick="fnlogin()">
+            <li class="aui-list-item list_li" onclick="fnopenCar()">
                 <div class="aui-list-item-label-icon list">
                 <img src="../image/user-icon6.png" alt="">
                 </div>
@@ -221,7 +221,6 @@
       fnUpdateLocalAvatar(userInfo.image);
       $api.html(user,userInfo.user);
     }
-
     function fnUpdateLocalAvatar(data_) {
         // 缓存头像
         var icon = $api.byId('icon');
@@ -300,10 +299,16 @@
                 }
             }
         }, function(ret, err) {
-            if (ret.Msg) {
+          console.log(JSON.stringify(ret));
+            if (ret.code=='success') {
               fnUpdateLocalAvatar(ret.Msg);
             } else {
                 console.log(JSON.stringify(err));
+                api.toast({
+                    msg: ret.msg,
+                    duration: 2000,
+                    location: 'bottom'
+                });
             }
         });
     }
@@ -316,6 +321,16 @@
                name: 'test'
            }
        });
+    }
+    function fnopenCar() {
+      // 打开购物车
+      api.openWin({
+          name: 'shoppingcart',
+          url: './user/shoppingcart.html',
+          pageParam: {
+              name: 'test'
+          }
+      });
 
     }
     function fnopenAdmission() {

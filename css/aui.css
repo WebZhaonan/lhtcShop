@@ -725,12 +725,12 @@ button, .aui-btn {
 	border: 1px solid #009688 !important;
 }
 .aui-btn-info.aui-btn-outlined {
-	color: #03a9f4 !important;
-	border: 1px solid #03a9f4 !important;
+	color: #03a9f4 ;
+	border: 1px solid #03a9f4;
 }
 .aui-btn-warning.aui-btn-outlined {
-	color: #ffc107 !important;
-	border: 1px solid #ffc107 !important;
+	color: #ffc107 ;
+	border: 1px solid #ffc107;
 }
 .aui-btn-danger.aui-btn-outlined {
 	color: #e51c23 !important;
