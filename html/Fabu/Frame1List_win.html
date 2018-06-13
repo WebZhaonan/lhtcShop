@@ -4,7 +4,6 @@
     <meta charset="utf-8">
     <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
     <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
-    <link rel="stylesheet" type="text/css" href="../../css/api.css" />
     <link rel="stylesheet" type="text/css" href="../../css/aui.css" />
 </head>
 <body>
@@ -12,10 +11,7 @@
         <a class="aui-btn aui-pull-left" tapmode onclick="closeWin()">
             <span class="aui-iconfont aui-icon-left"></span>
         </a>
-        <div class="aui-title">购物车</div>
-        <a class="aui-btn aui-pull-right" tapmode onclick="fnopencatAdmin()">
-            管理
-        </a>
+        <div class="aui-title">本地服务</div>
     </header>
 </body>
 <script type="text/javascript" src="../../script/api.js"></script>
@@ -27,9 +23,9 @@
         var headerPos = $api.offset(header);
         var body_h = $api.offset($api.dom('body')).h;
         api.openFrame({
-            name: 'shoppingcart_frame',
-            url: 'shoppingcart_frame.html',
-            bounces: false,
+            name: 'Frame1List_frm',
+            url: 'Frame1List_frm.html',
+            bounces: true,
             rect: {
                 x: 0,
                 y: headerPos.h,
@@ -42,18 +38,9 @@
                 text:'先喝会儿茶~~~'
               },
         })
-    };
-    function fnopencatAdmin() {
-      // 打开购物车管理窗口
-      api.openWin({
-          name: 'shoppingcartAdmin',
-          url: './shoppingcartAdmin.html',
-          pageParam: {
-              name: 'test'
-          }
-      });
 
-    }
+
+    };
     function closeWin(){
         api.closeWin({
         });

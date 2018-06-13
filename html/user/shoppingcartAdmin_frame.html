@@ -88,9 +88,11 @@
               margin-right: 10px
             }
             .aui-pull-right .aui-btn{
-              background: #fe467a;
-              color: #fff;
-              border-radius: 0
+              background: none;
+              color: #fe467a;
+              border: 1px solid #fe467a;
+              margin-right: 10px;
+              padding: 0 1.2rem
             }
 
             .aui-div{
@@ -155,11 +157,7 @@
   </div>
   <div class="aui-pull-right">
         <div class="aui-pull-right—box">
-          <div class="aui-div">
-            <span>合计:</span>
-            <span id="amount">￥98.00</span>
-          </div>
-          <div class="aui-btn">结算 <span id="count">(1)</span></div>
+          <div class="aui-btn deleat">删除</span></div>
         </div>
   </div>
   </footer>
@@ -172,14 +170,12 @@
 apiready = function() {
 };
 $(document).ready(function () {
-    getAllPrice();
     $("#checkAll").click(function () {
         if(this.checked ==  true){
             $('[type=checkbox]').prop('checked', true);
         }else{
             $('[type=checkbox]').prop('checked', false);
         }
-        getAllPrice();
     })
 $(".son").click(function () {
     //总的checkbox的个数
@@ -191,20 +187,8 @@ $(".son").click(function () {
     }else{
         $('#checkAll').prop('checked', false);
     }
-    getAllPrice()
 })
 });
-function getAllPrice() {
-  // 计算总价格
-  var sum =  0;
-     $(".son").each(function () {
-       if(this.checked == true){
-           var id  =  $(this).parent().siblings('.aui-list-item-inner').children('.total').text();
-           sum += parseInt(id);
-       }
-   })
-    $("#amount").text(sum);
-}
 </script>
 
 </html>

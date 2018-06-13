@@ -5,7 +5,7 @@
     <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
     <meta name="format-detection" content="telephone=no,email=no,date=no,aItemress=no">
     <title>设置</title>
-    <link rel="stylesheet" type="text/css" href="../../css/aui.css" />
+    <link rel="stylesheet" type="text/css" href="../css/aui.css" />
     <style media="screen">
       .clearLogin{
         background: #fe467a;
@@ -20,61 +20,37 @@
         border-top: none;
         border-right: none;
       }
-      .aui-list .aui-list-item-inner{
-        min-height: 2.7rem !important
-      }
     </style>
 </head>
 <body>
 <ul class="aui-list aui-list-in">
-            <li class="aui-list-item" onclick="fnopenuserInfo()">
+            <li class="aui-list-item">
                 <div class="aui-list-item-inner aui-list-item-arrow">
-                   个人资料设置
-                </div>
-            </li>
-            <li class="aui-list-item" onclick="fnopenInfo()">
-                <div class="aui-list-item-inner aui-list-item-arrow">
-                    消息管理
+                  性别
                 </div>
             </li>
             <li class="aui-list-item">
                 <div class="aui-list-item-inner aui-list-item-arrow">
-                    问题反馈
+                  生日
                 </div>
             </li>
             <li class="aui-list-item">
                 <div class="aui-list-item-inner aui-list-item-arrow">
-                    关于我们
+                    所在地
+                </div>
+            </li>
+            <li class="aui-list-item">
+                <div class="aui-list-item-inner aui-list-item-arrow">
+                    收货地址
                 </div>
             </li>
         </ul>
         <div class="aui-btn aui-btn-block clearLogin">退出登录</div>
 </body>
-<script src="../../script/api.js"></script>
+<script type="text/javascript" src="../script/api.js" ></script>
 <script type="text/javascript">
     apiready = function(){
         api.parseTapmode();
-    }
-     function fnopenuserInfo() {
-      //  打开个人资料设置页面
-      api.openWin({
-          name: 'userInfo_win',
-          url: './userInfo_win.html',
-          pageParam: {
-              name: 'test'
-          }
-      });
-     }
-    function fnopenInfo() {
-      // 打开消息管理
-      api.openWin({
-          name: 'infoSet_win',
-          url: './infoSet_win.html',
-          pageParam: {
-              name: 'test'
-          }
-      });
-
     }
 </script>
 </html>

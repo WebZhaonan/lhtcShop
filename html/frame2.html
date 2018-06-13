@@ -27,7 +27,7 @@
                             </div>
                             <div class="aui-list-item-inner aui-list-item-arrow">
                                 <div class="aui-list-item-text">
-                                    <div class="aui-list-item-title aui-font-size-14">发职位找人才</div>
+                                    <div class="aui-list-item-title">发职位找人才</div>
                                 </div>
                             </div>
                         </div>
@@ -79,19 +79,37 @@
         <script type="text/javascript">
          function fnOpenList1() {
         // 打开发职位找人才窗口
-        api.openWin({
-            name: 'Frame2List_win',
-            url: './Frame2List_win.html',
-            pageParam: {
-                name: 'test'
-            }
-        });
-         }
+        api.actionSheet({
+        title: '请选择发布类型',
+        cancelTitle: '取消',
+        buttons:['全职招聘', '兼职招聘']
+        }, function(ret, err) {
+        var index = ret.buttonIndex;
+        if(index == 1){
+          api.openWin({
+              name: 'QzJob',
+              url: './Fabu/QzJob.html',
+              pageParam: {
+                  name: 'test'
+              }
+          });
+        }else if (index == 2) {
+          api.openWin({
+              name: 'JzJob',
+              url: './Fabu/JzJob.html',
+              pageParam: {
+                  name: 'test'
+              }
+          });
+        }else {
+        }
+      })
+    }
          function fnOpenResume() {
           //  打开发简历找工作窗口
           api.openWin({
               name: 'Resume_win',
-              url: './Resume_win.html',
+              url: './Fabu/Resume_win.html',
               pageParam: {
                   name: 'test'
               }
@@ -102,7 +120,7 @@
         // 打开本地服务窗口
         api.openWin({
             name: 'Frame1List_win',
-            url: './Frame1List_win.html',
+            url: './Fabu/Frame1List_win.html',
             pageParam: {
                 name: 'test'
             }
@@ -112,7 +130,7 @@
         // 打开二手服务窗口
         api.openWin({
             name: 'Frame0List_win',
-            url: './Frame0List_win.html',
+            url: './Fabu/Frame0List_win.html',
             pageParam: {
                 name: 'test'
             }
@@ -120,13 +138,34 @@
          }
          function fnOpenList5() {
         // 打开二手服务窗口
-        api.openWin({
-            name: 'Frame3List_win',
-            url: './Frame3List_win.html',
-            pageParam: {
-                name: 'test'
-            }
-        });
+        api.actionSheet({
+        title: '请选择发布类型',
+        cancelTitle: '取消',
+        buttons:['整租', '短租','合租']
+        }, function(ret, err) {
+        var index = ret.buttonIndex;
+        if(index == 1){
+          api.openWin({
+              name: 'ZzRelease',
+              url: './Fabu/ZzRelease.html',
+              pageParam: {
+                  name: 'test'
+              }
+          });
+        }else if (index == 2) {
+          api.openWin({
+              name: 'DzRelease',
+              url: './Fabu/DzRelease.html',
+              pageParam: {
+                  name: 'test'
+              }
+          });
+        }else if(index == 3){
+          alert(345)
+        }else {
+
+        }
+      });
          }
         </script>
 </body>

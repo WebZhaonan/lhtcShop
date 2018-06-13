@@ -144,7 +144,7 @@
     <section class="aui-content bg-white aui-margin-b-15">
         <div class="aui-list aui-media-list aui-list-noborder aui-bg-info user-info">
             <div class="aui-list-item aui-list-item-middle user-header">
-                <div class="username" id="user">加载中.....</div>
+                <div class="username" id="user">加载中</div>
                 <div class="icon-panel" tapmode onclick="fnSetAvatar()">
                     <div id="icon" class="icon"></div>
                 </div>
@@ -169,7 +169,7 @@
                     购物车
                 </div>
             </li>
-            <li class="aui-list-item list_li">
+            <li class="aui-list-item list_li" onclick="fnopenmyrelease()">
                 <div class="aui-list-item-label-icon list">
                 <img src="../image/user-icon6.png" alt="">
                 </div>
@@ -177,7 +177,7 @@
                     我的发布
                 </div>
             </li>
-            <li class="aui-list-item list_li">
+            <li class="aui-list-item list_li" onclick="fnopenMycollection()">
                 <div class="aui-list-item-label-icon list">
                     <img src="../image/user-icon7.png" alt="">
                 </div>
@@ -185,20 +185,12 @@
                   我的收藏
                 </div>
             </li>
-            <li class="aui-list-item list_li">
+            <li class="aui-list-item list_li" onclick="fnopenLsjl()">
                 <div class="aui-list-item-label-icon list">
                     <img src="../image/user-icon8.png" alt="">
                 </div>
                 <div class="aui-list-item-inner aui-list-item-arrow" style="">
                     历史记录
-                </div>
-            </li>
-            <li class="aui-list-item list_li">
-                <div class="aui-list-item-label-icon list">
-                    <img src="../image/dingyue.png" alt="">
-                </div>
-                <div class="aui-list-item-inner aui-list-item-arrow" style="">
-                    我的订阅
                 </div>
             </li>
             <li class="aui-list-item list_li" onclick="fnopenAdmission()">
@@ -338,6 +330,36 @@
       api.openWin({
           name: 'MerchantEntry_win',
           url: './user/MerchantEntry_win.html',
+          pageParam: {
+              name: 'test'
+          }
+      });
+    }
+    function fnopenmyrelease() {
+      // 打开我的发布
+      api.openWin({
+          name: 'MyRelease_win',
+          url: './user/MyRelease_win.html',
+          pageParam: {
+              name: 'test'
+          }
+      });
+    }
+    function fnopenLsjl() {
+      // 打开历史记录窗口
+      api.openWin({
+          name: 'HistoricalRecords_win',
+          url: './user/HistoricalRecords_win.html',
+          pageParam: {
+              name: 'test'
+          }
+      });
+    }
+    function fnopenMycollection() {
+      // 打开我的收藏
+      api.openWin({
+          name: 'Mycollection_win',
+          url: './user/Mycollection_win.html',
           pageParam: {
               name: 'test'
           }

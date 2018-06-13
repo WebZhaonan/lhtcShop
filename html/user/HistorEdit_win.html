@@ -4,7 +4,6 @@
     <meta charset="utf-8">
     <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
     <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
-    <link rel="stylesheet" type="text/css" href="../../css/api.css" />
     <link rel="stylesheet" type="text/css" href="../../css/aui.css" />
 </head>
 <body>
@@ -12,13 +11,13 @@
         <a class="aui-btn aui-pull-left" tapmode onclick="closeWin()">
             <span class="aui-iconfont aui-icon-left"></span>
         </a>
-        <div class="aui-title">购物车</div>
-        <a class="aui-btn aui-pull-right" tapmode onclick="fnopencatAdmin()">
-            管理
+        <div class="aui-title">历史记录</div>
+        <a class="aui-btn aui-pull-right" tapmode onclick="">
+            完成
         </a>
     </header>
 </body>
-<script type="text/javascript" src="../../script/api.js"></script>
+<script src="../../script/api.js"></script>
 <script type="text/javascript">
     apiready = function(){
         api.parseTapmode();
@@ -27,9 +26,9 @@
         var headerPos = $api.offset(header);
         var body_h = $api.offset($api.dom('body')).h;
         api.openFrame({
-            name: 'shoppingcart_frame',
-            url: 'shoppingcart_frame.html',
-            bounces: false,
+            name: 'HistorEdit_frm',
+            url: 'HistorEdit_frm.html',
+            bounces: true,
             rect: {
                 x: 0,
                 y: headerPos.h,
@@ -43,20 +42,10 @@
               },
         })
     };
-    function fnopencatAdmin() {
-      // 打开购物车管理窗口
-      api.openWin({
-          name: 'shoppingcartAdmin',
-          url: './shoppingcartAdmin.html',
-          pageParam: {
-              name: 'test'
-          }
-      });
-
-    }
     function closeWin(){
         api.closeWin({
         });
     }
+
 </script>
 </html>
