@@ -40,7 +40,7 @@
 <body>
     <section class="aui-content aui-padded-l-5 aui-padded-r-10 aui-padded-t-5">
         <div class="aui-row aui-row-padded">
-            <div class="aui-col-xs-6">
+            <div class="aui-col-xs-6" onclick="fnOpenWareWin();">
                 <div class="aui-card-list">
                     <div class="aui-card-list-content">
                         <img src="../image/demo3.png">
@@ -73,5 +73,18 @@
     apiready = function(){
         api.parseTapmode();
     };
+    // 打开二手物品详情Window，指定商品Id
+    function fnOpenWareWin(wareId_) {
+        api.openWin({
+            name: 'infoDetail_win',
+            url: './infoDetail_win.html',
+            // pageParam: {
+            //     wareId: wareId_,
+            // },
+            animation: {
+                type: "fade"
+            }
+        });
+    }
 </script>
 </html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+  <html>
+  <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+      <title>title</title>
+      <link rel="stylesheet" type="text/css" href="../css/api.css"/>
+      <link rel="stylesheet" type="text/css" href="../css/aui.css"/>
+      <style>
+      .aui-price{
+      color:#ec3213;font-size:1rem;
+      }
+      .aui-card-list{
+        position: relative;
+        margin-bottom: 0.75rem;
+        background: #ffffff;
+        text-align: center;
+        padding-top: 31px;
+      }
+      </style>
+  </head>
+  <body>
+    <section class="aui-content">
+        <div class="aui-card-list">
+            <div class="aui-card-list-content-padded aui-padded-t-0 text-light" style="color:#999;">
+                +请点击添加收货地址以确保物品顺利到达
+            </div>
+        </div>
+    </section>
+        <ul class="aui-list aui-collapse aui-border">
+                <div class="aui-collapse-content aui-show">
+                    <li class="aui-list-item" style="display: block;">
+                        <div class="aui-media-list-item-inner">
+                            <div class="aui-list-item-media">
+                                <img src="../image/demo1.png">
+                            </div>
+                            <div class="aui-list-item-inner aui-padded-t-10 aui-padded-b-10" style="display: block;">
+                                <div class="aui-list-item-text">
+                                    <div class="aui-list-item-title">带有媒体的列表二</div>
+                                    <div class="aui-list-item-right">运费：<span style="color:#ec3213">￥0.00</span></div>
+                                </div>
+                                <div class="aui-list-item-text">
+                                    <div class="aui-price" >￥59.00</div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </div>
+            </div>
+        </ul>
+        <footer class="aui-bar aui-bar-tab">
+            <div class="aui-bar-tab-item" tapmode style="width: 9rem;">
+              <span>需付款：</span>
+              <span style="color:#ec3213;">￥59.00</span>
+            </div>
+            <div class="aui-bar-tab-item" tapmode style="width: 3rem;">
+            </div>
+            <div class="aui-bar-tab-item aui-bg-danger aui-text-white" tapmode style="width: auto;background-color:#fe467a !important;">立即购买</div>
+        </footer>
+  </body>
+  <script type="text/javascript" src="../script/api.js"></script>
+  <script type="text/javascript">
+      apiready = function(){
+
+      };
+  </script>
+  </html>
