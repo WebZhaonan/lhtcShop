@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <link rel="stylesheet" type="text/css" href="../css/aui.css" />
+    <link rel="stylesheet" type="text/css" href="../css/aui-slide.css" />
+    <style type="text/css">
+      .text-light {
+        color: #999;
+      }
+      .text-dark {
+        color: #333 !important;
+      }
+      .bg-white {
+        background: #ffffff;
+      }
+      .aui-list .aui-list-item-label-icon.label-text {
+        line-height: 2.1rem;
+        align-items: baseline;
+        -webkit-align-items: baseline;
+      }
+      .aui-tab-item {
+        width: 2rem;
+        margin: 0 auto;
+      }
+    .aui-label-danger{
+      background-color: #fe467a;
+    }
+
+    </style>
+</head>
+<body>
+    <section class="aui-card-list">
+      <div class="aui-card-list-content" id="aui-slide">
+        <div class="aui-slide-wrap" >
+            <div class="aui-slide-node bg-dark">
+                <img src="http://img10.360buyimg.com/n1/s450x450_jfs/t4276/257/2416766721/125228/ba72a107/58d1d078N20e18b62.jpg" />
+            </div>
+            <div class="aui-slide-node bg-dark">
+                <img src="http://img10.360buyimg.com/n1/s450x450_jfs/t4276/257/2416766721/125228/ba72a107/58d1d078N20e18b62.jpg" />
+            </div>
+            <div class="aui-slide-node bg-dark">
+                <img src="http://img10.360buyimg.com/n1/s450x450_jfs/t4276/257/2416766721/125228/ba72a107/58d1d078N20e18b62.jpg" />
+            </div>
+        </div>
+        <div class="aui-slide-page-wrap"><!--分页容器--></div>
+      </div>
+      <div class="aui-card-list-header aui-padded-b-0">
+        <div>
+          <span class="aui-label aui-label-danger aui-margin-r-5">乐航</span>Apple iPhone 7 128G玫瑰金色 移动联通电信4G手机
+        </div>
+      </div>
+        <div class="clearfix" style="overflow:hidden;padding-right:20px">
+          <p class="aui-pull-right">
+            <i class="aui-iconfont aui-icon-star" style="padding-right:5px"></i><span>收藏</span>
+          </p>
+        </div>
+      <div class="aui-card-list-header aui-padded-t-0">
+        <div class="aui-text-danger"><small>￥</small><big class="aui-font-size-20">5688</big></div>
+        <div class="aui-pull-right" style="font-size:0.6rem;">运费：<span>0.00</span></div>
+      </div>
+      <div class="aui-card-list-content">
+        <ul class="aui-list aui-media-list">
+          <li class="aui-list-item">
+              <div class="aui-media-list-item-inner">
+                <div class="aui-list-item-label-icon label-text aui-font-size-14">新旧</div>
+                <div class="aui-list-item-inner aui-padded-t-10 aui-padded-b-10">
+                    <div>
+                        <p class="aui-margin-b-10 aui-font-size-12 aui-ellipsis"><span class="aui-text-danger aui-margin-r-5">95新</p>
+                    </div>
+                </div>
+              </div>
+          </li>
+          <li class="aui-list-item">
+              <div class="aui-media-list-item-inner">
+                <div class="aui-list-item-label-icon label-text aui-font-size-14">类别</div>
+                <div class="aui-list-item-inner aui-padded-t-10 aui-padded-b-10">
+                    <div>
+                        <p class="aui-margin-b-10 aui-font-size-12 aui-ellipsis"><span class="aui-text-danger aui-margin-r-5">台式机</p>
+                    </div>
+                </div>
+              </div>
+          </li>
+        </ul>
+      </div>
+    </section>
+</body>
+<script type="text/javascript" src="../script/aui-slide.js"></script>
+<script type="text/javascript" src="../script/aui-tab.js"></script>
+<script type="text/javascript">
+    var slide = new auiSlide({
+        container:document.getElementById("aui-slide"),
+        // "width":300,
+        "height":400,
+        "speed":300,
+        "pageShow":true,
+        "pageStyle":'dot',
+        "loop":true,
+        'dotPosition':'center',
+        "speed":500, //速度
+        "autoPlay": 3000, //自动播放
+        // currentPage:currentFun
+    })
+
+</script>
+</html>
