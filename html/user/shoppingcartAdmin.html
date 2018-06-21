@@ -13,8 +13,8 @@
             <span class="aui-iconfont aui-icon-left"></span>
         </a>
         <div class="aui-title">购物车</div>
-        <a class="aui-btn aui-pull-right" tapmode onclick="fnopencatAdmin()">
-            管理
+        <a class="aui-btn aui-pull-right" tapmode onclick="">
+          完成
         </a>
     </header>
 </body>
@@ -27,8 +27,8 @@
         var headerPos = $api.offset(header);
         var body_h = $api.offset($api.dom('body')).h;
         api.openFrame({
-            name: 'shoppingcart_frame',
-            url: 'shoppingcart_frame.html',
+            name: 'shoppingcartAdmin_frame',
+            url: 'shoppingcartAdmin_frame.html',
             bounces: false,
             rect: {
                 x: 0,
@@ -42,18 +42,9 @@
                 text:'先喝会儿茶~~~'
               },
         })
-    };
-    function fnopencatAdmin() {
-      // 打开购物车管理窗口
-      api.openWin({
-          name: 'shoppingcartAdmin',
-          url: './shoppingcartAdmin.html',
-          pageParam: {
-              name: 'test'
-          }
-      });
 
-    }
+
+    };
     function closeWin(){
         api.closeWin({
         });

@@ -725,12 +725,21 @@ button, .aui-btn {
 	border: 1px solid #009688 !important;
 }
 .aui-btn-info.aui-btn-outlined {
+<<<<<<< HEAD
 	color: #03a9f4 ;
 	border: 1px solid #03a9f4;
 }
 .aui-btn-warning.aui-btn-outlined {
 	color: #ffc107 ;
 	border: 1px solid #ffc107;
+=======
+	color: #03a9f4 !important;
+	border: 1px solid #03a9f4 !important;
+}
+.aui-btn-warning.aui-btn-outlined {
+	color: #ffc107 !important;
+	border: 1px solid #ffc107 !important;
+>>>>>>> 81936c37fcbafe48bcfd06441954d67dcd1138ef
 }
 .aui-btn-danger.aui-btn-outlined {
 	color: #e51c23 !important;

@@ -1,0 +1,294 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,aItemress=no">
+    <title>短租发布 从  </title>
+    <link rel="stylesheet" type="text/css" href="../../css/aui.css" />
+    <style media="screen">
+       .aui-list-item-label{
+        width: 25%;
+        text-align: right;
+      }
+        body{
+          background: #eee;
+          overflow-x: hidden;
+        }
+        .aui-list-item-inner{
+          position: relative;
+        }
+        .aui-list-item-right{
+          position: absolute !important;
+          right: 10px;
+          top: 14px;
+          font-size: 0.7rem !important
+        }
+        .aui-list-item-right1{
+          position: absolute;
+          right: 50px;
+          top: 14px;
+          font-size: 0.7rem;
+          color: #2d2d2d;
+        }
+      .aui-radio:checked{
+        background-color: #fe467a;
+    border: solid 1px #fe467a;
+      }
+      textarea {
+          height: 8rem;
+          background-color: #ffffff;
+          padding: 0.5rem;
+      }
+      .photos img {
+          display: block;
+          width: 100%;
+      }
+      .add-photos > div {
+          width: 100%;
+          height:5.15rem;
+          line-height: 5.15rem;
+      }
+      .add-photos > div .aui-iconfont {
+          font-size: 2rem;
+          color: #ccc;
+      }
+      .image-item {
+          position: relative;
+          height: 5.3rem;
+          overflow: hidden;
+          background-color: #f0f0f0;
+      }
+      .image-item img {
+          display: block;
+          margin: 0 auto;
+          width: auto;
+          height: 100%;
+      }
+      .image-item .delete-btn {
+          position: absolute;
+          left: 50%;
+          top: 50%;
+          width: 28px;
+          height: 28px;
+          background-color: rgba(0,0,0,0.7);
+          margin-left: -14px;
+          margin-top: -14px;
+          color: #ffffff;
+          text-align: center;
+          border-radius: 50%;
+      }
+      .aui-content-padded{
+        margin: 0;
+        margin-top:10px
+      }
+      .oss{
+        margin-bottom: 20px
+      }
+      .keep{
+        width: 80%;
+        margin: 0 auto;
+        background: #fe467a;
+        color: #fff;
+        height: 2rem;
+        line-height: 2.05rem;
+        margin-top: 40px；auto;
+        margin-bottom: 30px
+      }
+    </style>
+</head>
+<body>
+  <ul class="aui-list aui-form-list">
+              <li class="aui-list-item">
+                  <div class="aui-list-item-inner">
+                      <div class="aui-list-item-label">
+                        姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名
+                      </div>
+                      <div class="aui-list-item-input">
+                          <input type="text" placeholder="请填写姓名">
+                      </div>
+                  </div>
+              </li>
+              <li class="aui-list-item">
+                  <div class="aui-list-item-inner">
+                      <div class="aui-list-item-label">
+                        手机号码
+                      </div>
+                      <div class="aui-list-item-input">
+                          <input type="text" placeholder="请填写">
+                      </div>
+                  </div>
+              </li>
+              <li class="aui-list-item">
+                  <div class="aui-list-item-inner">
+                      <div class="aui-list-item-label">
+                        选择身份
+                      </div>
+                      <div class="aui-list-item-input" onclick="fnopensheelt()">
+                          <input type="text" placeholder="选择" readonly="readonly" id="xl">
+                      </div>
+                  </div>
+              </li>
+          </ul>
+          <ul class="aui-list aui-form-list" style="margin-top:10px">
+            <li class="aui-list-item">
+                <div class="aui-list-item-inner">
+                    <div class="aui-list-item-label">
+                      小区名称
+                    </div>
+                    <div class="aui-list-item-input">
+                        <input type="text" placeholder="请填写">
+                    </div>
+                </div>
+            </li>
+                      <li class="aui-list-item">
+                          <div class="aui-list-item-inner">
+                              <div class="aui-list-item-label">
+                                位&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;置
+                              </div>
+                              <div class="aui-list-item-input">
+                                  <input type="text" placeholder="">
+                              </div>
+                          </div>
+                      </li>
+                      <li class="aui-list-item">
+                          <div class="aui-list-item-inner">
+                              <div class="aui-list-item-label">
+                                房屋面积
+                              </div>
+                              <div class="aui-list-item-input">
+                                  <input type="text" placeholder="请填写">
+                              </div>
+                        <div class="aui-list-item-right">平米</div>
+                          </div>
+                      </li>
+                      <li class="aui-list-item">
+                          <div class="aui-list-item-inner  aui-list-item-arrow">
+                              <div class="aui-list-item-label">
+                                房&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;型
+                              </div>
+                              <div class="aui-list-item-input" onclick="fnopensheelt1()">
+                                  <input type="text" placeholder="选择" readonly="readonly" id="Fx">
+                              </div>
+                          </div>
+                      </li>
+                      <li class="aui-list-item">
+                          <div class="aui-list-item-inner">
+                              <div class="aui-list-item-label">
+                                卧&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;室
+                              </div>
+                              <div class="aui-list-item-input">
+                                  <input type="text" placeholder="">
+                              </div>
+                          </div>
+                      </li>
+                      <li class="aui-list-item">
+                          <div class="aui-list-item-inner">
+                              <div class="aui-list-item-label">
+                                床&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;铺
+                              </div>
+                              <div class="aui-list-item-input">
+                                  <input type="text" placeholder="">
+                              </div>
+                          </div>
+                      </li>
+                      <li class="aui-list-item">
+                          <div class="aui-list-item-inner">
+                              <div class="aui-list-item-label">
+                                宜住人数
+                              </div>
+                              <div class="aui-list-item-input">
+                                  <input type="text" placeholder="">
+                              </div>
+                              <div class="aui-list-item-right1">人</div>
+                          </div>
+                      </li>
+                      <li class="aui-list-item">
+                          <div class="aui-list-item-inner">
+                              <div class="aui-list-item-label">
+                                租&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;期
+                              </div>
+                              <div class="aui-list-item-input">
+                                  <input type="text" placeholder="">
+                              </div>
+                              <div class="aui-list-item-right1">天</div>
+                          </div>
+                      </li>
+                      <li class="aui-list-item">
+                <div class="aui-list-item-inner">
+                  <div class="aui-list-item-label">
+                    租&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;金
+                  </div>
+                  <div class="aui-list-item-input">
+                      <input type="text" placeholder="">
+                  </div>
+                    <div class="aui-list-item-right" style="top:10px">
+                      <label><input class="aui-radio" type="radio" name="demo1" > <span style="color:#2d2d2d">元/日</span></label>
+                      <label><input class="aui-radio" type="radio" name="demo1">  <span style="color:#2d2d2d">元/月</span></label>
+                    </div>
+                </div>
+            </li>
+                  </ul>
+                  <section class="aui-content-padded">
+                      <textarea placeholder="描述补充..."></textarea>
+                  </section>
+                  <p class="aui-text-center aui-margin-t-15">上传照片</p>
+                  <section class="aui-content-padded oss">
+                      <div class="aui-row aui-row-padded">
+                        <div class="aui-col-xs-4 image-item">
+                            <input type="hidden" >
+                            <img src="../../image/demo1.png" class="notes-image">
+                            <div class="delete-btn">
+                                <i class="aui-iconfont aui-icon-trash"></i>
+                            </div>
+                        </div>
+                          <div class="aui-col-xs-4 add-photos">
+                              <div class="aui-border aui-text-center">
+                                  <i class="aui-iconfont aui-icon-plus"></i>
+                              </div>
+                          </div>
+                      </div>
+                  </section>
+                  <div class="aui-btn aui-btn-block keep">发布</div>
+</body>
+<script type="text/javascript" src="../../script/api.js" ></script>
+<script type="text/javascript">
+    apiready = function(){
+        api.parseTapmode();
+    }
+    function fnopensheelt() {
+      // 打开身份选择
+      var Button = ['业主', '个人', '中介'];
+      api.actionSheet({
+      title: '请选择身份',
+      cancelTitle: '取消',
+      buttons: Button
+      }, function(ret, err) {
+      var index = ret.buttonIndex;
+      if(index != 4){
+      var xl = $api.byId('xl')
+      var bHtml = Button[index-1]
+      $api.val(xl,bHtml);
+      $api.css(xl,'color:#2d2d2d;');
+    }
+    });
+    }
+    function fnopensheelt1() {
+      // 打开放行选择
+      var Button = ['一室', '两室','三室'];
+      api.actionSheet({
+      title: '请选择身份',
+      cancelTitle: '取消',
+      buttons: Button
+      }, function(ret, err) {
+      var index = ret.buttonIndex;
+      if(index != 4){
+      var fx = $api.byId('Fx')
+      var bHtml = Button[index-1]
+      $api.val(fx,bHtml);
+      $api.css(fx,'color:#2d2d2d;');
+    }
+    });
+    }
+</script>
+</html>

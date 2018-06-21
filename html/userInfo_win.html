@@ -11,7 +11,7 @@
         <a class="aui-btn aui-pull-left" tapmode onclick="closeWin()">
             <span class="aui-iconfont aui-icon-left"></span>
         </a>
-        <div class="aui-title">本地服务</div>
+        <div class="aui-title">个人资料设置</div>
     </header>
 </body>
 <script type="text/javascript" src="../script/api.js"></script>
@@ -23,8 +23,8 @@
         var headerPos = $api.offset(header);
         var body_h = $api.offset($api.dom('body')).h;
         api.openFrame({
-            name: 'Frame1List_frm',
-            url: 'Frame1List_frm.html',
+            name: 'userInfo_frm',
+            url: 'userInfo_frm.html',
             bounces: true,
             rect: {
                 x: 0,

@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
     <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
-    <title>购物车Frame</title>
+    <title>历史记录Frame</title>
     <link rel="stylesheet" type="text/css" href="../../css/api.css" />
     <link rel="stylesheet" type="text/css" href="../../css/aui.css" />
     <link rel="stylesheet" href="../../css/ydui.css"/>
@@ -88,9 +88,11 @@
               margin-right: 10px
             }
             .aui-pull-right .aui-btn{
-              background: #fe467a;
-              color: #fff;
-              border-radius: 0
+              background: none;
+              color: #fe467a;
+              border: 1px solid #fe467a;
+              margin-right: 10px;
+              padding: 0 1.2rem
             }
 
             .aui-div{
@@ -108,14 +110,6 @@
 <body>
     <section id="list" class="list">
     <div class="aui-list aui-select-list">
-      <div class="contbox">
-        <divclass="aui-list-item">
-          <div class="aui-card-list-header aui-card-list-user">
-              <div class="aui-card-list-user-name">
-                  <div class="aui-font-size-16 dpName">陕十三肉夹馍</div>
-              </div>
-          </div>
-        </div>
         <div class="aui-list-item">
             <div class="aui-media-list-item-inner ">
               <div class="aui-list-item-label" >
@@ -136,13 +130,6 @@
                     </div>
                 </div>
             </div>
-            <div class="demo-spinner demo-small-pitch">
-                    <span class="m-spinner" data-ydui-spinner="{input: '.J_Input', add: '.J_Add', minus: '.J_Del', longpress: false}">
-                        <a href="javascript:;" class="J_Del"></a>
-                        <input type="text" class="J_Input" placeholder=""/>
-                        <a href="javascript:;" class="J_Add"></a>
-                    </span>
-                </div>
         </div>
     </div>
     </section>
@@ -155,11 +142,7 @@
   </div>
   <div class="aui-pull-right">
         <div class="aui-pull-right—box">
-          <div class="aui-div">
-            <span>合计:</span>
-            <span id="amount">￥98.00</span>
-          </div>
-          <div class="aui-btn">结算 <span id="count">(1)</span></div>
+          <div class="aui-btn deleat">删除</span></div>
         </div>
   </div>
   </footer>
@@ -172,14 +155,12 @@
 apiready = function() {
 };
 $(document).ready(function () {
-    getAllPrice();
     $("#checkAll").click(function () {
         if(this.checked ==  true){
             $('[type=checkbox]').prop('checked', true);
         }else{
             $('[type=checkbox]').prop('checked', false);
         }
-        getAllPrice();
     })
 $(".son").click(function () {
     //总的checkbox的个数
@@ -191,20 +172,8 @@ $(".son").click(function () {
     }else{
         $('#checkAll').prop('checked', false);
     }
-    getAllPrice()
 })
 });
-function getAllPrice() {
-  // 计算总价格
-  var sum =  0;
-     $(".son").each(function () {
-       if(this.checked == true){
-           var id  =  $(this).parent().siblings('.aui-list-item-inner').children('.total').text();
-           sum += parseInt(id);
-       }
-   })
-    $("#amount").text(sum);
-}
 </script>
 
 </html>

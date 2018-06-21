@@ -57,5 +57,34 @@ function closeWin(){
     api.closeWin({
     });
 }
+    apiready = function(){
+        api.parseTapmode();
+        var header = $api.byId('aui-header');
+        $api.fixStatusBar(header);
+        var headerPos = $api.offset(header);
+        var body_h = $api.offset($api.dom('body')).h;
+        api.openFrame({
+            name: 'MerchantEntry_frm',
+            url: 'MerchantEntry_frm.html',
+            bounces: true,
+            rect: {
+                x: 0,
+                y: headerPos.h,
+                w: 'auto',
+                h: 'auto'
+            },
+            progress: {
+                type:'default',
+                title:'加载中.....',
+                text:'先喝会儿茶~~~'
+              },
+        })
+
+
+    };
+    function closeWin(){
+        api.closeWin({
+        });
+    }
 </script>
 </html>
