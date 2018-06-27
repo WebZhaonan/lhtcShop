@@ -44,7 +44,7 @@
   height: 1.5rem;
   color: #999
 }
-.aui-col-xs-4{
+.aui-col-xs-3{
   position: relative;
 }
 .cox:after{
@@ -75,7 +75,7 @@
                       姓名
                     </div>
                     <div class="aui-list-item-input">
-                        <input type="text" placeholder="">
+                        <input type="text" placeholder="" name="name" id="Uname">
                     </div>
                 </div>
             </li>
@@ -85,8 +85,8 @@
                         性别
                     </div>
                     <div class="aui-list-item-input sex">
-                        <label><input class="aui-radio" type="radio" name="demo1"> <img src="../../image/sex1.png" alt=""></label>
-                        <label><input class="aui-radio" type="radio" name="demo1"> <img src="../../image/sex2.png" alt=""></label>
+                        <label><input class="aui-radio" type="radio" name="sex" value="0" checked> <img src="../../image/sex1.png" alt=""></label>
+                        <label><input class="aui-radio" type="radio" name="sex" value="1" > <img src="../../image/sex2.png" alt=""></label>
                     </div>
                 </div>
             </li>
@@ -96,112 +96,61 @@
                         手机号
                     </div>
                     <div class="aui-list-item-input">
-                        <input type="number" placeholder="">
+                        <input type="number" placeholder="" name="phone" id="phone">
                     </div>
                 </div>
             </li>
             <li class="aui-list-item">
                 <div class="aui-list-item-inner">
-                    <div class="aui-list-item-label">
-                        验证码
-                    </div>
                     <div class="aui-list-item-input">
-                        <input type="number" placeholder="">
-                        <input class="aui-btn" type="button"  id="btn" value="获取验证码"></input>
+                        <textarea placeholder="请填写教育背景" name="eduask" id="eduask"></textarea>
                     </div>
                 </div>
             </li>
             <li class="aui-list-item">
                 <div class="aui-list-item-inner">
-                    <div class="aui-list-item-label">
-                        Select
-                    </div>
                     <div class="aui-list-item-input">
-                        <select>
-                            <option>Option1</option>
-                            <option>Option2</option>
-                            <option>Option3</option>
-                        </select>
+                        <textarea placeholder="请填写工作经验" name="work" id="work"></textarea>
                     </div>
                 </div>
             </li>
         </ul>
         <section class="aui-grid aui-margin-b-15">
     <div class="aui-row">
-        <div class="aui-col-xs-4  cox">
+        <div class="aui-col-xs-3  cox">
             <div class="aui-grid-label col">出生日期</div>
             <div class="aui-grid-label" onclick="fnopenData()" style="text-align:center;">
-                <input type="text" placeholder="请选择" id="Data" readonly="readonly" >
+                <input type="text" placeholder="请选择" id="Data" readonly="readonly" name="birth">
             </div>
         </div>
-        <div class="aui-col-xs-4  cox">
+        <div class="aui-col-xs-3  cox">
             <div class="aui-grid-label col">最高学历</div>
             <div class="aui-grid-label" onclick="fnopenactionSheet()" id="xl">
               请选择
             </div>
         </div>
-        <div class="aui-col-xs-4">
-          <div class="aui-grid-label col">工作时间</div>
+        <div class="aui-col-xs-3 cox">
+          <div class="aui-grid-label ">工作时间</div>
             <div class="aui-grid-label" onclick="fnopenactionSheetJob()" id="Job">
             请选择
             </div>
         </div>
+        <div class="aui-col-xs-3">
+          <div class="aui-grid-label col">薪资要求</div>
+            <div class="aui-grid-label" onclick="fnopenactionSheetMon()" id="Mon">
+            请选择
+            </div>
+        </div>
 </section>
-<div class="aui-btn aui-btn-block keep">保存</div>
+<div class="aui-btn aui-btn-block keep" onclick="fnSet()">保存</div>
 </body>
 <script type="text/javascript" src="../../script/api.js" ></script>
+<script type="text/javascript" src="../../script/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="../../script/layer/layer.js"></script>
+<script type="text/javascript" src="../../script/Reg.js"></script>
 <script type="text/javascript">
     apiready = function(){
         api.parseTapmode();
-    }
-    // 打开时间
-    function fnopenData() {
-      api.openPicker({
-    type: 'date',
-    date: '1990-05-01 12:30',
-    title: '选择时间'
-}, function(ret, err) {
-    if (ret) {
-        var userData = $api.byId('Data');
-        $api.val(userData,ret.year + '年' + ret.month + '月' + ret.day + '日');
-    } else {
-        alert(JSON.stringify(err));
-    }
-});
-    }
-    function fnopenactionSheet() {
-      // 打开学历选择
-      var Button = ['初中及高中', '大专', '本科','其他'];
-      api.actionSheet({
-      title: '请选择学历',
-      cancelTitle: '取消',
-      buttons: Button
-      }, function(ret, err) {
-      var index = ret.buttonIndex;
-      if(index != 5){
-      var xl = $api.byId('xl')
-      var bHtml = Button[index-1]
-      $api.html(xl,bHtml);
-      $api.css(xl,'color:#2d2d2d;');
-    }
-    });
-    }
-    function fnopenactionSheetJob() {
-      // 打开工作经验选择
-      var Button = ['1年以下', '1-3年', '3-5年','5-10年','10年以上'];
-      api.actionSheet({
-      title: '请选择学历',
-      cancelTitle: '取消',
-      buttons: Button
-      }, function(ret, err) {
-      var index = ret.buttonIndex;
-      if(index != 6){
-      var Job = $api.byId('Job')
-      var bHtml = Button[index-1]
-      $api.html(Job,bHtml);
-      $api.css(Job,'color:#2d2d2d;');
-    }
-    });
     }
 </script>
 </html>

@@ -6,26 +6,149 @@
     <meta name="format-detection" content="telephone=no,email=no,date=no,aItemress=no">
     <title>AUI快速完成布局</title>
     <link rel="stylesheet" type="text/css" href="../../css/aui.css" />
+    <link rel="stylesheet" href="../../css/common.css">
+    <style media="screen">
+      .sex img{
+        display: inline-block;
+        /*float: left;*/
+        width:50px
+      }
+      .sex label{
+        line-height: 0;
+        padding-right: 20px
+      }
+      .aui-radio:checked{
+        background-color: #fe467a;
+        border: 1px solid #fe467a
+      }
+      .aui-list-item-input{
+        position: relative;
+      }
+      #btn{
+        background: #fe467a;
+        color: #fff;
+        position: absolute;
+        right: 5px;
+        top: 7px
+      }
+      .col{
+        color: #999
+      }
+      #Data,.check{
+        text-align: center;
+        height: 1rem;
+        font-size: 0.7rem;
+        color: #2d2d2d;
+      }
+.aui-grid .aui-grid-label{
+  height: 1.5rem;
+  color: #999
+}
+.aui-col-xs-3{
+  position: relative;
+}
+.cox:after{
+  content: '';
+  position: absolute;
+  width: 1px;
+  background: #ddd;
+  height: 2.5rem;
+  right: 0;
+  top: 30px
+}
+.keep{
+  width: 80%;
+  margin: 0 auto;
+  background: #fe467a;
+  color: #fff;
+  height: 2rem;
+  line-height: 2.05rem;
+  margin-top: 40px
+}
+    </style>
 </head>
 <body>
-<ul class="aui-list aui-list-in">
+<ul class="aui-list aui-form-list">
             <li class="aui-list-item">
-                <div class="aui-list-item-inner aui-list-item-arrow">
-                    办公用品
+                <div class="aui-list-item-inner">
+                    <div class="aui-list-item-label">
+                      姓名
+                    </div>
+                    <div class="aui-list-item-input">
+                        <input type="text" placeholder="" name="name" id="Uname">
+                    </div>
                 </div>
             </li>
             <li class="aui-list-item">
-                <div class="aui-list-item-inner aui-list-item-arrow">
-                    礼品
+                <div class="aui-list-item-inner">
+                    <div class="aui-list-item-label">
+                        手机号
+                    </div>
+                    <div class="aui-list-item-input">
+                        <input type="number" placeholder="" name="phone" id="phone">
+                    </div>
+                </div>
+            </li>
+            <li class="aui-list-item">
+                <div class="aui-list-item-inner">
+                    <div class="aui-list-item-label">
+                      类别
+                    </div>
+                    <div class="aui-list-item-input">
+                        <input type="text" placeholder="" name="name" id="leibie">
+                    </div>
+                </div>
+            </li>
+            <li class="aui-list-item">
+                <div class="aui-list-item-inner">
+                    <div class="aui-list-item-label">
+                      区域
+                    </div>
+                    <div class="aui-list-item-input">
+                        <input type="text" placeholder="" name="name" id="Uname">
+                    </div>
+                </div>
+            </li>
+            <li class="aui-list-item">
+                <div class="aui-list-item-inner">
+                    <div class="aui-list-item-label">
+                      详细地址
+                    </div>
+                    <div class="aui-list-item-input">
+                        <input type="text" placeholder="" name="name" id="Uname">
+                    </div>
+                </div>
+            </li>
+            <li class="aui-list-item">
+                <div class="aui-list-item-inner">
+                    <div class="aui-list-item-label">
+                      标题
+                    </div>
+                    <div class="aui-list-item-input">
+                        <input type="text" placeholder="" name="name" id="Uname">
+                    </div>
+                </div> 
+            </li>
+            <li class="aui-list-item">
+                <div class="aui-list-item-inner">
+                    <div class="aui-list-item-label">
+                      描述
+                    </div>
+                    <div class="aui-list-item-input">
+                        <input type="text" placeholder="" name="name" id="Uname">
+                    </div>
                 </div>
             </li>
         </ul>
+<div class="aui-btn aui-btn-block keep">保存</div>
 </body>
 <script type="text/javascript" src="../../script/api.js" ></script>
+<script type="text/javascript" src="../../script/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="../../script/layer/layer.js"></script>
+<script type="text/javascript" src="../../script/Reg.js"></script>
 <script type="text/javascript">
     apiready = function(){
         api.parseTapmode();
     }
-
 </script>
 </html>

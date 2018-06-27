@@ -54,8 +54,9 @@ var usernameUIInputId;
 var passwordUIInputId;
 var usernameValue;
 var passwordValue;
-
-
+var jsfun  = function load() {
+  window.location.reload()
+}
 function fnInitUIInput() {
     // 用户名输入框模块
     var username = $api.byId('username');
@@ -177,7 +178,7 @@ function fnLogin() {
         return;
     }
     api.ajax({
-        url:'http://lhtcshop.com/public/index/Create/app_login',
+        url:hname.hname.name +'/public/index/Create/app_login',
         method: 'post',
         headers: {
             "X-APICloud-AppId":"A6079750662654",
@@ -191,27 +192,23 @@ function fnLogin() {
             }
         }
     }, function(ret,err) {
-          $api.setStorage('userInfo', ret);
-          console.log(JSON.stringify(ret));
-        if (ret&&ret.id) {
-          api.alert({
+          $api.setStorage('userInfo', ret.data);
+         if (ret.code=='success') {
+          api.toast({
               title: '提示',
-              msg: '登陆成功',
-          }, function(){
-            api.execScript({
-                  name: 'index',//你要刷新winName
-                  script: "location.reload(); "
-              });
-             api.openWin({
-                 name: 'index',
-                 url: '../index.html',
-                 pageParam: {
-                     name: 'test'
-                 },
-
-             });
-
+              msg: ret.Msg,
           });
+          api.execScript({
+                name: 'root',//你要刷新winName
+                script: jsfun
+            });
+           api.openWin({
+               name: 'index',
+               url: '../index.html',
+               pageParam: {
+                   name: 'test'
+               },
+           });
         } else {
           api.toast({
               msg:ret.Msg,
@@ -232,12 +229,17 @@ function fnOpenforgetPassword() {
   });
 }
 // 被注册页面调用，用于从注册页面传递用户名
-function fnSetUsername(username_) {
+function fnSetUsername(username_,pawd_) {
     usernameValue = username_;
+    passwordValue = pawd_
     UIInput.value({
         id: usernameUIInputId,
         msg: username_
-    }, function(ret, err) {});
+    });
+    UIInput.value({
+        id: passwordUIInputId,
+        msg: pawd_
+    });
 }
 </script>
 

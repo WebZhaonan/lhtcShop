@@ -90,7 +90,7 @@
         <li tapmode="hover" onclick="randomSwitchBtn( this );" class="flex-con" >消息</li>
         <li tapmode="hover"  class="flex-con">
           个人中心
-          <a class="aui-btn aui-pull-right" tapmode onclick="fnopenSetting()" style="padding-right:15px;margin-top:0px;">
+          <a class="aui-btn aui-pull-right" tapmode onclick="fnopenSetting()" style="padding-right:15px;margin-top:0px;" id="set">
               <span class="aui-iconfont aui-icon-gear" style="font-size:20px"></span>
           </a>
         </li>
@@ -126,6 +126,7 @@ apiready = function () {
 }
 function funIniGroup(index){
     var eHeaderLis = $api.domAll('header li'),
+        set = $api.byId('set'),
         frames = [];
     for (var i = 0,len = eHeaderLis.length; i < len; i++) {
               // 判断是否登陆
@@ -134,6 +135,7 @@ function funIniGroup(index){
               var url = './html/frame'+i+'.html';
               if(i == 4 && !userInfo){
                 url = './html/userWindow.html';
+                $api.remove(set);
               }
               frames.push( {
                 name: 'frame'+i,

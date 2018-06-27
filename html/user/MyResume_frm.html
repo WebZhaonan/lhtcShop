@@ -1,0 +1,234 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,aItemress=no">
+    <title>AUI快速完成布局</title>
+    <link rel="stylesheet" type="text/css" href="../../css/aui.css" />
+    <link rel="stylesheet" href="../../css/common.css">
+    <style media="screen">
+      .sex img{
+        display: inline-block;
+        /*float: left;*/
+        width:50px
+      }
+      .sex label{
+        line-height: 0;
+        padding-right: 20px
+      }
+      .aui-radio:checked{
+        background-color: #fe467a;
+        border: 1px solid #fe467a
+      }
+      .aui-list-item-input{
+        position: relative;
+      }
+      #btn{
+        background: #fe467a;
+        color: #fff;
+        position: absolute;
+        right: 5px;
+        top: 7px
+      }
+      .col{
+        color: #999
+      }
+      #Data,.check{
+        text-align: center;
+        height: 1rem;
+        font-size: 0.7rem;
+        color: #2d2d2d;
+      }
+.aui-grid .aui-grid-label{
+  height: 1.5rem;
+  color: #999
+}
+.aui-col-xs-3{
+  position: relative;
+}
+.cox:after{
+  content: '';
+  position: absolute;
+  width: 1px;
+  background: #ddd;
+  height: 2.5rem;
+  right: 0;
+  top: 30px
+}
+.keep{
+  width: 30%;
+  margin: 0 auto;
+  background: #fe467a !important;
+  color: #fff;
+  height: 1.7rem;
+  line-height: 1.75rem;
+  margin-top: 40px;
+  margin-right: 10px
+}
+    </style>
+</head>
+<body>
+<div id="list">
+  <div>
+<script type="text/template" id="template">
+<ul class="aui-list aui-form-list">
+            <li class="aui-list-item">
+                <div class="aui-list-item-inner">
+                    <div class="aui-list-item-label">
+                      姓名
+                    </div>
+                    <div class="aui-list-item-input">
+                        <input type="text" placeholder="" name="name" id="Uname"  value="{{=it.name}}" readonly>
+                    </div>
+                </div>
+            </li>
+            <li class="aui-list-item">
+                <div class="aui-list-item-inner">
+                    <div class="aui-list-item-label">
+                        性别
+                    </div>
+                    <div class="aui-list-item-input sex">
+                       {{? it.sex == 0}}
+                        <label><input class="aui-radio" type="radio" name="sex" value="0" checked="" disabled><img src="../../image/sex1.png" alt=""></label>
+                        <label><input class="aui-radio" type="radio" name="sex" value="1" disabled> <img src="../../image/sex2.png" alt=""></label>
+                        {{??}}
+                          <label><input class="aui-radio" type="radio" name="sex" value="0" disabled> <img src="../../image/sex1.png" alt=""></label>
+                        <label><input class="aui-radio" type="radio" name="sex" value="1" checked="" disabled> <img src="../../image/sex2.png" alt=""></label>
+                         {{?}}
+                    </div>
+                </div>
+            </li>
+            <li class="aui-list-item">
+                <div class="aui-list-item-inner">
+                    <div class="aui-list-item-label">
+                        手机号
+                    </div>
+                    <div class="aui-list-item-input">
+                        <input type="number" placeholder="" name="phone" id="phone" value="{{=it.phone}}" readonly="readonly">
+                    </div>
+                </div>
+            </li>
+            <li class="aui-list-item">
+                <div class="aui-list-item-inner">
+                    <div class="aui-list-item-input">
+                        <textarea placeholder="请填写教育背景" name="eduask" id="eduask" readonly="readonly">{{=it.eduask}}</textarea>
+                    </div>
+                </div>
+            </li>
+            <li class="aui-list-item">
+                <div class="aui-list-item-inner">
+                    <div class="aui-list-item-input">
+                        <textarea placeholder="请填写工作经验" name="work" id="work" readonly="readonly">{{=it.work}}</textarea>
+                    </div>
+                </div>
+            </li>
+        </ul>
+        <section class="aui-grid aui-margin-b-15">
+    <div class="aui-row">
+        <div class="aui-col-xs-3  cox">
+            <div class="aui-grid-label col">出生日期</div>
+            <div class="aui-grid-label" style="text-align:center;">
+                <input type="text" value='{{=it.birth}}' id="Data" readonly="readonly" name="birth">
+            </div>
+        </div>
+        <div class="aui-col-xs-3  cox">
+            <div class="aui-grid-label col">最高学历</div>
+            <div class="aui-grid-label"  id="xl" style="color:#2d2d2d;">
+            {{=it.xueli}}
+            </div>
+        </div>
+        <div class="aui-col-xs-3 cox">
+          <div class="aui-grid-label ">工作时间</div>
+            <div class="aui-grid-label"  id="Job" style="color:#2d2d2d;">
+            {{=it.work_year}}
+            </div>
+        </div>
+        <div class="aui-col-xs-3">
+          <div class="aui-grid-label col">薪资要求</div>
+            <div class="aui-grid-label" id="Mon" style="color:#2d2d2d;">
+            {{=it.money}}
+            </div>
+        </div>
+</section>
+      <div class="aui-list-item-inner aui-list-item-center aui-list-item-btn">
+      <div class="aui-btn aui-btn-danger aui-margin-l-5 keep" onclick="fnopenEditresume()"><span class="aui-iconfont aui-icon-edit"></span>编辑简历</div>
+      <div class="aui-btn  aui-margin-r-5 keep" onclick="removeResume();"><span class="aui-iconfont aui-icon-trash"></span>删除简历</div>
+      </div>
+  </script>
+  <script type="text/javascript" src="../../script/api.js" ></script>
+  <script type="text/javascript" src="../../script/doT.min.js"></script>
+  <script type="text/javascript" src="../../script/jquery-1.9.1.min.js"></script>
+  <script type="text/javascript" src="../../script/layer/layer.js"></script>
+  <script type="text/javascript">
+      apiready = function(){
+          api.parseTapmode();
+          fnGetResumeInfo();
+      }
+      var jsfun  = function load() {
+        window.location.reload()
+      }
+      var userInfo = $api.getStorage('userInfo');
+      function fnGetResumeInfo() {
+        // 获取简历信息
+        api.ajax({
+            url: 'http://lhtcshop.com/public/index/Ajax/resume_info',
+            method: 'post',
+            data: {
+               values: {
+                  uid: userInfo.id
+               }
+            }
+        },function(ret, err){
+            if (ret.code =='success') {
+              var dataInter = ret.data
+              var interText = doT.template($api.text($api.byId('template')));
+              $api.html($api.byId('list'), interText(dataInter));
+            } else {
+                $api.html($api.byId('list'), '123');
+            }
+        });
+      }
+      // 删除简历
+      function removeResume() {
+        api.ajax({
+            url: 'http://lhtcshop.com/public/index/Ajax/delete_resume',
+            method: 'post',
+            data: {
+                values: {
+                    uid: userInfo.id
+                },
+            }
+        },function(ret, err){
+           api.alert({
+               title: '提示',
+               msg:ret.Msg + ','+'请前往发布页面制作简历',
+           }, function(){
+               if( ret.code =='success' ){
+               api.execScript({
+                     name: 'MyResume_frm',//你要刷新winName
+                     script: jsfun
+                 });
+               api.closeWin({
+                   name: 'MyResume'
+               });
+               }
+           });
+
+        });
+      }
+  //  编辑简历
+   function fnopenEditresume(){
+     api.openWin({
+         name: 'EditResume',
+         url: './EditResume.html',
+         pageParam: {
+             name: 'test'
+         }
+     });
+
+   }
+
+  </script>
+</body>
+</html>

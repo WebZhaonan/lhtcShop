@@ -17,156 +17,112 @@
     </style>
 </head>
 <body>
-     <div class="aui-card-list">
-            <div class="aui-card-list-content">
-                <ul class="aui-list aui-media-list">
-                    <li class="aui-list-item aui-list-item-middle"  onclick="fnOpenList1();">
-                        <div class="aui-media-list-item-inner">
-                            <div class="aui-list-item-media" style="width: 2.5rem;">
-                                <img src="../image/Suitcase1.png" class="aui-img" >
-                            </div>
-                            <div class="aui-list-item-inner aui-list-item-arrow">
-                                <div class="aui-list-item-text">
-                                    <div class="aui-list-item-title">发职位找人才</div>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="aui-list-item aui-list-item-middle" onclick="fnOpenResume();">
-                        <div class="aui-media-list-item-inner">
-                            <div class="aui-list-item-media" style="width: 2.5rem;">
-                                <img src="../image/WordDocument.png" class="" style="width:31px;height:37px;">
-                            </div>
-                            <div class="aui-list-item-inner aui-list-item-arrow">
-                                发简历找工作
-                            </div>
-                        </div>
-                    </li>
-                    <li class="aui-list-item aui-list-item-middle" onclick="fnOpenList3()">
-                        <div class="aui-media-list-item-inner">
-                            <div class="aui-list-item-media" style="width: 2.5rem;">
-                                <img src="../image/Bag.png" class="" style="width:31px;height:33px;">
-                            </div>
-                            <div class="aui-list-item-inner aui-list-item-arrow">
-                                二手物品
-                            </div>
-                        </div>
-                    </li>
-                    <li class="aui-list-item aui-list-item-middle" onclick="fnOpenList4();">
-                        <div class="aui-media-list-item-inner">
-                            <div class="aui-list-item-media" style="width: 2.5rem;">
-                                <img src="../image/Home.png" class="" style="height:33px;width:39px;margin-left:-3px">
-                            </div>
-                            <div class="aui-list-item-inner aui-list-item-arrow">
-                                本地服务
-                            </div>
-                        </div>
-                    </li>
-                    <li class="aui-list-item aui-list-item-middle" onclick="fnOpenList5()">
-                        <div class="aui-media-list-item-inner">
-                            <div class="aui-list-item-media" style="width: 2.5rem;">
-                                <img src="../image/MySpace.png" class="" style="width:32px;height:32px;">
-                            </div>
-                            <div class="aui-list-item-inner aui-list-item-arrow">
-                                租房服务
-                            </div>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <script type="text/javascript" src="script/api.js"></script>
+  <section>
+    <div class="aui-card-list">
+           <div class="aui-card-list-content">
+               <ul class="aui-list aui-media-list" id="list">
+
+               </ul>
+           </div>
+       </div>
+  </section>
+
+        <!--模板渲染-->
+        <script type="text/template" id="template">
+
+                        {{ for(var prop in it) { }}
+                         <li class="aui-list-item aui-list-item-middle"  onclick="fnOpenList('{{= it[prop].id}}','{{= it[prop].keywords}}','{{= it[prop].url}}');">
+                             <div class="aui-media-list-item-inner">
+                                 <div class="aui-list-item-media" style="width:2.5rem">
+                                     <img src='http://{{= it[prop].image}}' class="aui-img" >
+                                 </div>
+                                 <div class="aui-list-item-inner aui-list-item-arrow">
+                                     <div class="aui-list-item-text">
+                                         <div class="aui-list-item-title">{{= it[prop].name }}</div>
+                                     </div>
+                                 </div>
+                             </div>
+                         </li>
+                          {{ } }}
+        </script>
+        <script type="text/javascript" src="../script/api.js"></script>
+        <script type="text/javascript" src="../script/doT.min.js"></script>
+        <script type="text/javascript" src="../script/common.js"></script>
+        <script src></script>
         <script type="text/javascript">
-         function fnOpenList1() {
-        // 打开发职位找人才窗口
-        api.actionSheet({
-        title: '请选择发布类型',
-        cancelTitle: '取消',
-        buttons:['全职招聘', '兼职招聘']
-        }, function(ret, err) {
-        var index = ret.buttonIndex;
-        if(index == 1){
-          api.openWin({
-              name: 'QzJob',
-              url: './Fabu/QzJob.html',
-              pageParam: {
-                  name: 'test'
-              }
-          });
-        }else if (index == 2) {
-          api.openWin({
-              name: 'JzJob',
-              url: './Fabu/JzJob.html',
-              pageParam: {
-                  name: 'test'
-              }
-          });
-        }else {
-        }
-      })
+        apiready = function() {
+            fnGetJson();
+            init();
+        };
+         function fnOpenList(wareId,keywords,url) {
+           var userInfo= $api.getStorage('userInfo');
+           if(userInfo){
+             api.ajax({
+                 url: 'http://lhtcshop.com/public/index/Ajax/get_erji',
+                 method: 'post',
+                 headers: {
+                     "X-APICloud-AppId":"A6079750662654",
+                     "X-APICloud-AppKey":"4B3AB3D8-C633-6D3E-F6C3-37EDFE6978AB"
+                 },
+                 dataType:'json',
+                 data: {
+                     values: {
+                         id: wareId,
+                     }
+                 }
+             },function(ret, err){
+                 if (ret) {
+                  if(ret.code!='error'){
+                    var a  = [];
+                    for (var i = 0; i < ret.length; i++) {
+                        a.push(ret[i].name)
+                    }
+                        api.actionSheet({
+                        title: '请选择发布类型',
+                        cancelTitle: '取消',
+                        buttons:a
+                      }, function(res) {
+                        var index = res.buttonIndex;
+                        if(ret[index-1]!=undefined){
+                          api.openWin({
+                              name: ret[index-1].keywords,
+                              url: ret[index-1].url,
+                              pageParam: {
+                                  name: 'test'
+                              }
+                          });
+                        }
+                      })
+                  }else {
+                    api.openWin({
+                        name: keywords,
+                        url: url,
+                        pageParam: {
+                            name: 'test'
+                        }
+                    });
+                  }
+                 }
+             });
+           }else {
+             noLogin()
+           }
     }
-         function fnOpenResume() {
-          //  打开发简历找工作窗口
-          api.openWin({
-              name: 'Resume_win',
-              url: './Fabu/Resume_win.html',
-              pageParam: {
-                  name: 'test'
+        // 获取数据
+        function fnGetJson() {
+          api.ajax({
+              url: 'http://lhtcshop.com/public/index/Ajax/category',
+              method: 'post',
+          },function(ret, err){
+              if (ret) {
+                var dataInter = ret
+                var interText = doT.template($api.text($api.byId('template')));
+                $api.html($api.byId('list'), interText(dataInter));
+              } else {
               }
-          });
-
-         }
-         function fnOpenList4() {
-        // 打开本地服务窗口
-        api.openWin({
-            name: 'Frame1List_win',
-            url: './Fabu/Frame1List_win.html',
-            pageParam: {
-                name: 'test'
-            }
-        });
-         }
-         function fnOpenList3() {
-        // 打开二手服务窗口
-        api.openWin({
-            name: 'Frame0List_win',
-            url: './Fabu/Frame0List_win.html',
-            pageParam: {
-                name: 'test'
-            }
-        });
-         }
-         function fnOpenList5() {
-        // 打开二手服务窗口
-        api.actionSheet({
-        title: '请选择发布类型',
-        cancelTitle: '取消',
-        buttons:['整租', '短租','合租']
-        }, function(ret, err) {
-        var index = ret.buttonIndex;
-        if(index == 1){
-          api.openWin({
-              name: 'ZzRelease',
-              url: './Fabu/ZzRelease.html',
-              pageParam: {
-                  name: 'test'
-              }
-          });
-        }else if (index == 2) {
-          api.openWin({
-              name: 'DzRelease',
-              url: './Fabu/DzRelease.html',
-              pageParam: {
-                  name: 'test'
-              }
-          });
-        }else if(index == 3){
-          alert(345)
-        }else {
+          }); 
 
         }
-      });
-         }
         </script>
 </body>
 </html>

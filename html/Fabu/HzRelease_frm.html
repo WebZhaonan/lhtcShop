@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
     <meta name="format-detection" content="telephone=no,email=no,date=no,aItemress=no">
-    <title>短租发布</title>
+    <title>短租发布 从  </title>
     <link rel="stylesheet" type="text/css" href="../../css/aui.css" />
     <style media="screen">
        .aui-list-item-label{
@@ -33,7 +33,7 @@
         }
       .aui-radio:checked{
         background-color: #fe467a;
-        border: solid 1px #fe467a;
+    border: solid 1px #fe467a;
       }
       textarea {
           height: 8rem;
@@ -95,6 +95,10 @@
         margin-top: 40px；auto;
         margin-bottom: 30px
       }
+      .active{
+        background: #fe467a;
+        color: #fff;
+      }
     </style>
 </head>
 <body>
@@ -144,16 +148,6 @@
                       <li class="aui-list-item">
                           <div class="aui-list-item-inner">
                               <div class="aui-list-item-label">
-                                位&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;置
-                              </div>
-                              <div class="aui-list-item-input">
-                                  <input type="text" placeholder="">
-                              </div>
-                          </div>
-                      </li>
-                      <li class="aui-list-item">
-                          <div class="aui-list-item-inner">
-                              <div class="aui-list-item-label">
                                 房屋面积
                               </div>
                               <div class="aui-list-item-input">
@@ -165,10 +159,40 @@
                       <li class="aui-list-item">
                           <div class="aui-list-item-inner  aui-list-item-arrow">
                               <div class="aui-list-item-label">
-                                房&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;型
+                                房屋户型
                               </div>
                               <div class="aui-list-item-input" onclick="fnopensheelt1()">
                                   <input type="text" placeholder="选择" readonly="readonly" id="Fx">
+                              </div>
+                          </div>
+                      </li>
+                      <li class="aui-list-item">
+                          <div class="aui-list-item-inner">
+                              <div class="aui-list-item-label">
+                                装修程度
+                              </div>
+                              <div class="aui-list-item-input" onclick="fnopensheelt2()">
+                                  <input type="text" placeholder="选择" readonly="readonly" id="Zx">
+                              </div>
+                          </div>
+                      </li>
+                      <li class="aui-list-item">
+                          <div class="aui-list-item-inner">
+                              <div class="aui-list-item-label">
+                                朝&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;向
+                              </div>
+                              <div class="aui-list-item-input">
+                                  <input type="text" placeholder="">
+                              </div>
+                          </div>
+                      </li>
+                      <li class="aui-list-item">
+                          <div class="aui-list-item-inner">
+                              <div class="aui-list-item-label">
+                                楼&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;层
+                              </div>
+                              <div class="aui-list-item-input">
+                                  <input type="text" placeholder="">
                               </div>
                           </div>
                       </li>
@@ -185,7 +209,7 @@
                       <li class="aui-list-item">
                           <div class="aui-list-item-inner">
                               <div class="aui-list-item-label">
-                                床&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;铺
+                                电&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;梯
                               </div>
                               <div class="aui-list-item-input">
                                   <input type="text" placeholder="">
@@ -195,40 +219,47 @@
                       <li class="aui-list-item">
                           <div class="aui-list-item-inner">
                               <div class="aui-list-item-label">
-                                宜住人数
+                                租&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;金
                               </div>
                               <div class="aui-list-item-input">
                                   <input type="text" placeholder="">
                               </div>
-                              <div class="aui-list-item-right1">人</div>
                           </div>
                       </li>
-                      <li class="aui-list-item">
-                          <div class="aui-list-item-inner">
-                              <div class="aui-list-item-label">
-                                租&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;期
-                              </div>
-                              <div class="aui-list-item-input">
-                                  <input type="text" placeholder="">
-                              </div>
-                              <div class="aui-list-item-right1">天</div>
-                          </div>
-                      </li>
-                      <li class="aui-list-item">
-                <div class="aui-list-item-inner">
-                  <div class="aui-list-item-label">
-                    租&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;金
-                  </div>
-                  <div class="aui-list-item-input">
-                      <input type="text" placeholder="">
-                  </div>
-                    <div class="aui-list-item-right" style="top:10px">
-                      <label><input class="aui-radio" type="radio" name="demo1" > <span style="color:#2d2d2d">元/日</span></label>
-                      <label><input class="aui-radio" type="radio" name="demo1">  <span style="color:#2d2d2d">元/月</span></label>
-                    </div>
-                </div>
-            </li>
                   </ul>
+    <section class="aui-grid">
+      <div class="aui-card-list-header">
+                房屋优点
+            </div>
+    <div class="aui-row">
+        <div class="aui-col-xs-3">
+            <div class="aui-btn">随时看房</div>
+        </div>
+        <div class="aui-col-xs-3">
+          <div class="aui-btn">新上房源</div>
+        </div>
+        <div class="aui-col-xs-3">
+          <div class="aui-btn">可短租</div>
+        </div>
+</section>
+<section class="aui-grid" style="margin-top:10px">
+  <div class="aui-card-list-header">
+            房屋配置
+        </div>
+<div class="aui-row">
+    <div class="aui-col-xs-3">
+        <div class="aui-btn">宽带</div>
+    </div>
+    <div class="aui-col-xs-3">
+      <div class="aui-btn">床</div>
+    </div>
+    <div class="aui-col-xs-3">
+      <div class="aui-btn">沙发</div>
+    </div>
+    <div class="aui-col-xs-3">
+      <div class="aui-btn">电视</div>
+    </div>
+</section>
                   <section class="aui-content-padded">
                       <textarea placeholder="描述补充..."></textarea>
                   </section>
@@ -252,6 +283,7 @@
                   <div class="aui-btn aui-btn-block keep">发布</div>
 </body>
 <script type="text/javascript" src="../../script/api.js" ></script>
+<script type="text/javascript" src="../../script/jquery-1.9.1.min.js" ></script>
 <script type="text/javascript">
     apiready = function(){
         api.parseTapmode();
@@ -290,5 +322,27 @@
     }
     });
     }
+    function fnopensheelt2() {
+      // 打开装修程度
+      var Button = ['毛坯', '简装','中等装修','精装'];
+      api.actionSheet({
+      title: '请选择身份',
+      cancelTitle: '取消',
+      buttons: Button
+      }, function(ret, err) {
+      var index = ret.buttonIndex;
+      if(index != 5){
+      var Zx = $api.byId('Zx')
+      var bHtml = Button[index-1]
+      $api.val(Zx,bHtml);
+      $api.css(Zx,'color:#2d2d2d;');
+    }
+    });
+    }
+    // 房屋优点添加点击事件
+    $(".aui-col-xs-3").click(function(){
+      var addCls= $(this);
+      addCls.children('.aui-btn').toggleClass('active')
+    });
 </script>
 </html>

@@ -145,7 +145,7 @@ function fnRegister() {
                     api.execScript({
                         name: 'login',
                         frameName: 'login_frame',
-                        script: 'fnSetUsername(\"' + usernameValue + '\");'
+                        script: 'fnSetUsername(\"' + usernameValue + '\",\"' + passwordValue + '\");'
                     });
                     api.closeWin();
                 }

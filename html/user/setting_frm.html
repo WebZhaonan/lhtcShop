@@ -53,7 +53,7 @@
                 </div>
             </li>
         </ul>
-        <div class="aui-btn aui-btn-block clearLogin">退出登录</div>
+        <div class="aui-btn aui-btn-block clearLogin" onclick="clearLoginInfo()">退出登录</div>
 </body>
 <script src="../../script/api.js"></script>
 <script type="text/javascript">
@@ -79,7 +79,25 @@
               name: 'test'
           }
       });
-
     }
+    // 清除登录缓存信息
+    var jsfun  = function load() {
+      window.location.reload()
+    }
+    function clearLoginInfo() {
+        $api.rmStorage('userInfo');
+        api.execScript({
+        name: 'root',
+        script: jsfun
+      });
+       api.openWin({
+           name: 'index',
+           url: '../../index.html',
+           pageParam: {
+               name: 'test'
+           }
+       });
+
+      }
 </script>
 </html>

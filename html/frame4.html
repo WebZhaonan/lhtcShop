@@ -177,6 +177,14 @@
                     我的发布
                 </div>
             </li>
+            <li class="aui-list-item list_li" onclick="fnopenMyResume()">
+                <div class="aui-list-item-label-icon list">
+                <img src="../image/user-icon6.png" alt="">
+                </div>
+                <div class="aui-list-item-inner aui-list-item-arrow">
+                    我的简历
+                </div>
+            </li>
             <li class="aui-list-item list_li" onclick="fnopenMycollection()">
                 <div class="aui-list-item-label-icon list">
                     <img src="../image/user-icon7.png" alt="">
@@ -291,11 +299,9 @@
                 }
             }
         }, function(ret, err) {
-          console.log(JSON.stringify(ret));
             if (ret.code=='success') {
               fnUpdateLocalAvatar(ret.Msg);
             } else {
-                console.log(JSON.stringify(err));
                 api.toast({
                     msg: ret.msg,
                     duration: 2000,
@@ -366,5 +372,16 @@
       });
 
     }
+    function fnopenMyResume(){
+      // 打开我的简历
+      api.openWin({
+          name: 'MyResume',
+          url: './user/MyResume.html',
+          pageParam: {
+              name: 'test'
+          }
+      });
+    }
+
 </script>
 </html>
