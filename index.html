@@ -124,6 +124,7 @@ apiready = function () {
     initEventListenner();
     api.parseTapmode();
 }
+var userInfo= $api.getStorage('userInfo');
 function funIniGroup(index){
     var eHeaderLis = $api.domAll('header li'),
         set = $api.byId('set'),
@@ -131,7 +132,6 @@ function funIniGroup(index){
     for (var i = 0,len = eHeaderLis.length; i < len; i++) {
               // 判断是否登陆
               // 从缓存中获取用户信息
-              var userInfo= $api.getStorage('userInfo');
               var url = './html/frame'+i+'.html';
               if(i == 4 && !userInfo){
                 url = './html/userWindow.html';

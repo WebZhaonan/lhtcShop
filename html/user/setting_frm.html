@@ -85,18 +85,29 @@
       window.location.reload()
     }
     function clearLoginInfo() {
-        $api.rmStorage('userInfo');
-        api.execScript({
-        name: 'root',
-        script: jsfun
+      api.confirm({
+          title: '提示',
+          msg: '是否退出',
+          buttons: ['确定', '取消']
+      }, function(ret, err){
+          if( ret.buttonIndex==1 ){
+            console.log(JSON.stringify(ret))
+            $api.rmStorage('userInfo');
+            api.execScript({
+            name: 'root',
+            script: jsfun
+          });
+           api.openWin({
+               name: 'index',
+               url: '../../index.html',
+               pageParam: {
+                   name: 'test'
+               }
+           });
+          }else{
+          }
       });
-       api.openWin({
-           name: 'index',
-           url: '../../index.html',
-           pageParam: {
-               name: 'test'
-           }
-       });
+
 
       }
 </script>
