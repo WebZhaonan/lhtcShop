@@ -60,6 +60,9 @@
     apiready = function(){
         api.parseTapmode();
     }
+    var jsfun  = function load() {
+      window.location.reload()
+    }
      function fnopenuserInfo() {
       //  打开个人资料设置页面
       api.openWin({
@@ -80,10 +83,7 @@
           }
       });
     }
-    // 清除登录缓存信息
-    var jsfun  = function load() {
-      window.location.reload()
-    }
+
     function clearLoginInfo() {
       api.confirm({
           title: '提示',
@@ -91,19 +91,19 @@
           buttons: ['确定', '取消']
       }, function(ret, err){
           if( ret.buttonIndex==1 ){
-            console.log(JSON.stringify(ret))
             $api.rmStorage('userInfo');
+            api.closeToWin({
+                name: 'login',
+                animation:{
+                  type:"none",                //动画类型（详见动画类型常量）
+                  subType:"from_bottom",        //动画子类型（详见动画子类型常量）
+                  duration:300
+                }
+            });
             api.execScript({
-            name: 'root',
-            script: jsfun
-          });
-           api.openWin({
-               name: 'index',
-               url: '../../index.html',
-               pageParam: {
-                   name: 'test'
-               }
-           });
+                  name: 'root',//你要刷新winName
+                  script: jsfun
+              });
           }else{
           }
       });

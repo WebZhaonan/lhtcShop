@@ -86,6 +86,15 @@
        .aui-list .aui-list-item-label{
          width: 50%
        }
+       .image-item{
+         display: none;
+       }
+       .aui-list-item-label{
+         text-align: right;
+       }
+       .toast-content{
+         color: #fff !important
+       }
     </style>
 </head>
 <body>
@@ -96,7 +105,7 @@
                         企业名称
                     </div>
                     <div class="aui-list-item-input">
-                        <input type="text" placeholder="企业名称">
+                        <input type="text" placeholder="企业名称" name="enterprise_name" id="enterprise_name">
                     </div>
                 </div>
             </li>
@@ -106,7 +115,17 @@
                         企业注册号
                     </div>
                     <div class="aui-list-item-input">
-                        <input type="text" placeholder="">
+                        <input type="text" placeholder="" name="zhuce_num" id="zhuce_num">
+                    </div>
+                </div>
+            </li>
+            <li class="aui-list-item">
+                <div class="aui-list-item-inner">
+                    <div class="aui-list-item-label">
+                        商家地址
+                    </div>
+                    <div class="aui-list-item-input">
+                        <input type="text" placeholder="请选择企业地址" id="J_Address" readonly="readonly" name="address">
                     </div>
                 </div>
             </li>
@@ -116,7 +135,7 @@
                         法人姓名
                     </div>
                     <div class="aui-list-item-input">
-                        <input type="text" placeholder="">
+                        <input type="text" placeholder="" name="name" id="name">
                     </div>
                 </div>
             </li>
@@ -126,67 +145,26 @@
                         法人身份证号
                     </div>
                     <div class="aui-list-item-input">
-                        <input type="text" placeholder="">
+                        <input type="text" placeholder="" name="name_id" id="name_id">
                     </div>
                 </div>
             </li>
             <li class="aui-list-item">
                 <div class="aui-list-item-inner">
                     <div class="aui-list-item-label">
-                        银行开户名
+                        所属行业
                     </div>
-                    <div class="aui-list-item-input">
-                        <input type="text" placeholder="">
-                    </div>
-                </div>
-            </li>
-            <li class="aui-list-item">
-                <div class="aui-list-item-inner">
-                    <div class="aui-list-item-label">
-                        注册号
-                    </div>
-                    <div class="aui-list-item-input">
-                        <input type="text" placeholder="">
+                    <div class="aui-list-item-input" id="set" name='hid'>
                     </div>
                 </div>
             </li>
             <li class="aui-list-item">
                 <div class="aui-list-item-inner">
                     <div class="aui-list-item-label">
-                        对公账号
+                        企业联系方式
                     </div>
                     <div class="aui-list-item-input">
-                        <input type="text" placeholder="">
-                    </div>
-                </div>
-            </li>
-            <li class="aui-list-item">
-                <div class="aui-list-item-inner">
-                    <div class="aui-list-item-label">
-                        开户行
-                    </div>
-                    <div class="aui-list-item-input">
-                        <input type="text" placeholder="">
-                    </div>
-                </div>
-            </li>
-            <li class="aui-list-item">
-                <div class="aui-list-item-inner">
-                    <div class="aui-list-item-label">
-                        开户行所在地
-                    </div>
-                    <div class="aui-list-item-input">
-                        <input type="text" placeholder="">
-                    </div>
-                </div>
-            </li>
-            <li class="aui-list-item">
-                <div class="aui-list-item-inner">
-                    <div class="aui-list-item-label">
-                      开户行支行民称
-                    </div>
-                    <div class="aui-list-item-input">
-                        <input type="text" placeholder="">
+                        <input type="text" placeholder="" name="phone" id="phone">
                     </div>
                 </div>
             </li>
@@ -194,43 +172,39 @@
         <p class="aui-text-center aui-margin-t-15">上传营业执照</p>
         <section class="aui-content-padded">
             <div class="aui-row aui-row-padded">
-              <div class="aui-col-xs-4 image-item">
+              <div class="aui-col-xs-4 image-item" id="dis">
                   <input type="hidden" >
-                  <img src="../../image/demo1.png" class="notes-image">
-                  <div class="delete-btn">
-                      <i class="aui-iconfont aui-icon-trash"></i>
-                  </div>
+                  <img src="" class="notes-image" id="ald">
               </div>
-                <div class="aui-col-xs-4 add-photos">
+                <div class="aui-col-xs-4 add-photos" onclick="fnUpdateImage()">
                     <div class="aui-border aui-text-center">
                         <i class="aui-iconfont aui-icon-plus"></i>
                     </div>
                 </div>
             </div>
         </section>
-  <div class="aui-btn aui-btn-block Login">确认</div>
+  <div class="aui-btn aui-btn-block Login" onclick="fnAddfile()">确认</div>
+  <script type="text/template" id="template">
+
+    <select id="select">
+        <option>请选择</option>
+        {{ for(var prop in it) { }}
+        <option>{{= it[prop].name}}</option>
+        {{ } }}
+    </select>
+
+  </script>
 </body>
 <script src="../../script/api.js"></script>
+<script src="../../script/doT.min.js"></script>
 <script src="../../script/jquery-1.9.1.min.js"></script>
 <script src="../../script/city.js"></script>
 <script src="../../script/ydui.js"></script>
+<script src="../../script/Rz.js"></script>
 <script type="text/javascript">
     apiready = function(){
         api.parseTapmode();
+        fnHyfl()
     }
-    !function () {
-    var $target = $('#J_Address');
-
-    $target.citySelect();
-
-    $target.on('click', function (event) {
-        event.stopPropagation();
-        $target.citySelect('open');
-    });
-
-    $target.on('done.ydui.cityselect', function (ret) {
-        $(this).val(ret.provance + ' ' + ret.city + ' ' + ret.area);
-    });
-}();
 </script>
 </html>

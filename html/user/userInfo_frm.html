@@ -1,3 +1,4 @@
+
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -6,7 +7,13 @@
     <meta name="format-detection" content="telephone=no,email=no,date=no,aItemress=no">
     <title>设置</title>
     <link rel="stylesheet" type="text/css" href="../../css/aui.css" />
+    <link rel="stylesheet" href="../../css/common.css">
+  <link rel="stylesheet" href="../../css/ydui.css"/>
+
     <style media="screen">
+    input[type=checkbox], input[type=radio] {
+    vertical-align: top !important;
+}
       .clearLogin{
         background: #fe467a;
         color: #fff;
@@ -20,20 +27,52 @@
         border-top: none;
         border-right: none;
       }
+      .sex img{
+        display: inline-block;
+        /*float: left;*/
+        width:50px
+      }
+      .sex label{
+        line-height: 0;
+        padding-right: 20px
+      }
+      .aui-radio:checked{
+        background-color: #fe467a;
+        border: 1px solid #fe467a
+      }
+      .aui-list-item-input{
+        position: relative;
+      }
+      .cityselect-item-box > a {
+        font-size: 16px;
+      }
+      .cityselect-nav > a {
+        font-size: 16px
+      }
+      .cityselect-title{
+        font-size: 16px
+      }
+      .keep{
+        width: 80%;
+        margin: 0 auto;
+        background: #fe467a;
+        color: #fff;
+        height: 2rem;
+        line-height: 2.05rem;
+        margin-top: 40px
+      }
     </style>
 </head>
 <body>
 <ul class="aui-list aui-list-in">
   <li class="aui-list-item">
-      <div class="aui-list-item-inner aui-list-item-arrow">
+      <div class="aui-list-item-inner">
           <div class="aui-list-item-label">
               性别
           </div>
-          <div class="aui-list-item-input">
-              <select>
-                  <option>男</option>
-                  <option>女</option>
-              </select>
+          <div class="aui-list-item-input sex">
+              <label><input class="aui-radio" type="radio" name="sex" value="0" checked> <img src="../../image/sex1.png" alt=""></label>
+              <label><input class="aui-radio" type="radio" name="sex" value="1" > <img src="../../image/sex2.png" alt=""></label>
           </div>
       </div>
   </li>
@@ -43,7 +82,7 @@
                       生日
                     </div>
                     <div class="aui-list-item-input">
-                        <input type="text" placeholder="" id="Data" readonly="readonly">
+                        <input type="text" placeholder="" id="Data" readonly="readonly" name=''>
                     </div>
                 </div>
             </li>
@@ -53,17 +92,27 @@
                    所在地
                   </div>
                   <div class="aui-list-item-input">
-                      <input type="text" placeholder="" id="add">
+                      <input type="text" placeholder="" id="add" readonly="">
                   </div>
               </div>
+            </li>
             <li class="aui-list-item">
-                <div class="aui-list-item-inner aui-list-item-arrow">
-                    收货地址
-                </div>
+              <div class="aui-list-item-inner aui-list-item-arrow">
+                  <div class="aui-list-item-label">
+                   地址管理
+                  </div>
+              </div>
             </li>
         </ul>
+<div class="aui-btn aui-btn-block keep" onclick="fnSet()">保存</div>
+<script type="text/template" id="template">
+</script>
 </body>
 <script type="text/javascript" src="../../script/api.js" ></script>
+<script type="text/javascript" src="../../script/doT.min.js" ></script>
+<script src="../../script/jquery-1.9.1.min.js"></script>
+<script src="../../script/city.js"></script>
+<script src="../../script/ydui.js"></script>
 <script type="text/javascript">
     apiready = function(){
         api.parseTapmode();
@@ -83,5 +132,38 @@
     }
 });
     }
+    !function () {
+    var $target = $('#add');
+
+    $target.citySelect();
+
+    $target.on('click', function (event) {
+        event.stopPropagation();
+        $target.citySelect('open');
+    });
+
+    $target.on('done.ydui.cityselect', function (ret) {
+        $(this).val(ret.provance + ' ' + ret.city + ' ' + ret.area);
+    });
+}();
+   function fnSet() {
+     var userInfo = $api.getStorage('userInfo');
+      api.ajax({
+          url: 'http://lhtcshop.com/public/index/Index/modify_userinfo',
+          method: 'post',
+          data: {
+              values: {
+                  uid: userInfo.id,
+              },
+          }
+      },function(ret, err){
+          if (ret) {
+              console.log( JSON.stringify( ret ) );
+          } else {
+            console.log( JSON.stringify( err ) );
+          }
+      });
+
+   }
 </script>
 </html>

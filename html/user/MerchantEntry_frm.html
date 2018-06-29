@@ -4,9 +4,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
     <meta name="format-detection" content="telephone=no,email=no,date=no,aItemress=no">
-    <title>设置</title>
-    <link rel="stylesheet" type="text/css" href="../../css/aui.css" />
+    <title>商家入驻</title>
     <link rel="stylesheet" href="../../css/ydui.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/aui.css" />
     <style media="screen">
       .clearLogin{
         background: #fe467a;
@@ -45,6 +45,53 @@
          border-radius: 3px
          line-height: 2rem
        }
+       .photos img {
+           display: block;
+           width: 100%;
+       }
+       .add-photos > div {
+           width: 100%;
+           height:5.15rem;
+           line-height: 5.15rem;
+       }
+       .add-photos > div .aui-iconfont {
+           font-size: 2rem;
+           color: #ccc;
+       }
+       .image-item {
+           position: relative;
+           height: 5.3rem;
+           overflow: hidden;
+           background-color: #f0f0f0;
+       }
+       .image-item img {
+           display: block;
+           margin: 0 auto;
+           width: auto;
+           height: 100%;
+       }
+       .image-item .delete-btn {
+           position: absolute;
+           left: 50%;
+           top: 50%;
+           width: 28px;
+           height: 28px;
+           background-color: rgba(0,0,0,0.7);
+           margin-left: -14px;
+           margin-top: -14px;
+           color: #ffffff;
+           text-align: center;
+           border-radius: 50%;
+       }
+       .aui-list .aui-list-item-label{
+         width: 50%
+       }
+       .image-item{
+         display: none;
+       }
+       .toast-content{
+         color: #fff !important
+       }
     </style>
 </head>
 <body>
@@ -55,7 +102,7 @@
                         商家名称
                     </div>
                     <div class="aui-list-item-input">
-                        <input type="text" placeholder="商家名称">
+                        <input type="text" placeholder="商家名称" name="name" id="name">
                     </div>
                 </div>
             </li>
@@ -64,28 +111,7 @@
                     <div class="aui-list-item-label">
                         行业分类
                     </div>
-                    <div class="aui-list-item-input">
-                        <select>
-                            <option>请选择</option>
-                            <option>互联网1</option>
-                            <option>互联网1</option>
-                            <option>互联网1</option>
-                        </select>
-                    </div>
-                </div>
-            </li>
-            <li class="aui-list-item">
-                <div class="aui-list-item-inner">
-                    <div class="aui-list-item-label">
-                        经营品牌
-                    </div>
-                    <div class="aui-list-item-input">
-                        <select>
-                            <option>请选择</option>
-                            <option>互联网1</option>
-                            <option>互联网1</option>
-                            <option>互联网1</option>
-                        </select>
+                    <div class="aui-list-item-input" id="set">
                     </div>
                 </div>
             </li>
@@ -95,39 +121,7 @@
                         商家地址
                     </div>
                     <div class="aui-list-item-input">
-                        <input type="text" placeholder="" id="J_Address" readonly="readonly">
-                    </div>
-                </div>
-            </li>
-            <li class="aui-list-item">
-                <div class="aui-list-item-inner">
-                    <div class="aui-list-item-title">银行卡实名</div>
-                    <div class="aui-list-item-right">
-                        <div class="aui-label aui-label-info">去认证</div>
-                    </div>
-                </div>
-            </li>
-            <li class="aui-list-item">
-                <div class="aui-list-item-inner">
-                    <div class="aui-list-item-title">网关认证</div>
-                    <div class="aui-list-item-right">
-                        <div class="aui-label aui-label-info">去认证</div>
-                    </div>
-                </div>
-            </li>
-            <li class="aui-list-item">
-                <div class="aui-list-item-inner">
-                    <div class="aui-list-item-title">芝麻实名认证</div>
-                    <div class="aui-list-item-right">
-                        <div class="aui-label aui-label-info">去认证</div>
-                    </div>
-                </div>
-            </li>
-            <li class="aui-list-item">
-                <div class="aui-list-item-inner">
-                    <div class="aui-list-item-title">人脸认证</div>
-                    <div class="aui-list-item-right">
-                        <div class="aui-label aui-label-info">去认证</div>
+                        <input type="text" placeholder="请选择商家地址" id="J_Address" readonly="readonly" name="address">
                     </div>
                 </div>
             </li>
@@ -137,7 +131,7 @@
                         申请人姓名
                     </div>
                     <div class="aui-list-item-input">
-                        <input type="text" placeholder="">
+                        <input type="text" placeholder="" name="username" id="username">
                     </div>
                 </div>
             </li>
@@ -147,7 +141,7 @@
                       联系电话
                     </div>
                     <div class="aui-list-item-input">
-                        <input type="text" placeholder="">
+                        <input type="text" placeholder="" name="phone" id="phone">
                     </div>
                 </div>
             </li>
@@ -157,35 +151,47 @@
                         电子邮箱
                     </div>
                     <div class="aui-list-item-input">
-                        <input type="text" placeholder="">
+                        <input type="text" placeholder="可不填" name="mail" id="mail">
                     </div>
                 </div>
             </li>
         </ul>
+        <p class="aui-text-center aui-margin-t-15">上传营业执照</p>
+        <section class="aui-content-padded">
+            <div class="aui-row aui-row-padded">
+              <div class="aui-col-xs-4 image-item" id="dis">
+                  <input type="hidden" >
+                  <img src="" class="notes-image" id="ald">
+              </div>
+                <div class="aui-col-xs-4 add-photos" onclick="fnUpdateImage()">
+                    <div class="aui-border aui-text-center">
+                        <i class="aui-iconfont aui-icon-plus"></i>
+                    </div>
+                </div>
+            </div>
+        </section>
+  <div class=" aui-btn-block Login" onclick="fnMerEnter()">确定</div>
+  <script type="text/template" id="template">
+    <select id="select">
+        <option>请选择</option>
+        {{ for(var prop in it) { }}
+        <option class="opt">{{= it[prop].name}}</option>
+        {{ } }}
+    </select>
 
-  <div class=" aui-btn-block Login">确认</div>
+  </script>
 </body>
+
 <script src="../../script/api.js"></script>
+<script src="../../script/doT.min.js"></script>
 <script src="../../script/jquery-1.9.1.min.js"></script>
 <script src="../../script/city.js"></script>
 <script src="../../script/ydui.js"></script>
+<script src="../../script/Rz.js"></script>
 <script type="text/javascript">
     apiready = function(){
         api.parseTapmode();
+        fnHyfl()
     }
-    !function () {
-    var $target = $('#J_Address');
-
-    $target.citySelect();
-
-    $target.on('click', function (event) {
-        event.stopPropagation();
-        $target.citySelect('open');
-    });
-
-    $target.on('done.ydui.cityselect', function (ret) {
-        $(this).val(ret.provance + ' ' + ret.city + ' ' + ret.area);
-    });
-}();
 </script>
 </html>

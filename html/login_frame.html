@@ -31,7 +31,7 @@
     <div class="btn" tapmode="highlight" onclick="fnLogin();">登录</div>
     <div class="forget">
       <a class="aui-pull-left  bage" onclick="fnOpenforgetPassword()">忘记密码</a>
-      <a class="aui-pull-right  bage">短信登录</a>
+      <a class="aui-pull-right  bage" onclick="fnopenIndex()">暂不登录</a>
       </div>
       <div class="other">
           <div class="ange">其他方式登陆</div>
@@ -195,20 +195,21 @@ function fnLogin() {
           $api.setStorage('userInfo', ret.data);
          if (ret.code=='success') {
           api.toast({
-              title: '提示', 
+              title: '提示',
               msg: ret.Msg,
           });
+          // return;
           api.execScript({
                 name: 'root',//你要刷新winName
-                script: jsfun
+                script: jsfun 
             });
-           api.openWin({
-               name: 'index',
-               url: '../index.html',
-               pageParam: {
-                   name: 'test'
-               },
-           });
+            api.openWin({
+                name: 'index',
+                url: '../index.html',
+                pageParam: {
+                    name: 'test'
+                }
+            });
         } else {
           api.toast({
               msg:ret.Msg,
@@ -240,6 +241,17 @@ function fnSetUsername(username_,pawd_) {
         id: passwordUIInputId,
         msg: pawd_
     });
+}
+// 打开首页
+function fnopenIndex() {
+  api.openWin({
+      name: 'index',
+      url: '../index.html',
+      pageParam: {
+          name: 'test'
+      }
+  });
+
 }
 </script>
 
