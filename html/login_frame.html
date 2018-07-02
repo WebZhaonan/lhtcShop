@@ -35,7 +35,7 @@
       </div>
       <div class="other">
           <div class="ange">其他方式登陆</div>
-          <div class="btn-third-party">
+          <div class="btn-third-party" onclick="fnopenwxLogin()">
               <i class="aui-iconfont aui-icon-wechat wechat" style="font-size:24px;color:#62b900" ></i>
             使用微信登录
           </div>
@@ -201,7 +201,7 @@ function fnLogin() {
           // return;
           api.execScript({
                 name: 'root',//你要刷新winName
-                script: jsfun 
+                script: jsfun
             });
             api.openWin({
                 name: 'index',
@@ -251,7 +251,21 @@ function fnopenIndex() {
           name: 'test'
       }
   });
-
+}
+// 微信登陆
+function fnopenwxLogin() {
+  var wx = api.require('wx');
+  wx.shareText({
+      apiKey: 'wx2ce3f886b53cd360',
+      scene: 'timeline',
+      text: '我分享的文本'
+  }, function(ret, err) {
+      if (ret.status) {
+          alert('分享成功');
+      } else {
+          alert(err.code);
+      }
+  });
 }
 </script>
 

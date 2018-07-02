@@ -53,7 +53,7 @@
         apiready = function() {
             fnGetJson();
             init();
-        };
+        }; 
          function fnOpenList(wareId,keywords,url) {
            var userInfo= $api.getStorage('userInfo');
            if(userInfo){
@@ -120,7 +120,7 @@
                 $api.html($api.byId('list'), interText(dataInter));
               } else {
               }
-          }); 
+          });
 
         }
         </script>
