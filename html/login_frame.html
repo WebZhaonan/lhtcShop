@@ -283,10 +283,8 @@ function fnopenwxLogin() {
                          }, function(ret, err) {
                              if (ret.status) {
                                  // 绑定成功
-                                 alert(ret.openid);
+                                 alert(JSON.stringif(ret));
                                  api.hideProgress();
-
-
                              }
                          });
              } else {
@@ -297,6 +295,25 @@ function fnopenwxLogin() {
      });
      }
  });
+}
+function WXbindAccount(参数1) {
+    api.ajax({
+        url: '接口',
+        method: 'get',
+        data: {
+            values: {
+                openid: 参数,
+            }
+        }
+    }, function(ret, err) {
+        if (ret.retCode == 200) {
+        	$api.setStorage("保存当前user",ret.data);
+        	api.closeWin({
+            	name:"login"
+            });
+        	return true;
+        }
+    });
 }
 </script>
 
