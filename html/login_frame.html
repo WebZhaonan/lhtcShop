@@ -309,7 +309,7 @@ function WXbindAccount(ret) {
           alert(ret)
         if (ret.code == 'success') {
         	$api.setStorage("userInfo",ret.data);
-        	api.closeWin({
+        	api.closeWin({ 
             	name:"login"
             });
         	return true;
