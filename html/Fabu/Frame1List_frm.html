@@ -7,6 +7,7 @@
     <title>AUI快速完成布局</title>
     <link rel="stylesheet" type="text/css" href="../../css/aui.css" />
     <link rel="stylesheet" href="../../css/common.css">
+    <link rel="stylesheet" href="../../css/ydui.css">
     <style media="screen">
       .sex img{
         display: inline-block;
@@ -65,6 +66,9 @@
   line-height: 2.05rem;
   margin-top: 40px
 }
+.toast-content{
+  color: #fff !important
+}
     </style>
 </head>
 <body>
@@ -75,7 +79,7 @@
                       姓名
                     </div>
                     <div class="aui-list-item-input">
-                        <input type="text" placeholder="" name="name" id="Uname">
+                        <input type="text" placeholder="" name="name" id="S_name">
                     </div>
                 </div>
             </li>
@@ -85,27 +89,16 @@
                         手机号
                     </div>
                     <div class="aui-list-item-input">
-                        <input type="number" placeholder="" name="phone" id="phone">
+                        <input type="number" placeholder="" name="phone" id="S_phone">
                     </div>
                 </div>
             </li>
             <li class="aui-list-item">
                 <div class="aui-list-item-inner">
                     <div class="aui-list-item-label">
-                      类别
+                      服务类型
                     </div>
-                    <div class="aui-list-item-input">
-                        <input type="text" placeholder="" name="name" id="leibie">
-                    </div>
-                </div>
-            </li>
-            <li class="aui-list-item">
-                <div class="aui-list-item-inner">
-                    <div class="aui-list-item-label">
-                      区域
-                    </div>
-                    <div class="aui-list-item-input">
-                        <input type="text" placeholder="" name="name" id="Uname">
+                    <div class="aui-list-item-input" id="set" name='sid'>
                     </div>
                 </div>
             </li>
@@ -115,40 +108,131 @@
                       详细地址
                     </div>
                     <div class="aui-list-item-input">
-                        <input type="text" placeholder="" name="name" id="Uname">
+                        <input type="text" placeholder="" name="address" id="S_add">
                     </div>
                 </div>
             </li>
             <li class="aui-list-item">
                 <div class="aui-list-item-inner">
-                    <div class="aui-list-item-label">
-                      标题
-                    </div>
                     <div class="aui-list-item-input">
-                        <input type="text" placeholder="" name="name" id="Uname">
-                    </div>
-                </div> 
-            </li>
-            <li class="aui-list-item">
-                <div class="aui-list-item-inner">
-                    <div class="aui-list-item-label">
-                      描述
-                    </div>
-                    <div class="aui-list-item-input">
-                        <input type="text" placeholder="" name="name" id="Uname">
+                        <textarea placeholder="具体服务详情" name="detail" id="fwdet"></textarea>
                     </div>
                 </div>
             </li>
         </ul>
-<div class="aui-btn aui-btn-block keep">保存</div>
+<div class="aui-btn aui-btn-block keep" onclick="fnopenBc()">保存</div>
+<script type="text/template" id="template">
+
+  <select id="select">
+      <option>请选择</option>
+      {{ for(var prop in it) { }}
+      <option value='{{= it[prop].id}}'>{{= it[prop].name}}</option>
+      {{ } }}
+  </select>
+
+</script>
 </body>
 <script type="text/javascript" src="../../script/api.js" ></script>
+<script src="../../script/doT.min.js"></script>
 <script type="text/javascript" src="../../script/jquery-1.9.1.min.js"></script>
-<script type="text/javascript" src="../../script/layer/layer.js"></script>
-<script type="text/javascript" src="../../script/Reg.js"></script>
+<script src="../../script/ydui.js"></script>
 <script type="text/javascript">
     apiready = function(){
         api.parseTapmode();
+        fnHyfl()
+    }
+    function fnHyfl(){
+    var userInfo = $api.getStorage('userInfo');
+    api.ajax({
+        url: 'http://lhtcshop.com/public/index/Ajax/get_service',
+        method: 'post',
+        data: {
+            values: {
+                uid: userInfo.id
+            },
+        }
+    },function(ret, err){
+        if (ret.code=='success') {
+          var dataInter = ret.data
+          var interText = doT.template($api.text($api.byId('template')));
+          $api.html($api.byId('set'), interText(dataInter));
+        } else {
+        }
+    });
+    }
+    function fnopenBc() {
+      var nameValue = $api.val($api.byId('S_name'));
+      var phoneValue = $api.val($api.byId('S_phone'));
+      var options=$("#select option:selected");
+      var sidValue=options.val();
+      var addressValue = $api.val($api.byId('S_add'));
+      var fwdetValue = $api.val($api.byId('fwdet'));
+      var dialog = YDUI.dialog;
+      var pattern = /^((0\d{2,3}-\d{7,8})|(1[3584]\d{9}))$/; //手机号以及座机正则验证
+      var pattern1 = /^[\u4E00-\u9FA5]{1,4}$/; //中文姓名验证正则
+      if(!pattern1.test(nameValue)){
+      dialog.toast('请填写正确的姓名！', 'error', 1000);
+        return;
+    }
+    if(!pattern.test(phoneValue)){
+      dialog.toast('号码格式不正确或者位数不正确！', 'error', 1000);
+      return;
+    }
+    if(sidValue=='请选择'){
+      dialog.toast('请选择所属行业！', 'none', 1000);
+        return;
+    }
+    if(!addressValue){
+      dialog.toast('请填写详细地址！', 'none', 1000);
+      return;
+    }
+    if(!fwdetValue){
+      dialog.toast('请填写服务详情！', 'none', 1000);
+      return;
+    }
+    api.ajax({
+        url: 'http://lhtcshop.com/public/index/Ajax/release_service',
+        method: 'post',
+        data: {
+            values: {
+                name: nameValue,
+                phone:phoneValue,
+                sid:sidValue,
+                address:addressValue,
+                detail:fwdetValue
+
+            },
+        }
+    },function(ret, err){
+        if (ret.code=='success') {
+          api.alert({
+              title: '提示',
+              msg: ret.Msg,
+          }, function(res, err){
+              if( res ){
+                window.location.reload()
+                api.openWin({
+                    name: 'index',
+                    url: '../../index.html',
+                    pageParam: {
+                        name: 'test'
+                    }
+                });
+              }else{
+                  //  alert( JSON.stringify( err ) );
+              }
+          });
+
+
+        } else {
+          api.toast({
+              msg: ret.Msg,
+              duration: 2000,
+              location: 'bottom'
+          });
+        }
+    });
+
     }
 </script>
 </html>

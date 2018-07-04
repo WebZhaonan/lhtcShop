@@ -29,7 +29,6 @@
 
         <!--模板渲染-->
         <script type="text/template" id="template">
-
                         {{ for(var prop in it) { }}
                          <li class="aui-list-item aui-list-item-middle"  onclick="fnOpenList('{{= it[prop].id}}','{{= it[prop].keywords}}','{{= it[prop].url}}');">
                              <div class="aui-media-list-item-inner">
@@ -53,7 +52,7 @@
         apiready = function() {
             fnGetJson();
             init();
-        }; 
+        };
          function fnOpenList(wareId,keywords,url) {
            var userInfo= $api.getStorage('userInfo');
            if(userInfo){
@@ -119,6 +118,11 @@
                 var interText = doT.template($api.text($api.byId('template')));
                 $api.html($api.byId('list'), interText(dataInter));
               } else {
+                api.showProgress({
+                  title: '努力加载中...',
+                  text: '先喝杯茶...',
+                  modal: false
+                  });
               }
           });
 

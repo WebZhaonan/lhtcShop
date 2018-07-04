@@ -31,56 +31,33 @@
 	</style>
 </head>
 <body>
-    <section class="aui-content aui-padded-l-5 aui-padded-r-10 aui-padded-t-5">
-      <div class="aui-card-list-header">
-          <div><span class="aui-text-danger"> 服务分类</span></div>
-      </div>
-      <ul class="aui-list aui-media-list">
-            <li class="aui-list-item aui-list-item-middle">
-                <div class="aui-media-list-item-inner">
-                    <div class="aui-list-item-media">
-                        <img src="../image/Lh-icon1.png" class="aui-img-round aui-list-img-sm">
-                    </div>
-                    <div class="aui-list-item-inner aui-list-item-arrow">
-                        工商注册
-                    </div>
-                </div>
-            </li>
-        </ul>
-        <section class="aui-grid aui-margin-b-15">
-    <div class="aui-row">
-        <div class="aui-col-xs-4">
-            <i class="aui-iconfont aui-icon-home"></i>
-            <div class="aui-grid-label">公司变更</div>
-        </div>
-        <div class="aui-col-xs-4">
-            <i class="aui-iconfont aui-icon-gear"></i>
-            <div class="aui-grid-label">工商年检</div>
-        </div>
-        <div class="aui-col-xs-4">
-            <i class="aui-iconfont aui-icon-map"></i>
-            <div class="aui-grid-label">公司注销</div>
-        </div>
-        <div class="aui-col-xs-4">
-            <i class="aui-iconfont aui-icon-calendar"></i>
-            <div class="aui-grid-label">专项审批</div>
-        </div>
-        <div class="aui-col-xs-4">
-            <i class="aui-iconfont aui-icon-date"></i>
-            <div class="aui-grid-label">公司变更</div>
-        </div>
-        <div class="aui-col-xs-4">
-            <i class="aui-iconfont aui-icon-more"></i>
-            <div class="aui-grid-label">更多</div>
-        </div>
-    </div>
-</section>
+    <section class="aui-content aui-padded-l-5 aui-padded-r-10 aui-padded-t-5" id="fenlei">
     </section>
+    <script type="text/template" id="template">
+      <div class="aui-card-list-header">
+        {{ for(var prop in it) { }}
+          <div><span class="aui-text-danger">{{= it[prop].id}}</span></div>
+          {{ } }}
+      </div>
+    </script>
 </body>
 <script type="text/javascript" src="../script/api.js"></script>
+<script src="../script/doT.min.js"></script>
 <script type="text/javascript">
     apiready = function(){
         api.parseTapmode();
+          fnGetJson()
     };
+    function fnGetJson() {
+      api.addEventListener({
+      name: 'myEvents'
+      }, function(ret, err) {
+        console.log(JSON.stringify(ret));  
+        // var interText = doT.template($api.text($api.byId('template')));
+        // $api.html($api.byId('fenlei'), interText(dataInter));
+    });
+    }
+
+
 </script>
 </html>

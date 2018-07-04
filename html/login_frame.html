@@ -55,7 +55,7 @@ var passwordUIInputId;
 var usernameValue;
 var passwordValue;
 var jsfun  = function load() {
-  window.location.reload()
+  location.reload()
 }
 function fnInitUIInput() {
     // 用户名输入框模块
@@ -178,7 +178,7 @@ function fnLogin() {
         return;
     }
     api.ajax({
-        url:hname.hname.name +'/public/index/Create/app_login',
+        url:hname.hname.name+'/public/index/Create/app_login',
         method: 'post',
         headers: {
             "X-APICloud-AppId":"A6079750662654",
@@ -198,10 +198,9 @@ function fnLogin() {
               title: '提示',
               msg: ret.Msg,
           });
-          // return;
           api.execScript({
                 name: 'root',//你要刷新winName
-                script: jsfun
+                script: 'load()'
             });
             api.openWin({
                 name: 'index',
@@ -284,12 +283,11 @@ function fnopenwxLogin() {
                              if (ret.status) {
                                  // 绑定成功
                                  WXbindAccount(ret);
-                                 alert(ret)
                                  api.hideProgress();
                              }
                          });
              } else {
-                 alert(err.code); 
+                 alert(err.code);
              }
          });
        }
@@ -303,16 +301,28 @@ function WXbindAccount(ret) {
         method: 'post',
         data: {
             values: {
-                openid: ret,
+                openid:ret,
             }
         }
     }, function(ret, err) {
-          alert(ret)
         if (ret.code == 'success') {
         	$api.setStorage("userInfo",ret.data);
-        	api.closeWin({
-            	name:"login"
-            });
+          api.closeFrame({
+                name: 'userWindow'
+              });
+          api.execScript({
+            name: 'root',//你要刷新winName
+            frameName:'frame4',
+            script: jsfun
+          });
+          api.openWin({
+              name: 'index',
+              url: '../index.html',
+              pageParam: {
+                  name: 'test'
+              }
+          });
+
         	return true;
         }
     });

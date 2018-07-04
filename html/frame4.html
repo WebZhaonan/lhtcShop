@@ -216,10 +216,16 @@
 <script type="text/javascript">
     var userInfo = $api.getStorage('userInfo');
     var user = $api.byId('user');
+    var icon = $api.byId('icon');
     apiready = function () {
       init();
-      fnUpdateLocalAvatar(userInfo.image);
-      $api.html(user,userInfo.user);
+      if(!userInfo.openid){
+          $api.html(user,userInfo.user);
+          fnUpdateLocalAvatar(userInfo.image);
+      }else{
+        $api.html(user,userInfo.nickname);
+        $api.css(icon,'background-image:url('+ userInfo.headimgurl + ')');
+      }
     }
     function fnUpdateLocalAvatar(data_) {
         // 缓存头像
@@ -228,15 +234,15 @@
             url: data_
         }, function(ret, err) {
             if (ret) {
+                $api.setStorage('userInfo',userInfo);
                 $api.css(icon,'background-image:url('+ ret.url + ')');
                 userInfo.image = ret.url;
-                $api.setStorage('userInfo',userInfo);
             } else {
-                api.toast({
-                    msg: '获取头像失败',
-                    duration: 2000,
-                    location: 'bottom'
-                });
+                // api.toast({
+                //     msg: '获取头像失败',
+                //     duration: 2000,
+                //     location: 'bottom'
+                // });
             }
         });
     }

@@ -16,39 +16,39 @@
   </body>
   <script type="text/javascript" src="../../script/api.js"></script>
   <script type="text/javascript">
-      apiready = function(){
-        var bMap = api.require('bMap');
-        bMap.getLocation({
-          accuracy: '100m',
-          autoStop: true,
-          filter: 1
-        }, function(ret, err) {
-          if (ret.status) {
-              console.log(JSON.stringify(ret.lon));
-              console.log(JSON.stringify(ret.lat));
-              bMap.open({
-                  rect: {
-                      x: 0,
-                      y: 0,
-                      w: 'auto',
-                      h: 'auto'
-                  },
-                  center: {
-                      lon: ret.lon,
-                      lat: ret.lat
-                  },
-                  zoomLevel: 10,
-                  showUserLocation: true,
-                  fixedOn: api.frameName,
-                  fixed: true
-              }, function(ret) {
-                  if (ret.status) {
-                  }
-              })
-          } else {
-              console.log(err.code);
-          }
-      });
-      };
+      // apiready = function(){
+      //   var bMap = api.require('bMap');
+      //   bMap.getLocation({
+      //     accuracy: '100m',
+      //     autoStop: true,
+      //     filter: 1
+      //   }, function(ret, err) {
+      //     if (ret.status) {
+      //         console.log(JSON.stringify(ret.lon));
+      //         console.log(JSON.stringify(ret.lat));
+      //         bMap.open({
+      //             rect: {
+      //                 x: 0,
+      //                 y: 0,
+      //                 w: 'auto',
+      //                 h: 'auto'
+      //             },
+      //             center: {
+      //                 lon: ret.lon,
+      //                 lat: ret.lat
+      //             },
+      //             zoomLevel: 10,
+      //             showUserLocation: true,
+      //             fixedOn: api.frameName,
+      //             fixed: true
+      //         }, function(ret) {
+      //             if (ret.status) {
+      //             }
+      //         })
+      //     } else {
+      //         console.log(err.code);
+      //     }
+      // });
+      // };
   </script>
   </html>

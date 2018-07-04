@@ -21,7 +21,7 @@
         .aui-list .aui-list-item-title {
             font-size: 0.7rem;
         }
-        .aui-list .aui-list-item {
+        .aui-list .aui-list-item { 
           border-bottom: none;
         }
         @media screen and (-webkit-min-device-pixel-ratio: 1.5){
@@ -46,27 +46,29 @@
         <div class="aui-title">本地服务</div>
     </header>
     <section class="aui-content" id="classify-list">
-        <ul class="aui-list aui-list-noborder">
-            <li class="aui-list-item  tuurw" onclick="randomTab( this );" tapmode='hoveer'>
-                <div class="aui-list-item-inner">
-                    <div class="aui-list-item-title">商务服务</div>
-                </div>
-            </li>
-            <li class="aui-list-item" onclick="randomTab( this );" tapmode='hoveer'>
-                <div class="aui-list-item-inner">
-                    <div class="aui-list-item-title">礼品</div>
-                </div>
-            </li>
-            <li class="aui-list-item" onclick="randomTab( this );" tapmode='hoveer'>
-                <div class="aui-list-item-inner">
-                    <div class="aui-list-item-title">婚庆</div>
-                </div>
-            </li>
-
-        </ul>
     </section>
+    <script type="text/template" id="template">
+      <ul class="aui-list aui-list-noborder">
+        {{ for(var prop in it) { }}
+            {{? it[prop].id == 1}}
+          <li class="aui-list-item tuurw" onclick="randomTab(this,'JSON.stringify({{= it[prop].son}})');" tapmode='hover'>
+              <div class="aui-list-item-inner">
+                  <div class="aui-list-item-title">{{= it[prop].name }}</div>
+              </div>
+          </li>
+          {{??}}
+          <li class="aui-list-item" onclick="randomTab(this,'JSON.stringify({{= it[prop].son}})');" tapmode='hover'>
+              <div class="aui-list-item-inner">
+                  <div class="aui-list-item-title">{{= it[prop].name }}</div>
+              </div>
+          </li>
+            {{?}}
+          {{ } }}
+      </ul>
+    </script>
 </body>
 <script type="text/javascript" src="../script/api.js"></script>
+<script src="../script/doT.min.js"></script>
 <script type="text/javascript">
     apiready = function(){
         api.parseTapmode();
@@ -92,15 +94,21 @@
               text:'先喝会儿茶~~~'
             },
         })
+            fnGetJson()
+            // fnevents()
     };
     // 切换按钮
-    function randomTab( tag ) {
+    function randomTab(tag,val) {
+      var obj = JSON.parse(val);
+      console.log(JSON.stringify(obj));
+            fnevents(val)
         if( tag == $api.dom('#classify-list li.tuurw') )return;
         var eFootLis = $api.domAll('#classify-list li'),
             index = 0;
         for (var i = 0,len = eFootLis.length; i < len; i++) {
             if( tag == eFootLis[i] ){
                 index = i;
+
             }else{
                 $api.removeCls(eFootLis[i], 'tuurw');
             }
@@ -114,6 +122,32 @@
     function closeWin(){
         api.closeWin({
         });
+    }
+    function fnevents(res) {
+      api.sendEvent({
+      name: 'myEvents',
+      extra: {
+          key1: res
+      }
+      });
+    }
+    function fnGetJson() {
+      // 获取分类
+      api.ajax({
+          url: 'http://lhtcshop.com/public/index/Ajax/get_services',
+          method: 'post',
+      },function(ret, err){
+          if (ret.code=='success') {
+            var dataInter = ret.data
+            // console.log(JSON.stringify(dataInter[0].son));
+            var interText = doT.template($api.text($api.byId('template')));
+            $api.html($api.byId('classify-list'), interText(dataInter));
+            // fnevents(dataInter)
+          } else {
+              // console.log( JSON.stringify( err ) );
+          }
+      });
+
     }
 </script>
 </html>

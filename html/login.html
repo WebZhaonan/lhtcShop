@@ -52,9 +52,6 @@
 
 <body>
     <header class="aui-bar aui-bar-nav" id="aui-header">
-        <a class="aui-btn aui-pull-left" tapmode onclick="closeWin()">
-            <span class="aui-iconfont aui-icon-close"></span>
-        </a>
         <div class="aui-title">登录</div>
         <a class="aui-btn aui-pull-right" tapmode style="font-size:16px" onclick="fnOpenRegisterWin()">
             注册
@@ -68,7 +65,7 @@ apiready = function() {
     $api.fixStatusBar(header);
     var headerH = $api.offset(header).h;
 
-    // 打开注册Frame
+    // 打开Frame
     api.openFrame({
         name: 'login_frame',
         url: './login_frame.html',
@@ -97,10 +94,6 @@ function fnOpenRegisterWin () {
         animation: {
           type: 'fade'
         }
-    });
-}
-function closeWin(){
-    api.closeWin({
     });
 }
 </script>

@@ -1,3 +1,15 @@
+!function () {
+var $target = $('#J_Address');
+$target.citySelect();
+$target.on('click', function (event) {
+    event.stopPropagation();
+    $target.citySelect('open');
+});
+
+$target.on('done.ydui.cityselect', function (ret) {
+    $(this).val(ret.provance + ' ' + ret.city + ' ' + ret.area);
+});
+}();
 // 打开时间
 function fnopenData() {
   api.openPicker({

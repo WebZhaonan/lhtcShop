@@ -164,7 +164,9 @@ function funIniGroup(index){
        var index = ret.index;
     });
 }
-
+  function load() {
+  location.reload();
+}
 // 随意切换按钮
 function randomSwitchBtn( tag ) {
     if( tag == $api.dom('#footer li.active'))return;
@@ -219,7 +221,7 @@ function initEventListenner() {
             location: 'bottom'
         });
 
-    }); 
+    });
 }
 // 打开个人中心设置窗口
   function fnopenSetting() {
