@@ -284,11 +284,12 @@ function fnopenwxLogin() {
                              if (ret.status) {
                                  // 绑定成功
                                  WXbindAccount(ret);
+                                 alert(ret)
                                  api.hideProgress();
                              }
                          });
              } else {
-                 alert(err.code);
+                 alert(err.code); 
              }
          });
        }
@@ -309,7 +310,7 @@ function WXbindAccount(ret) {
           alert(ret)
         if (ret.code == 'success') {
         	$api.setStorage("userInfo",ret.data);
-        	api.closeWin({ 
+        	api.closeWin({
             	name:"login"
             });
         	return true;
