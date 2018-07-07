@@ -65,7 +65,6 @@ body {
             lat: lat
         },function(ret,err){
             if(ret.status){
-                console.log(JSON.stringify(ret));
                 address = ret.address;
                 api.execScript({
                     frameName:'bmap_info_frm',
