@@ -60,7 +60,6 @@ body {
 
     }
     function getNameFromCoords(){
-      alert(123)
         map.getNameFromCoords({
             lon: lon,
             lat: lat
@@ -69,7 +68,7 @@ body {
                 console.log(JSON.stringify(ret));
                 address = ret.address;
                 api.execScript({
-                    frameName:'bmap_add_markinfo_frm',
+                    frameName:'bmap_info_frm',
                     script:'setInfo("'+address+'")'
                 })
             }else {

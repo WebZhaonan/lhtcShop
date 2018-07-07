@@ -65,9 +65,12 @@
             福利待遇
             </div>
           </li>
-          <li class="aui-list-item aui-list-item-middle">
-            <div class="aui-list-item-inner aui-list-item-arrow" onclick="fnBmap()">
-            工作地点
+          <li class="aui-list-item">
+            <div class="aui-list-item-inner" onclick="fnBmap()">
+                <div class="aui-list-item-title">工作地点</div>
+                <div class="aui-list-item-left">
+                      <input type="" placeholder="请选择" readonly id="info">
+                </div>
             </div>
           </li>
           <li class="aui-list-item">
@@ -86,19 +89,76 @@
 </body>
 <script type="text/javascript" src="../../script/api.js" ></script>
 <script type="text/javascript">
+var map,
+    lat,
+    lon,
+    address;
     apiready = function(){
         api.parseTapmode();
     }
     // 打开地图
     function fnBmap() {
-      api.openWin({
-          name: 'bmap_win',
-          url: '../Map/bmap_win.html',
-          pageParam: {
-              name: 'test'
-          }
-      });
+      map = api.require('bMap');
+      var Button = ['使用当前位置', '打开地图'];
+      api.actionSheet({
+      title: '请选择',
+      cancelTitle: '取消',
+      buttons: Button
+      }, function(ret, err) {
+      var index = ret.buttonIndex;
+      if(index ==1){
+      if(api.systemType == 'ios'){
+        api.getLocation(function(ret, err) {
+    if (ret && ret.status) {
+        //获取位置信息成功
+        alert(123)
+    } else {
+        alert(JSON.stringify(err));
+    }
+});
+      }else{
+        map.getLocation({
+            accuracy: '100m',
+            autoStop: true,
+            filter: 1
+        }, function(ret, err){
+            api.hideProgress();
+            if(ret.status){
+                lat = ret.lat;
+                lon = ret.lon;
+                //设置地图中心
+                map.setCenter({
+                    coords: {
+                        lon: lon,
+                        lat: lat
+                    },
+                    animation:true
+                });
+                getNameFromCoords();
+            }
 
+        });
+      }
+    }
+    });
+    }
+    function getNameFromCoords(){
+        map.getNameFromCoords({
+            lon: lon,
+            lat: lat
+        },function(ret,err){
+            if(ret.status){
+                console.log(JSON.stringify(ret));
+                address = ret.address;
+                $api.val($api.byId("info"),address);
+                // api.execScript({
+                //     frameName:'bmap_info_frm',
+                //     script:'setInfo("'+address+'")'
+                // })
+            }else {
+                console.log(JSON.stringify(err));
+            }
+        });
     }
 </script>
 </html>
