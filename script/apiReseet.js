@@ -50,14 +50,14 @@ function fnopenactionSheet2() {
 });
 }
 //打开地图
-function choseAdd(){
-   api.openWin({
-       name: 'Ditu_win',
-       url: './Ditu_win.html',
-       pageParam: {
-           name: 'test'
-       }
-   });
+// function choseAdd(){
+//    api.openWin({
+//        name: 'Ditu_win',
+//        url: './Ditu_win.html',
+//        pageParam: {
+//            name: 'test'
+//        }
+//    });
 
 //   var systemType = api.systemType;
 //    if(systemType == 'ios'){
@@ -103,4 +103,4 @@ function choseAdd(){
 //         console.log(err.code);
 //     }
 // });
-}
+// }

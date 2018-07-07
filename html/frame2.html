@@ -113,16 +113,19 @@
               url: 'http://lhtcshop.com/public/index/Ajax/category',
               method: 'post',
           },function(ret, err){
+            api.showProgress({
+              title: '努力加载中...',
+              text: '先喝杯茶...',
+              modal: false
+              });
               if (ret) {
+                api.hideProgress();
                 var dataInter = ret
                 var interText = doT.template($api.text($api.byId('template')));
                 $api.html($api.byId('list'), interText(dataInter));
+                api.hideProgress();
               } else {
-                api.showProgress({
-                  title: '努力加载中...',
-                  text: '先喝杯茶...',
-                  modal: false
-                  });
+
               }
           });
 

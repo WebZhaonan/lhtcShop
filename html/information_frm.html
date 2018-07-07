@@ -35,52 +35,61 @@
 .time{
   color: #212121;
 }
+.aui-card-list-content img{
+  height: 9rem;
+}
 	</style>
 </head>
 <body>
     <section class="aui-content aui-padded-l-5 aui-padded-r-10 aui-padded-t-5">
-        <div class="aui-row aui-row-padded">
-            <div class="aui-col-xs-6" onclick="fnOpenWareWin();">
-                <div class="aui-card-list">
-                    <div class="aui-card-list-content">
-                        <img src="../image/demo3.png">
-                    </div>
-                    <div class="aui-font-size-14">文字描述文字描述文字描述文字描述文字描述文字描述文字描述文字描述文字描述文字描述</div>
-                    <div class="aui-card-list-footer">
-                      <div class="price">价格：100</div>
-                      <div class="time">刚刚来过</div>
-                  </div>
-                </div>
-            </div>
-            <div class="aui-col-xs-6">
-                <div class="aui-card-list">
-                    <div class="aui-card-list-content">
-                        <img src="../image/demo3.png">
-                    </div>
-                    <div class="aui-font-size-14">文字描述文字描述文字描述文字描述文字描述文字描述文字描述文字描述文字描述文字描述</div>
-                    <div class="aui-card-list-footer">
-              <div class="price">价格：100</div>
-              <div class="time">刚刚来过</div>
-          </div>
-                </div>
-
-            </div>
+        <div class="aui-row aui-row-padded" id="tem">
         </div>
     </section>
+    <script type="text/template" id="template">
+      {{ for(var prop in it) { }}
+          <div class="aui-col-xs-6">
+          <div class="aui-card-list">
+          <div class="aui-card-list-content">
+          <img src="{{= it[prop].images[prop]}}" onclick="fnOpenWareWin('{{= it[prop].id}}')">
+          </div>
+          <div class="aui-font-size-14">{{= it[prop].title}}</div>
+          <div class="aui-card-list-footer">
+          <div class="price">价格：{{= it[prop].price}}</div>
+          </div>
+          </div>
+          </div>
+      {{ } }}
+    </script>
 </body>
 <script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/doT.min.js" ></script>
 <script type="text/javascript">
     apiready = function(){
         api.parseTapmode();
+        fnGetInfo()
     };
+    function fnGetInfo(){
+      api.ajax({
+          url: 'http://lhtcshop.com/public/index/Ajax/get_ershou',
+          method: 'post',
+      },function(ret, err){
+          if (ret.code == 'success') {
+              var dataInter = ret.data;
+              var interText = doT.template($api.text($api.byId('template')));
+              $api.html($api.byId('tem'), interText(dataInter));
+          } else {
+          }
+      });
+
+    }
     // 打开二手物品详情Window，指定商品Id
     function fnOpenWareWin(wareId_) {
         api.openWin({
             name: 'infoDetail_win',
             url: './infoDetail_win.html',
-            // pageParam: {
-            //     wareId: wareId_,
-            // },
+            pageParam: {
+                wareId: wareId_,
+            },
             animation: {
                 type: "fade"
             }

@@ -34,11 +34,36 @@
     <section class="aui-content aui-padded-l-5 aui-padded-r-10 aui-padded-t-5" id="fenlei">
     </section>
     <script type="text/template" id="template">
-      <div class="aui-card-list-header">
-        {{ for(var prop in it) { }}
-          <div><span class="aui-text-danger">{{= it[prop].id}}</span></div>
-          {{ } }}
-      </div>
+      {{##def.togeter0:
+        <div class="aui-card-list-header">
+          <div class="aui-card-list aui-border-t aui-border-b" style="width:100%">
+              <div class="aui-info aui-padded-l-15 aui-padded-r-15">
+                  <div class="aui-info-item aui-font-size-14">
+                      <span class="aui-margin-l-5">{{= it[prop].name }}发表的服务</span>
+                  </div>
+                  <div class="aui-info-item" onclick="fncall('{{= it[prop].phone }}')">
+                      <i class="aui-iconfont aui-icon-phone"></i>
+                  </div>
+              </div>
+              <div class="aui-card-list-header aui-padded-t-5 aui-padded-b-5">
+                {{= it[prop].detail }}
+              </div>
+              <div class="aui-card-list-footer aui-font-size-12" style="color:#999;">
+                  <div>
+                      <span>联系方式：{{= it[prop].phone}}</span><br>
+                      <span>地址：{{= it[prop].address }}</span>
+                  </div>
+              </div>
+          </div>
+        </div>
+        #}}
+      {{ for(var prop in it) { }}
+      {{? it[prop].sid == 1}}
+      {{#def.togeter0}}
+      {{??}}
+      {{#def.togeter0}}
+      {{?}}
+      {{ } }}
     </script>
 </body>
 <script type="text/javascript" src="../script/api.js"></script>
@@ -46,18 +71,69 @@
 <script type="text/javascript">
     apiready = function(){
         api.parseTapmode();
-          fnGetJson()
+          fninit()
+          fnGetJson();
     };
     function fnGetJson() {
       api.addEventListener({
       name: 'myEvents'
       }, function(ret, err) {
-        console.log(JSON.stringify(ret));  
-        // var interText = doT.template($api.text($api.byId('template')));
-        // $api.html($api.byId('fenlei'), interText(dataInter));
+        api.ajax({
+            url: 'http://lhtcshop.com/public/index/Ajax/get_services',
+            method: 'post',
+            data: {
+              values:{
+                id:ret.value.key1
+              }
+            }
+        },function(res, err){
+              api.showProgress({
+              title: '努力加载中...',
+              text: '先喝杯茶...',
+              modal: false
+              });
+            if (res.code=='success') {
+              var dataInter = res.data;
+              var HtmlId = $api.byId('fenlei')
+              var interText = doT.template($api.text($api.byId('template')));
+              $api.html(HtmlId, interText(dataInter));
+              api.hideProgress();
+            } else {
+            }
+        });
     });
     }
-
-
+    // 拨打电话
+    function fncall(phone) {
+      api.call({
+          type: 'tel_prompt',
+          number: phone
+      });
+    }
+    function fninit() {
+      api.ajax({
+          url: 'http://lhtcshop.com/public/index/Ajax/get_services',
+          method: 'post',
+          data: {
+            values:{
+              id:'1'
+            }
+          }
+      },function(ret, err){
+            api.showProgress({
+            title: '努力加载中...',
+            text: '先喝杯茶...',
+            modal: false
+            });
+          if (ret.code=='success') {
+            var dataInter = ret.data;
+            var HtmlId = $api.byId('fenlei')
+            var interText = doT.template($api.text($api.byId('template')));
+            $api.html(HtmlId, interText(dataInter));
+            api.hideProgress();
+          } else {
+          }
+      });
+    }
 </script>
 </html>

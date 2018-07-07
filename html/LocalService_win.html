@@ -21,7 +21,7 @@
         .aui-list .aui-list-item-title {
             font-size: 0.7rem;
         }
-        .aui-list .aui-list-item { 
+        .aui-list .aui-list-item {
           border-bottom: none;
         }
         @media screen and (-webkit-min-device-pixel-ratio: 1.5){
@@ -48,20 +48,26 @@
     <section class="aui-content" id="classify-list">
     </section>
     <script type="text/template" id="template">
+      {{##def.togeter0:
+        <li class="aui-list-item tuurw" onclick='randomTab(this, "{{= it[prop].id}}");' tapmode='hover'>
+            <div class="aui-list-item-inner">
+                <div class="aui-list-item-title">{{= it[prop].name }}</div>
+            </div>
+        </li>
+        #}}
+        {{##def.togeter1:
+          <li class="aui-list-item" onclick='randomTab(this, "{{= it[prop].id}}");' tapmode='hover'>
+              <div class="aui-list-item-inner">
+                  <div class="aui-list-item-title">{{= it[prop].name }}</div>
+              </div>
+          </li>
+    #}}
       <ul class="aui-list aui-list-noborder">
         {{ for(var prop in it) { }}
             {{? it[prop].id == 1}}
-          <li class="aui-list-item tuurw" onclick="randomTab(this,'JSON.stringify({{= it[prop].son}})');" tapmode='hover'>
-              <div class="aui-list-item-inner">
-                  <div class="aui-list-item-title">{{= it[prop].name }}</div>
-              </div>
-          </li>
+                {{#def.togeter0}}
           {{??}}
-          <li class="aui-list-item" onclick="randomTab(this,'JSON.stringify({{= it[prop].son}})');" tapmode='hover'>
-              <div class="aui-list-item-inner">
-                  <div class="aui-list-item-title">{{= it[prop].name }}</div>
-              </div>
-          </li>
+          {{#def.togeter1}}
             {{?}}
           {{ } }}
       </ul>
@@ -95,20 +101,16 @@
             },
         })
             fnGetJson()
-            // fnevents()
     };
     // 切换按钮
     function randomTab(tag,val) {
-      var obj = JSON.parse(val);
-      console.log(JSON.stringify(obj));
-            fnevents(val)
+        fnevents(val)
         if( tag == $api.dom('#classify-list li.tuurw') )return;
         var eFootLis = $api.domAll('#classify-list li'),
             index = 0;
         for (var i = 0,len = eFootLis.length; i < len; i++) {
             if( tag == eFootLis[i] ){
                 index = i;
-
             }else{
                 $api.removeCls(eFootLis[i], 'tuurw');
             }
@@ -134,15 +136,13 @@
     function fnGetJson() {
       // 获取分类
       api.ajax({
-          url: 'http://lhtcshop.com/public/index/Ajax/get_services',
+          url: 'http://lhtcshop.com/public/index/Ajax/get_service',
           method: 'post',
       },function(ret, err){
           if (ret.code=='success') {
             var dataInter = ret.data
-            // console.log(JSON.stringify(dataInter[0].son));
             var interText = doT.template($api.text($api.byId('template')));
             $api.html($api.byId('classify-list'), interText(dataInter));
-            // fnevents(dataInter)
           } else {
               // console.log( JSON.stringify( err ) );
           }

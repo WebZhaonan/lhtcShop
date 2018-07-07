@@ -15,7 +15,6 @@ $target.on('done.ydui.cityselect', function (ret) {
 // 行业分类
 function fnHyfl(){
 var userInfo = $api.getStorage('userInfo');
-
 api.ajax({
     url: 'http://lhtcshop.com/public/index/Index/industry',
     method: 'post',
@@ -175,82 +174,194 @@ function fnMerEnter() {
         }
     });
 }
-// 企业上传
-function fnAddfile() {
-  var enterprise_name = $api.val($api.byId('enterprise_name'));
-  var options=$("#select option:selected");
-  var hidValue=options.text();
-  var addressValue = $api.val($api.byId('J_Address'));
-  var zhuce_num = $api.val($api.byId('zhuce_num'));
-  var phoneValue = $api.val($api.byId('phone'));
-  var nameIdValue = $api.val($api.byId('name_id'));
-  var nameValue = $api.val($api.byId('name'));
-  var licese = $api.attr($api.byId('ald'),'src');
-  var dialog = YDUI.dialog;
-  var pattern = /^((0\d{2,3}-\d{7,8})|(1[3584]\d{9}))$/; //手机号以及座机正则验证
-  var pattern1 = /^[\u4E00-\u9FA5]{1,4}$/; //中文姓名验证正则
-  var isName_id = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/ //身份证号验证正则
-  if(!enterprise_name){
-    dialog.toast('请填写企业名称！', 'none', 1000);
-    return;
-    }
-      if(!zhuce_num){
-        dialog.toast('请填写企业注册号！', 'none', 1000);
-        return;
-    }
-    if(!addressValue){
-      dialog.toast('请选择企业地址！', 'none', 1000);
-      return;
-    }
-    if(!pattern1.test(nameValue)){
-    dialog.toast('请填写正确的法人姓名！', 'error', 1000);
-      return;
-  }
-  if(!isName_id.test(nameIdValue)){
-    dialog.toast('身份证号码格式不正确或者位数不正确！', 'error', 1000);
-    return;
-    }
-    if(hidValue=='请选择'){
-      dialog.toast('请选择所属行业！', 'none', 1000);
-        return;
-    }
-    if(!pattern.test(phoneValue)){
-      dialog.toast('号码格式不正确或者位数不正确！', 'error', 1000);
-      return;
-    }
-    if(!licese){
-      dialog.toast('请上传营业执照！', 'none', 1000);
-      return;
-    }
-    api.ajax({
-        url: 'http://lhtcshop.com/public/index/Index/put_enterprise',
-        method: 'post',
-        data: {
-            values: {
-                enterprise_name : enterprise_name,
-                zhuce_num : zhuce_num,
-                address : addressValue,
-                h_name : hidValue,
-                license_image : licese,
-                phone : phoneValue,
-                name_sid : nameIdValue,
-                name : nameValue
+// 二手交易
+// 获取物品类别
+function fnWpfl(){
+var userInfo = $api.getStorage('userInfo');
+api.ajax({
+    url: 'http://lhtcshop.com/public/index/Ajax/classification',
+    method: 'post',
+},function(ret, err){
+    if (ret.code=='success') {
+      var dataInter = ret.data
+      var interText = doT.template($api.text($api.byId('template')));
+      $api.html($api.byId('set'), interText(dataInter));
+    } else {
 
-
-            },
-        }
-    },function(ret, err){
-      console.log(ret.stayus)
-        if (ret.code == 'success') {
-          api.toast({
-              msg: ret.Msg,
-              duration: 2000,
-              location: 'bottom'
-          });
-        } else {
-            console.log( JSON.stringify( err ) );
-        }
-    });
-
-
+    }
+});
 }
+// 选择物品新旧
+function fnselect() {
+  // 打开学历选择
+  var Button = ['99新', '95新', '8成新','其他'];
+  api.actionSheet({
+  title: '请选择',
+  cancelTitle: '取消',
+  buttons: Button
+  }, function(ret, err) {
+  var index = ret.buttonIndex;
+  if(index != 5){
+  var wp = $api.byId('wp')
+  var bHtml = Button[index-1]
+  $api.val(wp,bHtml);
+  $api.css(wp,'color:#2d2d2d;');
+}
+});
+}
+// 上传物品照片
+ function fnUpdateImage1(){
+   api.actionSheet({
+       title: '选择',
+       cancelTitle: '取消',
+       buttons: ['拍照', '相册']
+   }, function(ret, err) {
+       if (ret) {
+           var sourceTypes = [
+               'camera',
+               'album'
+           ];
+           var encodingType = [
+               'jpg',
+               'png'
+           ];
+           if (ret.buttonIndex == (sourceTypes.length + 1)) {
+               return;
+           }
+           api.getPicture({
+               sourceType: sourceTypes[ret.buttonIndex - 1],
+               encodingType:encodingType,
+               destinationType:'url',
+               mediaValue:'pic',
+               allowEdit: true,
+               quality: 50, // 指定图片质量
+           }, function(ret, err) {
+               if (ret) {
+                  fnUploadAtavar1(ret.data);
+               }else {
+                 {
+                   //  alert(JSON.stringify());
+                 }
+               }
+           });
+       }
+   });
+ }
+ // 上传图片文件
+ function fnUploadAtavar1(avatarUrl_) {
+     var userInfo = $api.getStorage('userInfo');
+     api.ajax({
+         url: 'http://lhtcshop.com/public/index/Index/user_image',
+         method: 'post',
+         headers: {
+             "X-APICloud-AppId": "A6079750662654",
+             "X-APICloud-AppKey": "4B3AB3D8-C633-6D3E-F6C3-37EDFE6978AB"
+         },
+         data: {
+           values: {
+               filename: 'icon'
+           },
+             files: {
+                 file: avatarUrl_
+             }
+         }
+     }, function(ret, err) {
+         if (ret.code=='success') {
+           var Images = ret;
+           var interText = doT.template($api.text($api.byId('template1')));
+           $api.prepend($api.byId('append'), interText(Images));
+         } else {
+             api.toast({
+                 msg: ret.msg,
+                 duration: 2000,
+                 location: 'bottom'
+             });
+         }
+     });
+ }
+
+// 发布
+ function fnopenFb() {
+   var UtitValue = $api.val($api.byId('Tit'));
+   var options=$("#select option:selected");
+   var cidValue=options.val();
+   var UphoneValue = $api.val($api.byId('phone'));
+   var wpValue = $api.val($api.byId('wp'));
+   var o_priceValue = $api.val($api.byId('o_price'));
+   var priceValue = $api.val($api.byId('price'));
+   var postageValue = $api.val($api.byId('postage'));
+   var describeValue = $api.val($api.byId('describe'));
+   var pattern = /^1[3458][0-9]{9}$/; //手机号正则验证
+   var dialog = YDUI.dialog;
+   var img_urls = [];
+    $(".xh").each(function() {
+    img_urls.push($(this).attr("src"));
+    });
+   if(!UtitValue){
+     dialog.toast('标题不能为空！', 'none', 1000);
+       return;
+      }
+      if(!pattern.test(UphoneValue)){
+        dialog.toast('号码格式不正确或者位数不正确！', 'error', 1000);
+        return;
+      }
+     if(cidValue=='请选择'){
+       dialog.toast('请选择物品类别！', 'none', 1000);
+         return;
+     }
+     if(!wpValue){
+       dialog.toast('物品新旧！', 'none', 1000);
+         return;
+     }
+     if(!o_priceValue){
+       dialog.toast('原价不能为空！', 'error', 1000);
+       return;
+     }
+     if(!postageValue){
+       dialog.toast('现价不能为空！', 'none', 1000);
+       return;
+     }
+     if(!describeValue){
+       dialog.toast('请对物品进行描述！', 'none', 1000);
+       return;
+     }
+     api.ajax({
+         url: 'http://lhtcshop.com/public/index/Ajax/release_second',
+         method: 'post',
+         data: {
+             values: {
+                 title: UtitValue,
+                 phone: UphoneValue,
+                   cid: cidValue,
+             condition: wpValue,
+               o_price: o_priceValue,
+                 price: priceValue,
+               postage: postageValue,
+              describe: describeValue,
+               images: img_urls
+             }
+         }
+     },function(ret, err){
+         if (ret.code=='success') {
+             api.alert({
+                 title: '提示',
+                 msg: ret.Msg + '请在个人中心，我的发布中查看',
+             }, function(res){
+                 if( ret ){
+                    window.location.reload();
+                    api.openWin({
+                        name: 'index',
+                        url: '../../index.html',
+                        pageParam: {
+                            name: 'test'
+                        }
+                    });
+
+                 }
+             });
+
+         } else {
+         }
+     });
+
+ }

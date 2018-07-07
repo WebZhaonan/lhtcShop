@@ -21,6 +21,7 @@
           height: 1.2rem;
           font-size: 1.2rem;
           line-height: 1rem;
+          width: 100%;
         }
         .aui-bg-danger{
           background-color: #fe467a !important;
@@ -33,23 +34,12 @@
           <span class="aui-iconfont aui-icon-left"></span>
       </a>
       <div class="aui-title">二手详情</div>
-      <a class="aui-pull-right aui-btn" class="share" tapmode  onclick="fnOpenShareFrame()">
+      <!-- <a class="aui-pull-right aui-btn" class="share" tapmode  onclick="fnOpenShareFrame()">
           <span class="aui-iconfont aui-icon-share"></span>
-      </a>
+      </a> -->
   </header>
   <div id="main" class="flex-con">
   </div>
-  <footer class="aui-bar aui-bar-tab" id="footer">
-            <div class="aui-bar-tab-item aui-border-r" tapmode style="width: 5rem;" onclick="fnCall()">
-                 <i class="aui-iconfont aui-icon-phone"  style="color:#2d2d2d;"></i>
-                <div class="aui-bar-tab-label" style="color:#2d2d2d;">电话交流</div>
-            </div>
-            <div class="aui-bar-tab-item" tapmode style="width:5rem;">
-                <i class="aui-iconfont aui-icon-comment"  style="color:#2d2d2d;"></i>
-                <div class="aui-bar-tab-label"  style="color:#2d2d2d;">在线交流</div>
-            </div>
-            <div class="aui-bar-tab-item aui-bg-danger aui-text-white" tapmode style="width: auto;" onclick="fnopenLjBuy()">立即购买</div>
-        </footer>
 </body>
 <script type="text/javascript" src="../script/api.js"></script>
 <script type="text/javascript">
@@ -68,7 +58,9 @@
                 y: headerPos.h,
                 w: 'auto',
                 h: 'auto',
-                marginBottom:60,
+            },
+            pageParam: {
+                wareId: api.pageParam.wareId
             },
             progress: {
                 type:'default',
@@ -78,13 +70,6 @@
         })
         fnInitEvent();
     };
-    function fnCall() {
-      // 拨打电话
-      api.call({
-        type: 'tel_prompt',
-        number: '13080920872'
-});
-    }
     // 分享
     function fnInitEvent() {
         api.addEventListener({

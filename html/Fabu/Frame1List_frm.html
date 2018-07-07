@@ -122,14 +122,12 @@
         </ul>
 <div class="aui-btn aui-btn-block keep" onclick="fnopenBc()">保存</div>
 <script type="text/template" id="template">
-
   <select id="select">
       <option>请选择</option>
       {{ for(var prop in it) { }}
       <option value='{{= it[prop].id}}'>{{= it[prop].name}}</option>
       {{ } }}
   </select>
-
 </script>
 </body>
 <script type="text/javascript" src="../../script/api.js" ></script>

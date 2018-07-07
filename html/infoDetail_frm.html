@@ -28,81 +28,127 @@
     .aui-label-danger{
       background-color: #fe467a;
     }
-
+    .keep{
+      border-radius: 0;
+      background: #fe467a;
+      margin: 50px auto;
+      color: #fff;
+      width: 90%;
+    }
     </style>
 </head>
 <body>
     <section class="aui-card-list">
-      <div class="aui-card-list-content" id="aui-slide">
-        <div class="aui-slide-wrap" >
-            <div class="aui-slide-node bg-dark">
-                <img src="http://img10.360buyimg.com/n1/s450x450_jfs/t4276/257/2416766721/125228/ba72a107/58d1d078N20e18b62.jpg" />
-            </div>
-            <div class="aui-slide-node bg-dark">
-                <img src="http://img10.360buyimg.com/n1/s450x450_jfs/t4276/257/2416766721/125228/ba72a107/58d1d078N20e18b62.jpg" />
-            </div>
-            <div class="aui-slide-node bg-dark">
-                <img src="http://img10.360buyimg.com/n1/s450x450_jfs/t4276/257/2416766721/125228/ba72a107/58d1d078N20e18b62.jpg" />
-            </div>
-        </div>
-        <div class="aui-slide-page-wrap"><!--分页容器--></div>
-      </div>
-      <div class="aui-card-list-header aui-padded-b-0">
-        <div>
-          <span class="aui-label aui-label-danger aui-margin-r-5">乐航</span>Apple iPhone 7 128G玫瑰金色 移动联通电信4G手机
-        </div>
-      </div>
-        <div class="clearfix" style="overflow:hidden;padding-right:20px">
-          <p class="aui-pull-right">
-            <i class="aui-iconfont aui-icon-star" style="padding-right:5px"></i><span>收藏</span>
-          </p>
-        </div>
-      <div class="aui-card-list-header aui-padded-t-0">
-        <div class="aui-text-danger"><small>￥</small><big class="aui-font-size-20">5688</big></div>
-        <div class="aui-pull-right" style="font-size:0.6rem;">运费：<span>0.00</span></div>
-      </div>
-      <div class="aui-card-list-content">
-        <ul class="aui-list aui-media-list">
-          <li class="aui-list-item">
-              <div class="aui-media-list-item-inner">
-                <div class="aui-list-item-label-icon label-text aui-font-size-14">新旧</div>
-                <div class="aui-list-item-inner aui-padded-t-10 aui-padded-b-10">
-                    <div>
-                        <p class="aui-margin-b-10 aui-font-size-12 aui-ellipsis"><span class="aui-text-danger aui-margin-r-5">95新</p>
-                    </div>
-                </div>
-              </div>
-          </li>
-          <li class="aui-list-item">
-              <div class="aui-media-list-item-inner">
-                <div class="aui-list-item-label-icon label-text aui-font-size-14">类别</div>
-                <div class="aui-list-item-inner aui-padded-t-10 aui-padded-b-10">
-                    <div>
-                        <p class="aui-margin-b-10 aui-font-size-12 aui-ellipsis"><span class="aui-text-danger aui-margin-r-5">台式机</p>
-                    </div>
-                </div>
-              </div>
-          </li>
-        </ul>
+      <div id="content">
       </div>
     </section>
+    <script type="text/template" id="template1">
+      <div class="aui-card-list-content" id="aui-slide">
+        <div class="aui-slide-wrap" >
+          {{~it.images :value:index }}
+            <div class="aui-slide-node bg-dark">
+                <img src="{{= value }}" />
+        </div>
+        {{~}}
+        <div class="aui-slide-page-wrap"><!--分页容器--></div>
+      </div>
+    </div>
+       <div class="aui-card-list-header aui-padded-b-0">
+          <div>
+            <span class="aui-label aui-label-danger aui-margin-r-5">乐航</span>{{= it.title}}
+          </div>
+       </div>
+       <div class="aui-card-list-header aui-padded-t-0">
+         <div class="aui-text-danger"><small>￥</small><big class="aui-font-size-20">{{= it.price}}</big></div>
+         <div class="aui-pull-right" style="font-size:0.6rem;">发布时间：<span>{{= it.add_time}}</span></div>
+         <div class="aui-pull-right" style="font-size:0.6rem;">运费：<span>{{= it.postage}}</span></div>
+       </div>
+       <div class="aui-card-list-content">
+         <ul class="aui-list aui-media-list">
+           <li class="aui-list-item">
+               <div class="aui-media-list-item-inner">
+                 <div class="aui-list-item-label-icon label-text aui-font-size-14">新旧：</div>
+                 <div class="aui-list-item-inner aui-padded-t-10 aui-padded-b-10">
+                     <div>
+                         <p class="aui-margin-b-10 aui-font-size-14 aui-ellipsis"><span class="aui-text-danger aui-margin-r-5">{{= it.condition}}</p>
+                     </div>
+                 </div>
+               </div>
+           </li>
+           <li class="aui-list-item">
+               <div class="aui-media-list-item-inner">
+                 <div class="aui-list-item-label-icon label-text aui-font-size-14">类别：</div>
+                 <div class="aui-list-item-inner aui-padded-t-10 aui-padded-b-10">
+                     <div>
+                         <p class="aui-margin-b-10 aui-font-size-14 aui-ellipsis"><span class="aui-text-danger aui-margin-r-5">{{= it.cid}}</p>
+                     </div>
+                 </div>
+               </div>
+           </li>
+           <li class="aui-list-item">
+               <div class="aui-media-list-item-inner">
+                 <div class="aui-list-item-label-icon label-text aui-font-size-14">物品详情：</div>
+                 <div class="aui-list-item-inner aui-padded-t-10 aui-padded-b-10">
+                     <div>
+                         <p class="aui-margin-b-10 aui-font-size-14 aui-ellipsis">{{= it.describe}}</p>
+                     </div>
+                 </div>
+               </div>
+           </li>
+         </ul>
+       </div>
+       <div class="aui-btn aui-btn-block keep" onclick="fncall('{{= it.phone}}')"><span class="aui-iconfont aui-icon-phone">拨打电话</div>
+    </script>
 </body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/doT.min.js" ></script>
 <script type="text/javascript" src="../script/aui-slide.js"></script>
 <script type="text/javascript" src="../script/aui-tab.js"></script>
 <script type="text/javascript">
-    var slide = new auiSlide({
-        container:document.getElementById("aui-slide"),
-        // "width":300,
-        "height":400,
-        "speed":300,
-        "pageShow":true,
-        "pageStyle":'dot',
-        "loop":true,
-        'dotPosition':'center',
-        "speed":500, //速度
-        "autoPlay": 3000, //自动播放
-        // currentPage:currentFun
-    })
+    apiready = function(){
+        api.parseTapmode();
+        fnGetInfoDetail(api.pageParam.wareId)
+    }
+    function fnGetInfoDetail(wareId_) {
+      // 取得对应数据
+      api.ajax({
+          url: 'http://lhtcshop.com/public/index/Ajax/get_ershou',
+          method: 'post',
+          data: {
+              values: {
+                  id:wareId_
+              }
+          }
+      },function(ret, err){
+          if (ret.code =='success') {
+            var dataInter = ret.data;
+            var interText = doT.template($api.text($api.byId('template1')));
+            $api.html($api.byId('content'), interText(dataInter));
+            // 轮播图
+            var slide = new auiSlide({
+                container:document.getElementById("aui-slide"),
+                // "width":300,
+                "height":400,
+                "speed":300,
+                "pageShow":true,
+                "pageStyle":'dot',
+                "loop":true,
+                'dotPosition':'center',
+                "speed":500, //速度
+                "autoPlay": 3000, //自动播放
+                // currentPage:currentFun
+            })
+          } else {
+          }
+      });
+    }
+ // 拨打电话
+ function fncall(phone){
+   api.call({
+       type: 'tel_prompt',
+       number: phone
+   });
 
+ }
 </script>
 </html>
