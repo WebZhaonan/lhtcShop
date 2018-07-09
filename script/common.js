@@ -17,7 +17,7 @@ function noLogin(){
     api.confirm({
     title: '确认',
     msg: '是否去登陆',
-    buttons:['确定','取消']
+    buttons:['确定','取消'] 
 }, function(ret,err) {
    var index = ret.buttonIndex;
    if(index == 1){

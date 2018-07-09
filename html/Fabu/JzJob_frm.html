@@ -69,7 +69,7 @@
             <div class="aui-list-item-inner" onclick="fnBmap()" style="justify-content:initial !important;-webkit-justify-content:initial !important;padding-right:0 !important;">
                 <div class="aui-list-item-title">工作地点</div>
                 <div class="aui-list-item-left" style="padding-left:35px;width:80%">
-                      <input type="" placeholder="请选择" readonly id="info">
+                      <input type="" placeholder="" readonly id="info">
                 </div>
             </div>
           </li>
@@ -111,7 +111,6 @@ var map,
         api.getLocation(function(ret, err) {
         if (ret && ret.status) {
           map.initMapSDK(function(ret,err) {
-
         if (ret.status) {
             alert('地图初始化成功，可以从百度地图服务器检索信息了！');
         }else {
@@ -120,26 +119,8 @@ var map,
           }
         }
     });
-      // map.getNameFromCoords({
-      //     lon: ret.longitude,
-      //     lat: ret.latitude
-      // },function(ret,err){
-      //     if(ret.status){
-      //         address = ret.address;
-      //         console.log(address)
-      //         $api.val($api.byId("info"),address);
-      //         // api.execScript({
-      //         //     frameName:'bmap_info_frm',
-      //         //     script:'setInfo("'+address+'")'
-      //         // })
-      //     }else {
-      //         console.log(JSON.stringify(err));
-      //     }
-      // });
-    } else {
-        alert(JSON.stringify(err));
     }
-          });
+      });
       }else{
         map.getLocation({
             accuracy: '100m',
@@ -171,7 +152,6 @@ var map,
               name: 'test'
           }
       });
-
     }
     });
     }
@@ -183,14 +163,13 @@ var map,
             if(ret.status){
                 address = ret.address;
                 $api.val($api.byId("info"),address);
-                // api.execScript({
-                //     frameName:'bmap_info_frm',
-                //     script:'setInfo("'+address+'")'
-                // })
             }else {
                 console.log(JSON.stringify(err));
             }
         });
+    }
+    function setInfo(address){
+        $api.val($api.byId("info"),address);
     }
 </script>
 </html>

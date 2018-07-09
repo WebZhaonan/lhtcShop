@@ -37,7 +37,7 @@ body {
                 url:'bmap_info_frm.html',
                 rect:{
                     x:0,
-                    y:45,
+                    y:82,
                     w:'auto',
                     h:30
                 },
@@ -56,8 +56,37 @@ body {
                     getNameFromCoords();
                 }
             });
-        },400)
+            map.addEventListener({
+                name: 'click'
+            },function(ret){
+                if(ret.status){
+                    lon = ret.lon;
+                    lat = ret.lat;
+                    getNameFromCoords();
+                    api.confirm({
+                        title: '提示',
+                        msg: '是否要定位到此地',
+                        buttons: ['确定', '取消']
+                    }, function(ret, err){
+                        if( ret.buttonIndex == 1 ){
+                          api.execScript({
+                              name: 'JzJob',
+                              frameName:'JzJob_frm',
+                              script:'setInfo("'+address+'")'
+                          })
+                          api.execScript({
+                              name: 'JzJob',
+                              frameName:'JzJob_frm',
+                              script:'fnJob(\"' + lon + '\",\"' + lat + '\")'
+                          })
+                          api.closeWin();
+                        }else{
+                        }
+                    });
 
+                }
+            });
+        },400)
     }
     function getNameFromCoords(){
         map.getNameFromCoords({
@@ -100,7 +129,7 @@ body {
     }
     function getLocation(){
         map.getLocation({
-            accuracy: '100m',
+            accuracy: '10m',
             autoStop: true,
             filter: 1
         }, function(ret, err){
