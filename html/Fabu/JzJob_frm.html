@@ -32,6 +32,12 @@
       line-height: 2.05rem;
       margin-top: 40px
     }
+    #info{
+      width: 100%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
     </style>
 </head>
 <body>
@@ -39,39 +45,20 @@
      <ul class="aui-list aui-list-in">
          <li class="aui-list-item">
              <div class="aui-list-item-inner">
-                 <div class="aui-list-item-title">工资</div>
-                 <div class="aui-list-item-left">
-                     <input type="number" class="mon" >
+                 <div class="aui-list-item-title">工&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;资</div>
+                 <div class="aui-list-item-left" style="padding-left:35px;width:80%">
+                     <input type="number" class="mon" id='mon'>
                       <span style="color:#2d2d2d;">元/1小时</span>
                  </div>
              </div>
          </li>
-         <li class="aui-list-item aui-list-item-middle">
+         <li class="aui-list-item aui-list-item-middle" onclick="fnopenactionSheet()">
               <div class="aui-list-item-inner aui-list-item-arrow">
-                  工资结算
-          </li>
-          <li class="aui-list-item aui-list-item-middle">
-            <div class="aui-list-item-inner aui-list-item-arrow">
-            有效期限
-            </div>
-          </li>
-          <li class="aui-list-item aui-list-item-middle">
-            <div class="aui-list-item-inner aui-list-item-arrow">
-            职位描述
-            </div>
-          </li>
-          <li class="aui-list-item aui-list-item-middle">
-            <div class="aui-list-item-inner aui-list-item-arrow">
-            福利待遇
-            </div>
-          </li>
-          <li class="aui-list-item">
-            <div class="aui-list-item-inner" onclick="fnBmap()" style="justify-content:initial !important;-webkit-justify-content:initial !important;padding-right:0 !important;">
-                <div class="aui-list-item-title">工作地点</div>
-                <div class="aui-list-item-left" style="padding-left:35px;width:80%">
-                      <input type="" placeholder="" readonly id="info">
-                </div>
-            </div>
+                  <div class="aui-list-item-title">结算方式</div>
+                  <div class="aui-list-item-left" style="padding-left:35px;width:75%" id="jieusna">
+                    请选择
+                  </div>
+                  <div>
           </li>
           <li class="aui-list-item">
              <div class="aui-list-item-inner">
@@ -79,97 +66,58 @@
                      联系电话
                  </div>
                  <div class="aui-list-item-input">
-                     <input type="number" placeholder="">
+                     <input type="number" placeholder="请填写联系方式" id="phone">
                  </div>
              </div>
          </li>
+          <li class="aui-list-item">
+            <div class="aui-list-item-inner" onclick="fnBmap()" style="justify-content:initial !important;-webkit-justify-content:initial !important;padding-right:0 !important;">
+                <div class="aui-list-item-title">工作地点</div>
+                <div class="aui-list-item-left" style="padding-left:35px;width:70%">
+                      <input type="" placeholder="请选择工作地点" readonly id="info">
+                </div>
+            </div>
+          </li>
+          <li class="aui-list-item aui-list-item-middle">
+            <div class="aui-list-item-inner">
+            <div class="aui-list-item-input">
+                <textarea placeholder="请描述职位详情" name="eduask" id="jobms"></textarea>
+            </div>
+            </div>
+          </li>
      </ul>
  </div>
- <div class="aui-btn aui-btn-block keep">发布</div>
+ <div class="aui-btn aui-btn-block keep" onclick="fnFbjob()">发布</div>
 </body>
 <script type="text/javascript" src="../../script/api.js" ></script>
+<script type="text/javascript" src="../../script/Map.js" ></script>
 <script type="text/javascript">
-var map,
-    lat,
-    lon,
-    address;
-    apiready = function(){
-        api.parseTapmode();
-    }
-    // 打开地图
-    function fnBmap() {
-      map = api.require('bMap');
-      var Button = ['使用当前位置', '打开地图'];
-      api.actionSheet({
-      title: '请选择',
-      cancelTitle: '取消',
-      buttons: Button
-      }, function(ret, err) {
-      var index = ret.buttonIndex;
-      if(index ==1){
-      if(api.systemType == 'ios'){
-        api.getLocation(function(ret, err) {
-        if (ret && ret.status) {
-          map.initMapSDK(function(ret,err) {
-        if (ret.status) {
-            alert('地图初始化成功，可以从百度地图服务器检索信息了！');
-        }else {
-          {
-            alert(JSON.stringify(err))
-          }
-        }
-    });
-    }
-      });
-      }else{
-        map.getLocation({
-            accuracy: '100m',
-            autoStop: true,
-            filter: 1
-        }, function(ret, err){
-            api.hideProgress();
-            if(ret.status){
-                lat = ret.lat;
-                lon = ret.lon;
-                //设置地图中心
-                map.setCenter({
-                    coords: {
-                        lon: lon,
-                        lat: lat
-                    },
-                    animation:true
-                });
-                getNameFromCoords();
-            }
-
-        });
-      }
-    }else if (index==2) {
-      api.openWin({
-          name: 'bmap_win',
-          url: '../Map/bmap_win.html',
-          pageParam: {
-              name: 'test'
-          }
-      });
-    }
-    });
-    }
-    function getNameFromCoords(){
-        map.getNameFromCoords({
-            lon: lon,
-            lat: lat
-        },function(ret,err){
-            if(ret.status){
-                address = ret.address;
-                $api.val($api.byId("info"),address);
-            }else {
-                console.log(JSON.stringify(err));
-            }
-        });
-    }
-    function setInfo(address){
-        $api.val($api.byId("info"),address);
-    }
+apiready = function(){
+    api.parseTapmode();
+}
+function fnopenactionSheet() {
+  // 打开学历选择
+  var Button = ['日结', '周结', '其他'];
+  api.actionSheet({
+  title: '请选择结算方式',
+  cancelTitle: '取消',
+  buttons: Button
+  }, function(ret, err) {
+  var index = ret.buttonIndex;
+  if(index != 4){
+  var yeraMon = $api.byId('jieusna')
+  var bHtml = Button[index-1]
+  $api.html(yeraMon,bHtml);
+}  
+});
+}
+  function fnFbjob() {
+   var monValue=$api.val($api.byId('mon'));
+   var JsValue=$api.val($api.byId('jieusna'));
+   var phoneValue = $api.val($api.byId('phone'));
+   var pattern1 = /^1[3458][0-9]{9}$/; //手机号正则验证
+   var addInfoValue = $api.val($api.byId('info'));
+   var jobmsValue = $api.val($api.byId('jobms'));
+  }
 </script>
 </html>
