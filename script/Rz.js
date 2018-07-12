@@ -115,6 +115,7 @@ function fnMerEnter() {
   var pattern = /^1[3458][0-9]{9}$/; //手机号正则验证
   var pattern1 = /^[\u4E00-\u9FA5]{1,4}$/; //中文姓名验证正则
   var isEmail = /^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/; //邮箱
+  var userInfo= $api.getStorage('userInfo');
   if(!nameValue){
     dialog.toast('名称不能为空！', 'none', 1000);
       return;
@@ -150,6 +151,7 @@ function fnMerEnter() {
         method: 'post',
         data: {
             values: {
+                uid:userInfo.id,
                 name: nameValue,
                  h_name: hidValue,
              address: addressValue,
@@ -297,6 +299,7 @@ function fnselect() {
     $(".xh").each(function() {
     img_urls.push($(this).attr("src"));
     });
+    var userInfo= $api.getStorage('userInfo');
    if(!UtitValue){
      dialog.toast('标题不能为空！', 'none', 1000);
        return;
@@ -317,7 +320,7 @@ function fnselect() {
        dialog.toast('原价不能为空！', 'error', 1000);
        return;
      }
-     if(!postageValue){
+     if(!priceValue){
        dialog.toast('现价不能为空！', 'none', 1000);
        return;
      }
@@ -330,13 +333,13 @@ function fnselect() {
          method: 'post',
          data: {
              values: {
+                uid:userInfo.id,
                  title: UtitValue,
                  phone: UphoneValue,
                    cid: cidValue,
              condition: wpValue,
                o_price: o_priceValue,
                  price: priceValue,
-               postage: postageValue,
               describe: describeValue,
                images: img_urls
              }

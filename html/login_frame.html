@@ -54,9 +54,6 @@ var usernameUIInputId;
 var passwordUIInputId;
 var usernameValue;
 var passwordValue;
-var jsfun  = function load() {
-  location.reload()
-}
 function fnInitUIInput() {
     // 用户名输入框模块
     var username = $api.byId('username');
@@ -200,10 +197,10 @@ function fnLogin() {
           });
           api.execScript({
                 name: 'root',//你要刷新winName
-                script: 'load()'
+                script: 'location.reload()'
             });
             api.openWin({
-                name: 'index',
+                name: 'root',
                 url: '../index.html',
                 pageParam: {
                     name: 'test'

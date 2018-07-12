@@ -37,7 +37,7 @@ body {
                 url:'bmap_info_frm.html',
                 rect:{
                     x:0,
-                    y:82,
+                    y:70,
                     w:'auto',
                     h:30
                 },
@@ -72,12 +72,22 @@ body {
                           api.execScript({
                               name: 'JzJob',
                               frameName:'JzJob_frm',
-                              script:'setInfo("'+address+'")'
+                              script:'setInfo(\"' + lon + '\",\"' + lat + '\",\"' + address + '\")'
                           })
                           api.execScript({
-                              name: 'JzJob',
-                              frameName:'JzJob_frm',
-                              script:'fnJob(\"' + lon + '\",\"' + lat + '\")'
+                              name: 'QzJob',
+                              frameName:'QzJob_frm',
+                              script:'setInfo(\"' + lon + '\",\"' + lat + '\",\"' + address + '\")'
+                          })
+                          api.execScript({
+                              name: 'DzRelease',
+                              frameName:'DzRelease_frm',
+                              script:'setInfo(\"' + lon + '\",\"' + lat + '\",\"' + address + '\")'
+                          })
+                          api.execScript({
+                              name: 'HzRelease',
+                              frameName:'HzRelease_frm',
+                              script:'setInfo(\"' + lon + '\",\"' + lat + '\",\"' + address + '\")'
                           })
                           api.closeWin();
                         }else{

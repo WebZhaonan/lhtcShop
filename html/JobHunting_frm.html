@@ -88,9 +88,8 @@
 <body>
   <div id="wrap" class="flex-wrap flex-vertical">
     <div class="gambit_menu gambit_recommend" id="top-menu">
-        <div class="list active" tapmode onclick="fnChange(0);">为您推荐</div>
-        <div class="list" tapmode onclick="fnChange(1);">高薪职位</div>
-        <div class="list" tapmode onclick="fnChange(2);">福利专区</div>
+        <div class="list active" tapmode onclick="fnChange(0);">全职招聘</div>
+        <div class="list" tapmode onclick="fnChange(1);">兼职招聘</div>
         </div>
     </div>
 </div>
@@ -119,7 +118,7 @@ function changeStyle(index) {
         }
     }
 }
-var frameNames = ['Job', 'Job0','Job1'];
+var frameNames = ['Job', 'Job0'];
 function fnInitShoplist() {
     var frames = [];
     for (var i = 0; i < frameNames.length; i++) {

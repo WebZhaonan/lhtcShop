@@ -4,9 +4,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
     <meta name="format-detection" content="telephone=no,email=no,date=no,aItemress=no">
-    <title>短租发布 从  </title>
+    <title>出租发布</title>
     <link rel="stylesheet" type="text/css" href="../../css/aui.css" />
     <style media="screen">
+    body{
+      overflow-x: hidden;
+    }
        .aui-list-item-label{
         width: 25%;
         text-align: right;
@@ -92,12 +95,27 @@
         color: #fff;
         height: 2rem;
         line-height: 2.05rem;
-        margin-top: 40px；auto;
+        margin-top: 40px;
         margin-bottom: 30px
       }
       .active{
         background: #fe467a;
         color: #fff;
+      }
+      .aui-grid [class*=aui-col-]{
+        padding: 0.3rem 0 !important;
+      }
+      .image-item {
+          position: relative;
+          height: 5.3rem;
+          overflow: hidden;
+          background-color: #f0f0f0;
+      }
+      .image-item img {
+          display: block;
+          margin: 0 auto;
+          width: auto;
+          height: 100%;
       }
     </style>
 </head>
@@ -109,7 +127,7 @@
                         姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名
                       </div>
                       <div class="aui-list-item-input">
-                          <input type="text" placeholder="请填写姓名">
+                          <input type="text" placeholder="请填写姓名" name="name" id="name">
                       </div>
                   </div>
               </li>
@@ -119,7 +137,7 @@
                         手机号码
                       </div>
                       <div class="aui-list-item-input">
-                          <input type="text" placeholder="请填写">
+                          <input type="tel" placeholder="请填写" name="phone" id="phone">
                       </div>
                   </div>
               </li>
@@ -129,7 +147,7 @@
                         选择身份
                       </div>
                       <div class="aui-list-item-input" onclick="fnopensheelt()">
-                          <input type="text" placeholder="选择" readonly="readonly" id="xl">
+                          <input type="text" placeholder="选择" readonly="readonly" id="xl" name="identity">
                       </div>
                   </div>
               </li>
@@ -141,7 +159,17 @@
                       小区名称
                     </div>
                     <div class="aui-list-item-input">
-                        <input type="text" placeholder="请填写">
+                        <input type="text" placeholder="请填写" name="r_name" id='r_name'>
+                    </div>
+                </div>
+            </li>
+            <li class="aui-list-item">
+                <div class="aui-list-item-inner  aui-list-item-arrow">
+                    <div class="aui-list-item-label">
+                      出租类型
+                    </div>
+                    <div class="aui-list-item-input" onclick="fnopensheelt1()">
+                        <input type="text" placeholder="选择" readonly="readonly" id="Fx" name="lease_type">
                     </div>
                 </div>
             </li>
@@ -151,19 +179,9 @@
                                 房屋面积
                               </div>
                               <div class="aui-list-item-input">
-                                  <input type="text" placeholder="请填写">
+                                  <input type="number" placeholder="请填写" name="area" id="area">
                               </div>
                         <div class="aui-list-item-right">平米</div>
-                          </div>
-                      </li>
-                      <li class="aui-list-item">
-                          <div class="aui-list-item-inner  aui-list-item-arrow">
-                              <div class="aui-list-item-label">
-                                房屋户型
-                              </div>
-                              <div class="aui-list-item-input" onclick="fnopensheelt1()">
-                                  <input type="text" placeholder="选择" readonly="readonly" id="Fx">
-                              </div>
                           </div>
                       </li>
                       <li class="aui-list-item">
@@ -172,49 +190,21 @@
                                 装修程度
                               </div>
                               <div class="aui-list-item-input" onclick="fnopensheelt2()">
-                                  <input type="text" placeholder="选择" readonly="readonly" id="Zx">
+                                  <input type="text" placeholder="选择" readonly="readonly" id="Zx" name="beautify">
                               </div>
                           </div>
                       </li>
                       <li class="aui-list-item">
-                          <div class="aui-list-item-inner">
-                              <div class="aui-list-item-label">
-                                朝&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;向
-                              </div>
-                              <div class="aui-list-item-input">
-                                  <input type="text" placeholder="">
-                              </div>
-                          </div>
-                      </li>
-                      <li class="aui-list-item">
-                          <div class="aui-list-item-inner">
-                              <div class="aui-list-item-label">
-                                楼&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;层
-                              </div>
-                              <div class="aui-list-item-input">
-                                  <input type="text" placeholder="">
-                              </div>
-                          </div>
-                      </li>
-                      <li class="aui-list-item">
-                          <div class="aui-list-item-inner">
-                              <div class="aui-list-item-label">
-                                卧&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;室
-                              </div>
-                              <div class="aui-list-item-input">
-                                  <input type="text" placeholder="">
-                              </div>
-                          </div>
-                      </li>
-                      <li class="aui-list-item">
-                          <div class="aui-list-item-inner">
-                              <div class="aui-list-item-label">
-                                电&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;梯
-                              </div>
-                              <div class="aui-list-item-input">
-                                  <input type="text" placeholder="">
-                              </div>
-                          </div>
+                            <div class="aui-list-item-inner">
+                                <div class="aui-list-item-label">
+                                      位&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;置
+                                </div>
+                                <div class="aui-list-item-input"  onclick="fnBmap()">
+                                    <input type="text" placeholder="请选择工作地点" readonly id="info" name="address">
+                                        <input type="hidden" readonly  name="la" id="la">
+                                        <input type="hidden"  readonly  name="ln" id="ln">
+                                </div>
+                            </div>
                       </li>
                       <li class="aui-list-item">
                           <div class="aui-list-item-inner">
@@ -222,26 +212,12 @@
                                 租&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;金
                               </div>
                               <div class="aui-list-item-input">
-                                  <input type="text" placeholder="">
+                                  <input type="number" placeholder="" name="price" id="price">
                               </div>
+                              <div class="aui-list-item-right">/月</div>
                           </div>
                       </li>
                   </ul>
-    <section class="aui-grid">
-      <div class="aui-card-list-header">
-                房屋优点
-            </div>
-    <div class="aui-row">
-        <div class="aui-col-xs-3">
-            <div class="aui-btn">随时看房</div>
-        </div>
-        <div class="aui-col-xs-3">
-          <div class="aui-btn">新上房源</div>
-        </div>
-        <div class="aui-col-xs-3">
-          <div class="aui-btn">可短租</div>
-        </div>
-</section>
 <section class="aui-grid" style="margin-top:10px">
   <div class="aui-card-list-header">
             房屋配置
@@ -259,90 +235,55 @@
     <div class="aui-col-xs-3">
       <div class="aui-btn">电视</div>
     </div>
+    <div class="aui-col-xs-3">
+      <div class="aui-btn">冰箱</div>
+    </div>
+    <div class="aui-col-xs-3">
+      <div class="aui-btn">洗衣机</div>
+    </div>
+    <div class="aui-col-xs-3">
+      <div class="aui-btn">空调</div>
+    </div>
+    <div class="aui-col-xs-3">
+      <div class="aui-btn">热水器</div>
+    </div>
+    <div class="aui-col-xs-3">
+      <div class="aui-btn">燃气灶</div>
+    </div>
+    <div class="aui-col-xs-3">
+      <div class="aui-btn">大阳台</div>
+    </div>
 </section>
                   <section class="aui-content-padded">
-                      <textarea placeholder="描述补充..."></textarea>
+                      <textarea placeholder="描述补充..." name="detail" id="detail"></textarea>
                   </section>
-                  <p class="aui-text-center aui-margin-t-15">上传照片</p>
-                  <section class="aui-content-padded oss">
-                      <div class="aui-row aui-row-padded">
-                        <div class="aui-col-xs-4 image-item">
-                            <input type="hidden" >
-                            <img src="../../image/demo1.png" class="notes-image">
-                            <div class="delete-btn">
-                                <i class="aui-iconfont aui-icon-trash"></i>
-                            </div>
-                        </div>
-                          <div class="aui-col-xs-4 add-photos">
+                  <p class="aui-text-center aui-margin-t-15">上传房屋照片</p>
+                  <section class="aui-content-padded">
+                      <div class="aui-row aui-row-padded" id="append">
+                          <div class="aui-col-xs-4 add-photos" onclick="fnUpdateImage1()">
                               <div class="aui-border aui-text-center">
                                   <i class="aui-iconfont aui-icon-plus"></i>
                               </div>
                           </div>
                       </div>
                   </section>
-                  <div class="aui-btn aui-btn-block keep">发布</div>
+                  <div class="aui-btn aui-btn-block keep" onclick="fnCzfb()">发布</div>
+    <script type="text/template" id="template1">
+        <div class="aui-col-xs-4 image-item" id="dis">
+            <img src="{{= it.Msg}}" class="notes-image xh">
+              </div>
+            </script>
 </body>
 <script type="text/javascript" src="../../script/api.js" ></script>
+<script type="text/javascript" src="../../script/doT.min.js" ></script>
 <script type="text/javascript" src="../../script/jquery-1.9.1.min.js" ></script>
+<script type="text/javascript" src="../../script/Map.js" ></script>
+<script type="text/javascript" src="../../script/aui-toast.js" ></script>
+<script src="../../script/Hzimage.js"></script>
 <script type="text/javascript">
     apiready = function(){
         api.parseTapmode();
     }
-    function fnopensheelt() {
-      // 打开身份选择
-      var Button = ['业主', '个人', '中介'];
-      api.actionSheet({
-      title: '请选择身份',
-      cancelTitle: '取消',
-      buttons: Button
-      }, function(ret, err) {
-      var index = ret.buttonIndex;
-      if(index != 4){
-      var xl = $api.byId('xl')
-      var bHtml = Button[index-1]
-      $api.val(xl,bHtml);
-      $api.css(xl,'color:#2d2d2d;');
-    }
-    });
-    }
-    function fnopensheelt1() {
-      // 打开放行选择
-      var Button = ['一室', '两室','三室'];
-      api.actionSheet({
-      title: '请选择身份',
-      cancelTitle: '取消',
-      buttons: Button
-      }, function(ret, err) {
-      var index = ret.buttonIndex;
-      if(index != 4){
-      var fx = $api.byId('Fx')
-      var bHtml = Button[index-1]
-      $api.val(fx,bHtml);
-      $api.css(fx,'color:#2d2d2d;');
-    }
-    });
-    }
-    function fnopensheelt2() {
-      // 打开装修程度
-      var Button = ['毛坯', '简装','中等装修','精装'];
-      api.actionSheet({
-      title: '请选择身份',
-      cancelTitle: '取消',
-      buttons: Button
-      }, function(ret, err) {
-      var index = ret.buttonIndex;
-      if(index != 5){
-      var Zx = $api.byId('Zx')
-      var bHtml = Button[index-1]
-      $api.val(Zx,bHtml);
-      $api.css(Zx,'color:#2d2d2d;');
-    }
-    });
-    }
-    // 房屋优点添加点击事件
-    $(".aui-col-xs-3").click(function(){
-      var addCls= $(this);
-      addCls.children('.aui-btn').toggleClass('active')
-    });
+
 </script>
 </html>

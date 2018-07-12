@@ -8,7 +8,7 @@ function fnopenactionSheet() {
   }, function(ret, err) {
   var index = ret.buttonIndex;
   if(index != 6){
-  var yeraMon = $api.byId('yeraMon')
+  var yeraMon = $api.byId('price')
   var bHtml = Button[index-1]
   $api.val(yeraMon,bHtml);
   $api.css(yeraMon,'color:#2d2d2d;');
@@ -25,7 +25,7 @@ function fnopenactionSheet1() {
   }, function(ret, err) {
   var index = ret.buttonIndex;
   if(index != 5){
-  var xl = $api.byId('xl')
+  var xl = $api.byId('edu')
   var bHtml = Button[index-1]
   $api.val(xl,bHtml);
   $api.css(xl,'color:#2d2d2d;');
@@ -42,7 +42,7 @@ function fnopenactionSheet2() {
   }, function(ret, err) {
   var index = ret.buttonIndex;
   if(index != 6){
-  var Job = $api.byId('Job')
+  var Job = $api.byId('ex')
   var bHtml = Button[index-1]
   $api.val(Job,bHtml);
   $api.css(Job,'color:#2d2d2d;');

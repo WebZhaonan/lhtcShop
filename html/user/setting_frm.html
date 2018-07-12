@@ -94,11 +94,11 @@
                 });
             api.execScript({
                   name: 'root',//你要刷新winName
-                  script:'load()'
+                  script:'location.reload()'
               });
               api.openWin({
                   name: 'index',
-                  url: '../../index.html', 
+                  url: '../../index.html',
                   pageParam: {
                       name: 'test'
                   }

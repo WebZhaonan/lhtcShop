@@ -46,6 +46,8 @@ var map,
                     animation:true
                 });
                 getNameFromCoords();
+                $api.val($api.byId("ln"),lon);
+                $api.val($api.byId("la"),lat);
             }
 
         });
@@ -61,7 +63,7 @@ var map,
     }
     });
     }
-    function getNameFromCoords(){
+      function getNameFromCoords(){
         map.getNameFromCoords({
             lon: lon,
             lat: lat
@@ -74,6 +76,8 @@ var map,
             }
         });
     }
-    function setInfo(address){
+    function setInfo(lon,lat,address){
+        $api.val($api.byId("ln"),lon);
+        $api.val($api.byId("la"),lat);
         $api.val($api.byId("info"),address);
     }

@@ -43,20 +43,50 @@
 <body>
     <div class="aui-content aui-margin-b-15">
      <ul class="aui-list aui-list-in">
+       <li class="aui-list-item">
+          <div class="aui-list-item-inner">
+              <div class="aui-list-item-label">
+                  岗位名称
+              </div>
+              <div class="aui-list-item-input">
+                  <input type="text" placeholder="请填写岗位民称" id="name" name="name">
+              </div>
+          </div>
+      </li>
+      <li class="aui-list-item">
+         <div class="aui-list-item-inner">
+             <div class="aui-list-item-label">
+                 公司名称
+             </div>
+             <div class="aui-list-item-input">
+                 <input type="text" placeholder="请填写公司民称" id="t_name" name="t_name">
+             </div>
+         </div>
+     </li>
          <li class="aui-list-item">
              <div class="aui-list-item-inner">
                  <div class="aui-list-item-title">工&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;资</div>
                  <div class="aui-list-item-left" style="padding-left:35px;width:80%">
-                     <input type="number" class="mon" id='mon'>
+                     <input type="number" class="mon" id='mon' name="price">
                       <span style="color:#2d2d2d;">元/1小时</span>
                  </div>
              </div>
          </li>
+         <li class="aui-list-item">
+            <div class="aui-list-item-inner">
+                <div class="aui-list-item-label">
+                    招聘人数
+                </div>
+                <div class="aui-list-item-input">
+                    <input type="number" placeholder="请填写招聘人数" id="Jobnumber" name="people">
+                </div>
+            </div>
+        </li>
          <li class="aui-list-item aui-list-item-middle" onclick="fnopenactionSheet()">
-              <div class="aui-list-item-inner aui-list-item-arrow">
-                  <div class="aui-list-item-title">结算方式</div>
-                  <div class="aui-list-item-left" style="padding-left:35px;width:75%" id="jieusna">
-                    请选择
+              <div class="aui-list-item-inner">
+                  <div class="aui-list-item-label">结算方式</div>
+                  <div class="aui-list-item-input" >
+                    <input type="text" placeholder="请选择" id="jieusna" readonly name="price_type">
                   </div>
                   <div>
           </li>
@@ -66,31 +96,36 @@
                      联系电话
                  </div>
                  <div class="aui-list-item-input">
-                     <input type="number" placeholder="请填写联系方式" id="phone">
+                     <input type="number" placeholder="请填写联系方式" id="phone" name="phone">
                  </div>
              </div>
          </li>
           <li class="aui-list-item">
-            <div class="aui-list-item-inner" onclick="fnBmap()" style="justify-content:initial !important;-webkit-justify-content:initial !important;padding-right:0 !important;">
-                <div class="aui-list-item-title">工作地点</div>
-                <div class="aui-list-item-left" style="padding-left:35px;width:70%">
-                      <input type="" placeholder="请选择工作地点" readonly id="info">
+                <div class="aui-list-item-inner">
+                    <div class="aui-list-item-label">
+                        工作地点
+                    </div>
+                    <div class="aui-list-item-input"  onclick="fnBmap()">
+                        <input type="text" placeholder="请选择工作地点" readonly id="info" name="address">
+                            <input type="hidden" readonly  name="la" id="la">
+                            <input type="hidden"  readonly  name="ln" id="ln">
+                    </div>
                 </div>
-            </div>
           </li>
           <li class="aui-list-item aui-list-item-middle">
             <div class="aui-list-item-inner">
             <div class="aui-list-item-input">
-                <textarea placeholder="请描述职位详情" name="eduask" id="jobms"></textarea>
+                <textarea placeholder="请描述职位详情" name="detail" id="jobms"></textarea>
             </div>
             </div>
           </li>
      </ul>
  </div>
- <div class="aui-btn aui-btn-block keep" onclick="fnFbjob()">发布</div>
+ <div class="aui-btn aui-btn-block keep" onclick="fnJob()">发布</div>
 </body>
 <script type="text/javascript" src="../../script/api.js" ></script>
 <script type="text/javascript" src="../../script/Map.js" ></script>
+<script type="text/javascript" src="../../script/aui-toast.js" ></script>
 <script type="text/javascript">
 apiready = function(){
     api.parseTapmode();
@@ -107,17 +142,137 @@ function fnopenactionSheet() {
   if(index != 4){
   var yeraMon = $api.byId('jieusna')
   var bHtml = Button[index-1]
-  $api.html(yeraMon,bHtml);
-}  
+  $api.val(yeraMon,bHtml);
+}
 });
 }
-  function fnFbjob() {
+  function fnJob() {
+   var t_nameValue=$api.val($api.byId('t_name'));
    var monValue=$api.val($api.byId('mon'));
+   var nameValue=$api.val($api.byId('name'));
+   var numberValue=$api.val($api.byId('Jobnumber'));
    var JsValue=$api.val($api.byId('jieusna'));
    var phoneValue = $api.val($api.byId('phone'));
-   var pattern1 = /^1[3458][0-9]{9}$/; //手机号正则验证
+   var pattern = /^1[3458][0-9]{9}$/; //手机号正则验证
    var addInfoValue = $api.val($api.byId('info'));
+   var lnValue = $api.val($api.byId('ln'));
+   var laValue = $api.val($api.byId('la'));
    var jobmsValue = $api.val($api.byId('jobms'));
+   var userInfo= $api.getStorage('userInfo');
+   var toast = new auiToast();
+   if(!nameValue){
+     api.toast({
+         msg: '请填写岗位名称',
+         duration: 2000,
+         location: 'middle'
+     });
+     return;
+   }
+   if(!G_nameValue){
+     api.toast({
+         msg: '请填写公司名称',
+         duration: 2000,
+         location: 'middle'
+     });
+     return;
+   }
+   if(!monValue){
+     api.toast({
+         msg: '请填写工资',
+         duration: 2000,
+         location: 'middle'
+     });
+     return;
+   }
+   if(!numberValue){
+     api.toast({
+         msg: '请填写招聘人数',
+         duration: 2000,
+         location: 'middle'
+     });
+     return;
+   }
+   if(!JsValue){
+     api.toast({
+         msg: '请选择结算方式',
+         duration: 2000,
+         location: 'middle'
+     });
+     return;
+   }
+   if(!pattern.test(phoneValue)){
+     api.toast({
+         msg: '号码格式不正确或者位数不正确',
+         duration: 2000,
+         location: 'middle'
+     });
+     return;
+   }
+   if(!addInfoValue){
+     api.toast({
+         msg: '请选择工作地点',
+         duration: 2000,
+         location: 'middle'
+     });
+     return;
+   }
+   if(!jobmsValue){
+     api.toast({
+         msg: '请描述工作详情',
+         duration: 2000,
+         location: 'middle'
+     });
+     return;
+   }
+   api.ajax({
+       url: 'http://lhtcshop.com/public/index/Ajax/release_jianzhi',
+       method: 'post',
+       data: {
+           values: {
+              uid:userInfo.id,
+              t_name:t_nameValue,
+              price: monValue,
+              people:numberValue,
+              price_type:JsValue,
+              phone:phoneValue,
+              address:addInfoValue,
+              detail:jobmsValue,
+              la:laValue,
+              ln:lnValue
+           },
+       }
+   },function(ret, err){
+       if (ret.code=='success') {
+         toast.loading({
+               title:"提交中",
+               duration:2000
+           },function(res){
+               setTimeout(function(){
+                   toast.hide();
+                   api.toast({
+                       msg:ret.Msg + '请前往首页查看',
+                       duration: 4000,
+                       location: 'bottom'
+                   });
+                   api.openWin({
+                       name: 'index',
+                       url: '../../index.html',
+                       pageParam: {
+                           name: 'test'
+                       }
+                   });
+                   window.location.reload()
+               }, 3000)
+           });
+
+       } else {
+         api.toast({
+             msg: ret.Msg ,
+             duration: 2000,
+             location: 'bottom'
+         });
+       }
+   });
   }
 </script>
 </html>

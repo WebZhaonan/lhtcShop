@@ -30,7 +30,8 @@
     .aui-btn-op{
       background: none;
       border: 1px solid #999;
-      margin-bottom: 10px
+      margin-bottom: 10px;
+      margin-right: 10px
     }
 .aui-list .aui-list-item{
 border-bottom: 1px solid #ddd !important;
@@ -38,50 +39,92 @@ border-bottom: 1px solid #ddd !important;
   </style>
 </head>
 <body>
-<ul class="aui-list aui-media-list">
-            <li class="aui-list-item aui-list-item-arrow">
-                <div class="aui-media-list-item-inner">
-                    <div class="aui-list-item-inner">
-                        <div class="aui-list-item-text">
-                            <div class="aui-list-item-title">急招送餐员</div>
-                            <div class="aui-list-item-righ aui-mo">3k-5k</div>
-                        </div>
-                        <div class="aui-list-item-text aui-ellipsis-2">
-                            饿了么网络科技有限公司
-                        </div>
-                      <div class="aui-btn">西安雁塔区朱雀大街</div>
-                      <div class="aui-btn">经验不限</div>
-                      <div class="aui-btn aui-inf aui-pull-right">投简历</div>
-                    </div>
-                </div>
-                <div class="bz">
-                  <div class="aui-btn aui-btn-op">月休四天</div>
-                  <div class="aui-btn aui-btn-op">饭补</div>
-                  <div class="aui-btn aui-btn-op">话补</div>
-                </div>
-            </li>
-            <li class="aui-list-item aui-list-item-arrow">
-                <div class="aui-media-list-item-inner">
-                    <div class="aui-list-item-inner">
-                        <div class="aui-list-item-text">
-                            <div class="aui-list-item-title">急招送餐员</div>
-                            <div class="aui-list-item-righ aui-mo">3k-5k</div>
-                        </div>
-                        <div class="aui-list-item-text aui-ellipsis-2">
-                            饿了么网络科技有限公司
-                        </div>
-                      <div class="aui-btn">西安雁塔区朱雀大街</div>
-                      <div class="aui-btn">经验不限</div>
-                      <div class="aui-btn aui-inf aui-pull-right">投简历</div>
-                    </div>
-                </div>
-                <div class="bz">
-                  <div class="aui-btn aui-btn-op">月休四天</div>
-                  <div class="aui-btn aui-btn-op">饭补</div>
-                  <div class="aui-btn aui-btn-op">话补</div>
-                </div>
-            </li>
+<ul class="aui-list aui-media-list" id="tem">
         </ul>
+        <!--模板渲染-->
+        <script type="text/template" id="template">
+          {{ for(var prop in it) { }}
+          <li class="aui-list-item aui-list-item-arrow" onclick="fnjobDetail('{{= it[prop].id}}')">
+              <div class="aui-media-list-item-inner">
+                  <div class="aui-list-item-inner">
+                      <div class="aui-list-item-text">
+                          <div class="aui-list-item-title">急招{{= it[prop].name}}</div>
+                          <div class="aui-list-item-righ aui-mo">{{= it[prop].price}}</div>
+                      </div>
+                      <div class="aui-list-item-text aui-ellipsis-2">
+                          {{= it[prop].t_name}}
+                      </div>
+                    <div class="aui-btn">{{= it[prop].address}}</div>
+                  </div>
+              </div>
+
+              <div class="aui-info aui-padded-b-0" style="padding:0 !important;">
+                <div class="bz">
+                  {{= it[prop].welfare}}
+                </div>
+                <div class="aui-info-item aui-font-size-12">{{= it[prop].distance}}</div>
+                </div>
+          </li>
+          {{ } }}
+        </script>
   <script type="text/javascript" src="../script/api.js"></script>
+  <script type="text/javascript" src="../script/doT.min.js" ></script>
+  <script type="text/javascript">
+    apiready = function(){
+      fnGetjobinfo()
+    }
+    // 获取招聘信息
+    function fnGetjobinfo() {
+      var map = api.require('bMap');
+      map.getLocation({
+          accuracy: '100m',
+          autoStop: true,
+          filter: 1
+      }, function(ret, err){
+          if(ret.status){
+              lat = ret.lat;
+              lon = ret.lon;
+              //设置地图中心
+              map.setCenter({
+                  coords: {
+                      lon: lon,
+                      lat: lat
+                  },
+                  animation:true
+              });
+              api.ajax({
+                  url: 'http://lhtcshop.com/public/index/Ajax/get_position',
+                  method: 'post',
+                   data: {
+                    values: {
+                      ln: lon,
+                      la: lat
+                    },
+                }
+              },function(ret, err){
+                if (ret.code == 'success') {
+                    var dataInter = ret.data;
+                    var interText = doT.template($api.text($api.byId('template')));
+                    $api.html($api.byId('tem'), interText(dataInter));
+                } else {
+                }
+              });
+          }
+      });
+    }
+    // 打开找工作详情，指定ID
+    function fnjobDetail(wareId_) {
+       api.openWin({
+           name: 'Jobdetail',
+           url: './Fabu/Jobdetail.html',
+           pageParam: {
+               wareId: wareId_,
+           },
+           animation: {
+               type: "fade"
+           }
+       });
+    }
+  </script>
 </body>
 </html>

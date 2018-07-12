@@ -32,6 +32,12 @@
       line-height: 2.05rem;
       margin-top: 40px
     }
+    #info{
+      width: 100%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
     </style>
 </head>
 <body>
@@ -40,20 +46,50 @@
        <li class="aui-list-item">
           <div class="aui-list-item-inner">
               <div class="aui-list-item-label">
-                  月&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;薪
+                  岗位名称
               </div>
               <div class="aui-list-item-input">
-                  <input type="text" placeholder="请选择月薪" readonly id="yeraMon" onclick="fnopenactionSheet()">
+                  <input type="text" placeholder="请填写岗位民称"  id="name" name="name">
               </div>
           </div>
       </li>
       <li class="aui-list-item">
          <div class="aui-list-item-inner">
              <div class="aui-list-item-label">
+                 公司名称
+             </div>
+             <div class="aui-list-item-input">
+                 <input type="text" placeholder="请填写公司民称"  id="t_name" name="t_name">
+             </div>
+         </div>
+     </li>
+       <li class="aui-list-item">
+          <div class="aui-list-item-inner">
+              <div class="aui-list-item-label">
+                  月&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;薪
+              </div>
+              <div class="aui-list-item-input">
+                  <input type="text" placeholder="请选择月薪" readonly id="price" onclick="fnopenactionSheet()" name="price">
+              </div>
+          </div>
+      </li>
+      <li class="aui-list-item">
+         <div class="aui-list-item-inner">
+             <div class="aui-list-item-label">
+                 招聘人数
+             </div>
+             <div class="aui-list-item-input">
+                 <input type="text" placeholder="请填写招聘人数"  id="people" name="people">
+             </div>
+         </div>
+     </li>
+      <li class="aui-list-item">
+         <div class="aui-list-item-inner">
+             <div class="aui-list-item-label">
                  学历要求
              </div>
              <div class="aui-list-item-input">
-                 <input type="text" placeholder="请选择学历要求" readonly id="xl" onclick="fnopenactionSheet1()">
+                 <input type="text" placeholder="请选择学历要求" readonly id="edu" onclick="fnopenactionSheet1()" name="edu">
              </div>
          </div>
      </li>
@@ -63,21 +99,21 @@
                 工作经验
             </div>
             <div class="aui-list-item-input">
-                <input type="text" placeholder="请选择经验要求" readonly id="Job" onclick="fnopenactionSheet2()">
+                <input type="text" placeholder="请选择经验要求" readonly id="ex" onclick="fnopenactionSheet2()" name="ex">
             </div>
         </div>
     </li>
     <li class="aui-list-item">
         <div class="aui-list-item-inner">
             <div class="aui-list-item-input">
-                <textarea placeholder="请填写职位描述" name="" id="zwms"></textarea>
+                <textarea placeholder="请填写职位描述" name="detail" id="detail"></textarea>
             </div>
         </div>
     </li>
     <li class="aui-list-item">
         <div class="aui-list-item-inner">
             <div class="aui-list-item-input">
-                <textarea placeholder="请填写福利待遇" name="" id="fldy"></textarea>
+                <textarea placeholder="请填写福利待遇" name="welfare" id="welfare"></textarea>
             </div>
         </div>
     </li>
@@ -86,8 +122,10 @@
            <div class="aui-list-item-label">
                工作地点
            </div>
-           <div class="aui-list-item-input">
-               <input type="text" placeholder="选择工作地点" readonly="" id='add' onclick="choseAdd()">
+           <div class="aui-list-item-input" onclick="fnBmap()">
+               <input type="text" placeholder="请选择工作地点" readonly id="info" name="address">
+                   <input type="hidden" readonly  name="la" id="la">
+                   <input type="hidden"  readonly  name="ln" id="ln">
            </div>
        </div>
    </li>
@@ -97,19 +135,170 @@
                      联系电话
                  </div>
                  <div class="aui-list-item-input">
-                     <input type="number" placeholder="">
+                     <input type="number" placeholder="" id="phone">
                  </div>
              </div>
          </li>
      </ul>
  </div>
- <div class="aui-btn aui-btn-block keep">发布</div>
+ <div class="aui-btn aui-btn-block keep" onclick="fnopenFb()">发布</div>
 </body>
 <script type="text/javascript" src="../../script/api.js" ></script>
+<script type="text/javascript" src="../../script/Map.js" ></script>
 <script type="text/javascript" src="../../script/apiReseet.js" ></script>
+<script type="text/javascript" src="../../script/aui-toast.js" ></script>
 <script type="text/javascript">
     apiready = function(){
         api.parseTapmode();
+    }
+    function fnopenFb(){
+      var nameValue=$api.val($api.byId('name'));
+      var t_nameValue=$api.val($api.byId('t_name'));
+      var eduValue=$api.val($api.byId('edu'));
+      var priceValue=$api.val($api.byId('price'));
+      var peopleValue=$api.val($api.byId('people'));
+      var exValue=$api.val($api.byId('ex'));
+      var welfare=$api.val($api.byId('welfare'));
+      var phoneValue = $api.val($api.byId('phone'));
+      var pattern = /^1[3458][0-9]{9}$/; //手机号正则验证
+      var addInfoValue = $api.val($api.byId('info'));
+      var lnValue = $api.val($api.byId('ln'));
+      var laValue = $api.val($api.byId('la'));
+      var detailValue = $api.val($api.byId('detail'));
+      var userInfo= $api.getStorage('userInfo');
+      var toast = new auiToast();
+      if(!nameValue){
+        api.toast({
+            msg: '请填写岗位名称',
+            duration: 2000,
+            location: 'middle'
+        });
+        return;
+      }
+      if(!t_nameValue){
+        api.toast({
+            msg: '请填写公司名称',
+            duration: 2000,
+            location: 'middle'
+        });
+        return;
+      }
+      if(!priceValue){
+        api.toast({
+            msg: '请选择待遇',
+            duration: 2000,
+            location: 'middle'
+        });
+        return;
+      }
+      if(!peopleValue){
+        api.toast({
+            msg: '请填写招聘人数',
+            duration: 2000,
+            location: 'middle'
+        });
+        return;
+      }
+      if(!eduValue){
+        api.toast({
+            msg: '请选择学历要求',
+            duration: 2000,
+            location: 'middle'
+        });
+        return;
+      }
+      if(!exValue){
+        api.toast({
+            msg: '请选择经验要求',
+            duration: 2000,
+            location: 'middle'
+        });
+        return;
+      }
+      if(!detailValue){
+        api.toast({
+            msg: '请填写工作详情',
+            duration: 2000,
+            location: 'middle'
+        });
+        return;
+      }
+      if(!welfare){
+        api.toast({
+            msg: '请填写福利',
+            duration: 2000,
+            location: 'middle'
+        });
+        return;
+      }
+      if(!addInfoValue){
+        api.toast({
+            msg: '请选择工作地点',
+            duration: 2000,
+            location: 'middle'
+        });
+        return;
+      }
+      if(!pattern.test(phoneValue)){
+        api.toast({
+            msg: '号码格式不正确或者位数不正确',
+            duration: 2000,
+            location: 'middle'
+        });
+        return;
+      }
+      api.ajax({
+          url: 'http://lhtcshop.com/public/index/Ajax/release_quanzhi',
+          method: 'post',
+          data: {
+              values: {
+                 uid:userInfo.id,
+                 name:nameValue,
+                 t_name:t_nameValue,
+                 price: priceValue,
+                 people:peopleValue,
+                 ex:exValue,
+                 welfare:welfare,
+                 edu:eduValue,
+                 phone:phoneValue,
+                 address:addInfoValue,
+                 detail:detailValue,
+                 la:laValue,
+                 ln:lnValue
+              },
+          }
+      },function(ret, err){
+          if (ret.code=='success') {
+            toast.loading({
+                  title:"提交中",
+                  duration:2000
+              },function(res){
+                  setTimeout(function(){
+                      toast.hide();
+                      api.toast({
+                          msg:ret.Msg + '请前往首页查看',
+                          duration: 4000,
+                          location: 'bottom'
+                      });
+                      api.openWin({
+                          name: 'index',
+                          url: '../../index.html',
+                          pageParam: {
+                              name: 'test'
+                          }
+                      });
+                    window.location.reload()
+                  }, 3000)
+              });
+
+          } else {
+            api.toast({
+                msg: ret.Msg ,
+                duration: 2000,
+                location: 'bottom'
+            });
+          }
+      });
     }
 </script>
 </html>

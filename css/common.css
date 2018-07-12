@@ -1,7 +1,7 @@
 body {
     text-align: center;
 }
-input[type=button], input[type=submit], input[type=file], button { cursor: pointer; -webkit-appearance: none; } 
+input[type=button], input[type=submit], input[type=file], button { cursor: pointer; -webkit-appearance: none; }
 .row {
     width: auto;
     height: 70px;
@@ -44,7 +44,7 @@ float: right;
     height: 40px;
     margin-left: 32px;
     margin-right: 32px;
-    margin-top:50px;
+    margin-top:40px;
     background-color: #fe467a;
     line-height: 40px;
     color: #fff;
@@ -126,7 +126,7 @@ border-right: none;
    min-height:2.6rem !important;
  }
  .other{
- padding-top:50px;
+ padding-top:20px;
  background: #f5f5f5
  }
  .ange{

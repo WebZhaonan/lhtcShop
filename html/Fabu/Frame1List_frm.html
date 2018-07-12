@@ -168,6 +168,7 @@
       var dialog = YDUI.dialog;
       var pattern = /^((0\d{2,3}-\d{7,8})|(1[3584]\d{9}))$/; //手机号以及座机正则验证
       var pattern1 = /^[\u4E00-\u9FA5]{1,4}$/; //中文姓名验证正则
+      var userInfo= $api.getStorage('userInfo');
       if(!pattern1.test(nameValue)){
       dialog.toast('请填写正确的姓名！', 'error', 1000);
         return;
@@ -193,6 +194,7 @@
         method: 'post',
         data: {
             values: {
+                uid:userInfo.id,
                 name: nameValue,
                 phone:phoneValue,
                 sid:sidValue,
@@ -203,12 +205,12 @@
         }
     },function(ret, err){
         if (ret.code=='success') {
+
           api.alert({
               title: '提示',
               msg: ret.Msg,
           }, function(res, err){
               if( res ){
-                window.location.reload()
                 api.openWin({
                     name: 'index',
                     url: '../../index.html',
@@ -216,6 +218,7 @@
                         name: 'test'
                     }
                 });
+              window.location.reload()
               }else{
                   //  alert( JSON.stringify( err ) );
               }

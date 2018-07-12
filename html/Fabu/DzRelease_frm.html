@@ -92,7 +92,7 @@
         color: #fff;
         height: 2rem;
         line-height: 2.05rem;
-        margin-top: 40px；auto;
+        margin-top: 40px;
         margin-bottom: 30px
       }
     </style>
@@ -105,7 +105,7 @@
                         姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名
                       </div>
                       <div class="aui-list-item-input">
-                          <input type="text" placeholder="请填写姓名">
+                          <input type="text" placeholder="请填写姓名" name="name" id="name">
                       </div>
                   </div>
               </li>
@@ -115,114 +115,172 @@
                         手机号码
                       </div>
                       <div class="aui-list-item-input">
-                          <input type="text" placeholder="请填写">
+                          <input type="text" placeholder="请填写" name="phone" id="phone">
                       </div>
                   </div>
               </li>
           </ul>
           <ul class="aui-list aui-form-list" style="margin-top:10px">
                       <li class="aui-list-item">
-                          <div class="aui-list-item-inner">
-                              <div class="aui-list-item-label">
-                                位&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;置
-                              </div>
-                              <div class="aui-list-item-input">
-                                  <input type="text" placeholder="">
-                              </div>
-                          </div>
+                            <div class="aui-list-item-inner">
+                                <div class="aui-list-item-label">
+                                      位&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;置
+                                </div>
+                                <div class="aui-list-item-input"  onclick="fnBmap()">
+                                    <input type="text" placeholder="请选择工作地点" readonly id="info" name="address">
+                                        <input type="hidden" readonly  name="la" id="la">
+                                        <input type="hidden"  readonly  name="ln" id="ln">
+                                </div>
+                            </div>
                       </li>
-
                       <li class="aui-list-item">
                           <div class="aui-list-item-inner  aui-list-item-arrow">
                               <div class="aui-list-item-label">
-                                房&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;型
+                                求租类型
                               </div>
                               <div class="aui-list-item-input" onclick="fnopensheelt1()">
-                                  <input type="text" placeholder="选择" readonly="readonly" id="Fx">
-                              </div>
-                          </div>
-                      </li>
-                      <li class="aui-list-item">
-                          <div class="aui-list-item-inner">
-                              <div class="aui-list-item-label">
-                                卧&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;室
-                              </div>
-                              <div class="aui-list-item-input">
-                                  <input type="text" placeholder="">
+                                  <input type="text" placeholder="选择" readonly="readonly" id="Fx" name="renting_type">
                               </div>
                           </div>
                       </li>
                       <li class="aui-list-item">
                 <div class="aui-list-item-inner">
                   <div class="aui-list-item-label">
-                    租&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;金
+                    期望租金
                   </div>
                   <div class="aui-list-item-input">
-                      <input type="text" placeholder="">
+                      <input type="text" placeholder="" name="price" id="price">
                   </div>
+                  <div class="aui-list-item-right">/月</div>
                 </div>
             </li>
                   </ul>
-                  <section class="aui-content-padded">
-                      <textarea placeholder="描述补充..."></textarea>
-                  </section>
-                  <p class="aui-text-center aui-margin-t-15">上传照片</p>
-                  <section class="aui-content-padded oss">
-                      <div class="aui-row aui-row-padded">
-                        <div class="aui-col-xs-4 image-item">
-                            <input type="hidden" >
-                            <img src="../../image/demo1.png" class="notes-image">
-                            <div class="delete-btn">
-                                <i class="aui-iconfont aui-icon-trash"></i>
-                            </div>
-                        </div>
-                          <div class="aui-col-xs-4 add-photos">
-                              <div class="aui-border aui-text-center">
-                                  <i class="aui-iconfont aui-icon-plus"></i>
-                              </div>
-                          </div>
-                      </div>
-                  </section>
-                  <div class="aui-btn aui-btn-block keep">发布</div>
+                  <div class="aui-btn aui-btn-block keep" onclick="fnsucFb()">发布</div>
 </body>
 <script type="text/javascript" src="../../script/api.js" ></script>
+<script type="text/javascript" src="../../script/Map.js" ></script>
+<script type="text/javascript" src="../../script/aui-toast.js" ></script>
 <script type="text/javascript">
     apiready = function(){
         api.parseTapmode();
     }
-    function fnopensheelt() {
-      // 打开身份选择
-      var Button = ['业主', '个人', '中介'];
-      api.actionSheet({
-      title: '请选择身份',
-      cancelTitle: '取消',
-      buttons: Button
-      }, function(ret, err) {
-      var index = ret.buttonIndex;
-      if(index != 4){
-      var xl = $api.byId('xl')
-      var bHtml = Button[index-1]
-      $api.val(xl,bHtml);
-      $api.css(xl,'color:#2d2d2d;');
-    }
-    });
-    }
     function fnopensheelt1() {
       // 打开放行选择
-      var Button = ['一室', '两室','三室'];
+      var Button = ['整租', '合租'];
       api.actionSheet({
       title: '请选择身份',
       cancelTitle: '取消',
       buttons: Button
       }, function(ret, err) {
       var index = ret.buttonIndex;
-      if(index != 4){
+      if(index != 3){
       var fx = $api.byId('Fx')
       var bHtml = Button[index-1]
       $api.val(fx,bHtml);
       $api.css(fx,'color:#2d2d2d;');
     }
     });
+    }
+    function fnsucFb() {
+      var nameValue = $api.val($api.byId('name'));
+      var phoneValue = $api.val($api.byId('phone'));
+      var addInfoValue = $api.val($api.byId('info'));
+      var lnValue = $api.val($api.byId('ln'));
+      var laValue = $api.val($api.byId('la'));
+      var typeValue = $api.val($api.byId('Fx'));
+      var priceValue = $api.val($api.byId('price'));
+      var pattern = /^[\u4E00-\u9FA5]{1,4}$/; //中文姓名验证正则
+      var pattern1 = /^1[3458][0-9]{9}$/; //手机号正则验证
+      var userInfo= $api.getStorage('userInfo');
+      var toast = new auiToast();
+      if(!pattern.test(nameValue)){
+        api.toast({
+            msg: '姓名格式不正确或者位数不正确',
+            duration: 2000,
+            location: 'middle'
+        });
+        return;
+      }
+      if(!pattern1.test(phoneValue)){
+        api.toast({
+            msg: '号码格式不正确或者位数不正确',
+            duration: 2000,
+            location: 'middle'
+        });
+        return;
+      }
+      if(!addInfoValue){
+        api.toast({
+            msg: '请选择位置',
+            duration: 2000,
+            location: 'middle'
+        });
+        return;
+      }
+      if(!typeValue){
+        api.toast({
+            msg: '请选择求租类型',
+            duration: 2000,
+            location: 'middle'
+        });
+        return;
+      }
+      if(!priceValue){
+        api.toast({
+            msg: '请填写您的期望租金',
+            duration: 2000,
+            location: 'middle'
+        });
+        return;
+      }
+      api.ajax({
+          url: 'http://lhtcshop.com/public/index/Ajax/release_renting',
+          method: 'post',
+          data: {
+              values: {
+                 uid:userInfo.id,
+                 name:nameValue,
+                 price: priceValue,
+                 phone:phoneValue,
+                 address:addInfoValue,
+                 renting_type:typeValue,
+                 la:laValue,
+                 ln:lnValue
+              },
+          }
+      },function(ret, err){
+        console.log(JSON.stringify(ret))
+          if (ret.code=='success') {
+            toast.loading({
+                  title:"提交中",
+                  duration:2000
+              },function(res){ 
+                  setTimeout(function(){
+                      toast.hide();
+                      api.toast({
+                          msg:ret.Msg + '请前往首页查看',
+                          duration: 4000,
+                          location: 'bottom'
+                      });
+                      api.openWin({
+                          name: 'index',
+                          url: '../../index.html',
+                          pageParam: {
+                              name: 'test'
+                          }
+                      });
+                      window.location.reload()
+                  }, 3000)
+              });
+
+          } else {
+            api.toast({
+                msg: ret.Msg ,
+                duration: 2000,
+                location: 'bottom'
+            });
+          }
+      });
     }
 </script>
 </html>
