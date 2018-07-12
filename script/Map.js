@@ -18,7 +18,29 @@ var map,
         if (ret && ret.status) {
           map.initMapSDK(function(ret,err) {
         if (ret.status) {
-            alert('地图初始化成功，可以从百度地图服务器检索信息了！');
+          map.getLocation({
+              accuracy: '100m',
+              autoStop: true,
+              filter: 1
+          }, function(ret, err){
+              api.hideProgress();
+              if(ret.status){
+                  lat = ret.lat;
+                  lon = ret.lon;
+                  //设置地图中心
+                  map.setCenter({
+                      coords: {
+                          lon: lon,
+                          lat: lat
+                      },
+                      animation:true
+                  });
+                  getNameFromCoords();
+                  $api.val($api.byId("ln"),lon);
+                  $api.val($api.byId("la"),lat);
+              }
+
+          });
         }else {
           {
             alert(JSON.stringify(err))
