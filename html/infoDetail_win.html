@@ -21,7 +21,10 @@
           height: 1.2rem;
           font-size: 1.2rem;
           line-height: 1rem;
+<<<<<<< HEAD
           width: 100%;
+=======
+>>>>>>> deadd48e33efd2cf312bb711d8cc191e8be96b03
         }
         .aui-bg-danger{
           background-color: #fe467a !important;
@@ -34,12 +37,32 @@
           <span class="aui-iconfont aui-icon-left"></span>
       </a>
       <div class="aui-title">二手详情</div>
+<<<<<<< HEAD
       <!-- <a class="aui-pull-right aui-btn" class="share" tapmode  onclick="fnOpenShareFrame()">
           <span class="aui-iconfont aui-icon-share"></span>
       </a> -->
   </header>
   <div id="main" class="flex-con">
   </div>
+=======
+      <a class="aui-pull-right aui-btn" class="share" tapmode  onclick="fnOpenShareFrame()">
+          <span class="aui-iconfont aui-icon-share"></span>
+      </a>
+  </header>
+  <div id="main" class="flex-con">
+  </div>
+  <footer class="aui-bar aui-bar-tab" id="footer">
+            <div class="aui-bar-tab-item aui-border-r" tapmode style="width: 5rem;" onclick="fnCall()">
+                 <i class="aui-iconfont aui-icon-phone"  style="color:#2d2d2d;"></i>
+                <div class="aui-bar-tab-label" style="color:#2d2d2d;">电话交流</div>
+            </div>
+            <div class="aui-bar-tab-item" tapmode style="width:5rem;">
+                <i class="aui-iconfont aui-icon-comment"  style="color:#2d2d2d;"></i>
+                <div class="aui-bar-tab-label"  style="color:#2d2d2d;">在线交流</div>
+            </div>
+            <div class="aui-bar-tab-item aui-bg-danger aui-text-white" tapmode style="width: auto;" onclick="fnopenLjBuy()">立即购买</div>
+        </footer>
+>>>>>>> deadd48e33efd2cf312bb711d8cc191e8be96b03
 </body>
 <script type="text/javascript" src="../script/api.js"></script>
 <script type="text/javascript">
@@ -58,9 +81,13 @@
                 y: headerPos.h,
                 w: 'auto',
                 h: 'auto',
+<<<<<<< HEAD
             },
             pageParam: {
                 wareId: api.pageParam.wareId
+=======
+                marginBottom:60,
+>>>>>>> deadd48e33efd2cf312bb711d8cc191e8be96b03
             },
             progress: {
                 type:'default',
@@ -70,6 +97,16 @@
         })
         fnInitEvent();
     };
+<<<<<<< HEAD
+=======
+    function fnCall() {
+      // 拨打电话
+      api.call({
+        type: 'tel_prompt',
+        number: '13080920872'
+});
+    }
+>>>>>>> deadd48e33efd2cf312bb711d8cc191e8be96b03
     // 分享
     function fnInitEvent() {
         api.addEventListener({

@@ -17,6 +17,7 @@
     </style>
 </head>
 <body>
+<<<<<<< HEAD
   <section>
     <div class="aui-card-list">
            <div class="aui-card-list-content">
@@ -124,6 +125,158 @@
           });
 
         }
+=======
+     <div class="aui-card-list">
+            <div class="aui-card-list-content">
+                <ul class="aui-list aui-media-list">
+                    <li class="aui-list-item aui-list-item-middle"  onclick="fnOpenList1();">
+                        <div class="aui-media-list-item-inner">
+                            <div class="aui-list-item-media" style="width: 2.5rem;">
+                                <img src="../image/Suitcase1.png" class="aui-img" >
+                            </div>
+                            <div class="aui-list-item-inner aui-list-item-arrow">
+                                <div class="aui-list-item-text">
+                                    <div class="aui-list-item-title">发职位找人才</div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="aui-list-item aui-list-item-middle" onclick="fnOpenResume();">
+                        <div class="aui-media-list-item-inner">
+                            <div class="aui-list-item-media" style="width: 2.5rem;">
+                                <img src="../image/WordDocument.png" class="" style="width:31px;height:37px;">
+                            </div>
+                            <div class="aui-list-item-inner aui-list-item-arrow">
+                                发简历找工作
+                            </div>
+                        </div>
+                    </li>
+                    <li class="aui-list-item aui-list-item-middle" onclick="fnOpenList3()">
+                        <div class="aui-media-list-item-inner">
+                            <div class="aui-list-item-media" style="width: 2.5rem;">
+                                <img src="../image/Bag.png" class="" style="width:31px;height:33px;">
+                            </div>
+                            <div class="aui-list-item-inner aui-list-item-arrow">
+                                二手物品
+                            </div>
+                        </div>
+                    </li>
+                    <li class="aui-list-item aui-list-item-middle" onclick="fnOpenList4();">
+                        <div class="aui-media-list-item-inner">
+                            <div class="aui-list-item-media" style="width: 2.5rem;">
+                                <img src="../image/Home.png" class="" style="height:33px;width:39px;margin-left:-3px">
+                            </div>
+                            <div class="aui-list-item-inner aui-list-item-arrow">
+                                本地服务
+                            </div>
+                        </div>
+                    </li>
+                    <li class="aui-list-item aui-list-item-middle" onclick="fnOpenList5()">
+                        <div class="aui-media-list-item-inner">
+                            <div class="aui-list-item-media" style="width: 2.5rem;">
+                                <img src="../image/MySpace.png" class="" style="width:32px;height:32px;">
+                            </div>
+                            <div class="aui-list-item-inner aui-list-item-arrow">
+                                租房服务
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <script type="text/javascript" src="script/api.js"></script>
+        <script type="text/javascript">
+         function fnOpenList1() {
+        // 打开发职位找人才窗口
+        api.actionSheet({
+        title: '请选择发布类型',
+        cancelTitle: '取消',
+        buttons:['全职招聘', '兼职招聘']
+        }, function(ret, err) {
+        var index = ret.buttonIndex;
+        if(index == 1){
+          api.openWin({
+              name: 'QzJob',
+              url: './Fabu/QzJob.html',
+              pageParam: {
+                  name: 'test'
+              }
+          });
+        }else if (index == 2) {
+          api.openWin({
+              name: 'JzJob',
+              url: './Fabu/JzJob.html',
+              pageParam: {
+                  name: 'test'
+              }
+          });
+        }else {
+        }
+      })
+    }
+         function fnOpenResume() {
+          //  打开发简历找工作窗口
+          api.openWin({
+              name: 'Resume_win',
+              url: './Fabu/Resume_win.html',
+              pageParam: {
+                  name: 'test'
+              }
+          });
+
+         }
+         function fnOpenList4() {
+        // 打开本地服务窗口
+        api.openWin({
+            name: 'Frame1List_win',
+            url: './Fabu/Frame1List_win.html',
+            pageParam: {
+                name: 'test'
+            }
+        });
+         }
+         function fnOpenList3() {
+        // 打开二手服务窗口
+        api.openWin({
+            name: 'Frame0List_win',
+            url: './Fabu/Frame0List_win.html',
+            pageParam: {
+                name: 'test'
+            }
+        });
+         }
+         function fnOpenList5() {
+        // 打开二手服务窗口
+        api.actionSheet({
+        title: '请选择发布类型',
+        cancelTitle: '取消',
+        buttons:['整租', '短租','合租']
+        }, function(ret, err) {
+        var index = ret.buttonIndex;
+        if(index == 1){
+          api.openWin({
+              name: 'ZzRelease',
+              url: './Fabu/ZzRelease.html',
+              pageParam: {
+                  name: 'test'
+              }
+          });
+        }else if (index == 2) {
+          api.openWin({
+              name: 'DzRelease',
+              url: './Fabu/DzRelease.html',
+              pageParam: {
+                  name: 'test'
+              }
+          });
+        }else if(index == 3){
+          alert(345)
+        }else {
+
+        }
+      });
+         }
+>>>>>>> deadd48e33efd2cf312bb711d8cc191e8be96b03
         </script>
 </body>
 </html>
