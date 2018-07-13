@@ -29,9 +29,10 @@
                                   <p class="aui-ellipsis-2">{{= it.t_name}}</p>
                               </div>
                           </div>
-                          <div class="aui-info-item aui-font-size-16" style="width:40%;color:#fe467a">{{= it.price}}</div>
+                          <div class="aui-info-item aui-font-size-16" style="width:40%;color:#fe467a">{{= it.price}}/天</div>
                       </div>
                       <div class="aui-ellipsis-2" style="font-size:0.7rem;color:#757575;margin-top:-0.4rem;">招聘人数：{{= it.people}}</div>
+                      <div class="aui-ellipsis-2" style="font-size:0.7rem;color:#757575;margin-top:0.4rem;">结算方式：{{= it.price_type}}</div>
                   </li>
                   <li class="aui-list-header aui-font-size-18">
                       职位详情
@@ -53,22 +54,6 @@
               地址详情
         </div>
     </div>
-    <div class="aui-content aui-margin-b-15" style="margin-bottom:0 !important;margin-top:200px">
-      <ul class="aui-list aui-media-list">
-          <li class="aui-list-header aui-font-size-18">
-              福利待遇
-          </li>
-          <li class="aui-list-item aui-list-item-arrow">
-              <div class="aui-media-list-item-inner">
-                  <div class="aui-list-item-inner">
-                      <div class="aui-list-item-text aui-ellipsis-2">
-                        {{= it.welfare}}
-                      </div>
-                  </div>
-              </div>
-          </li>
-      </ul>
-  </div>
   </script>
 </body>
 <script type="text/javascript" src="../../script/api.js"></script>
@@ -80,7 +65,7 @@
     }
     function fnJobid(wareId_) {
       api.ajax({
-          url: 'http://lhtcshop.com/public/index/Ajax/get_position',
+          url: 'http://lhtcshop.com/public/index/Ajax/get_jianzhis',
           method: 'post',
            data: {
              values: {

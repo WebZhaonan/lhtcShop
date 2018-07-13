@@ -197,7 +197,7 @@ function fnLogin() {
           });
           api.execScript({
                 name: 'root',//你要刷新winName
-                script: 'location.reload()'
+                script: 'jsfun'
             });
             api.openWin({
                 name: 'root',
@@ -206,6 +206,7 @@ function fnLogin() {
                     name: 'test'
                 }
             });
+
         } else {
           api.toast({
               msg:ret.Msg,

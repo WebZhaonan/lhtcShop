@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+  <html>
+  <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+      <title>title</title>
+      <link rel="stylesheet" type="text/css" href="../../css/api.css"/>
+      <link rel="stylesheet" type="text/css" href="../../css/aui.css"/>
+      <style>
+          body{
+
+          }
+      </style>
+  </head>
+  <body>
+    <header class="aui-bar aui-bar-nav" id="aui-header">
+        <a class="aui-btn aui-pull-left" tapmode onclick="closeWin()">
+            <span class="aui-iconfont aui-icon-left"></span>
+        </a>
+        <div class="aui-title">工作详情</div>
+    </header>
+    <footer class="aui-bar aui-bar-tab">
+            <div class="aui-bar-tab-item aui-border-r" tapmode style="width: 3rem;" onclick="fncall()">
+                <i class="aui-iconfont aui-icon-phone "></i>
+                <div class="aui-bar-tab-label ">电话</div>
+            </div>
+            <div class="aui-bar-tab-item" tapmode style="width: 3rem;">
+                <i class="aui-iconfont aui-icon-comment "></i>
+                <div class="aui-bar-tab-label ">咨询</div>
+            </div>
+            <div class="aui-bar-tab-item aui-bg-danger aui-text-white" tapmode style="width: auto;background:#fe467a !important;">立即申请</div>
+        </footer>
+  </body>
+  <script type="text/javascript" src="../../script/api.js"></script>
+  <script type="text/javascript">
+  apiready = function(){
+      api.parseTapmode();
+      var header = $api.byId('aui-header');
+      $api.fixStatusBar(header);
+      var headerPos = $api.offset(header);
+      var body_h = $api.offset($api.dom('body')).h;
+      api.openFrame({
+          name: 'JzJobdetail_frm',
+          url: 'JzJobdetail_frm.html',
+          bounces: true,
+          rect: {
+              x: 0,
+              y: headerPos.h,
+              w: 'auto',
+              h: 'auto',
+              marginBottom:60,
+          },
+          pageParam: {
+              wareId: api.pageParam.wareId
+          },
+          progress: {
+              type:'default',
+              title:'加载中.....',
+              text:'先喝会儿茶~~~'
+            },
+      })
+  };
+  // 拨打电话
+  // 拨打电话
+  var phone = '';
+  function fncall(){
+    api.call({
+        type: 'tel_prompt',
+        number: phone
+    });
+
+  }
+  function closeWin(){
+      api.closeWin({
+      });
+  }
+  </script>
+  </html>

@@ -168,7 +168,7 @@ function fnopenactionSheet() {
      });
      return;
    }
-   if(!G_nameValue){
+   if(!t_nameValue){
      api.toast({
          msg: '请填写公司名称',
          duration: 2000,
@@ -230,6 +230,7 @@ function fnopenactionSheet() {
        data: {
            values: {
               uid:userInfo.id,
+              name:nameValue,
               t_name:t_nameValue,
               price: monValue,
               people:numberValue,
@@ -249,18 +250,24 @@ function fnopenactionSheet() {
            },function(res){
                setTimeout(function(){
                    toast.hide();
-                   api.toast({
-                       msg:ret.Msg + '请前往首页查看',
-                       duration: 4000,
-                       location: 'bottom'
-                   });
-                   api.openWin({
-                       name: 'index',
-                       url: '../../index.html',
-                       pageParam: {
-                           name: 'test'
-                       }
-                   });
+                  api.alert({
+                      title: '提示',
+                      msg: ret.Msg + ',请前往首页查看',
+                  }, function(re, err){
+                      if( re ){
+                        alert(123)
+                        api.openWin({
+                            name: 'index',
+                            url: '../../index.html',
+                            pageParam: {
+                                name: 'test'
+                            }
+                        });
+                      }else{
+                           alert( JSON.stringify( err ) );
+                      }
+                  });
+
                    window.location.reload()
                }, 3000)
            });
