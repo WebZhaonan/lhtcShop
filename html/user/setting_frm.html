@@ -80,8 +80,6 @@
           }
       });
     }
-<<<<<<< HEAD
-
     function clearLoginInfo() {
       api.confirm({
           title: '提示',
@@ -90,9 +88,6 @@
       }, function(ret, err){
           if( ret.buttonIndex==1 ){
             $api.rmStorage('userInfo');
-            api.closeFrame({
-                  name: 'userWindow'
-                });
             api.execScript({
                   name: 'root',//你要刷新winName
                   script:'location.reload()'
@@ -111,7 +106,5 @@
 
 
       }
-=======
->>>>>>> deadd48e33efd2cf312bb711d8cc191e8be96b03
 </script>
 </html>

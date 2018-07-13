@@ -42,36 +42,7 @@
 </head>
 <body>
     <section class="aui-content aui-padded-l-5 aui-padded-r-10 aui-padded-t-5">
-<<<<<<< HEAD
         <div class="aui-row aui-row-padded" id="tem">
-=======
-        <div class="aui-row aui-row-padded">
-            <div class="aui-col-xs-6" onclick="fnOpenWareWin();">
-                <div class="aui-card-list">
-                    <div class="aui-card-list-content">
-                        <img src="../image/demo3.png">
-                    </div>
-                    <div class="aui-font-size-14">文字描述文字描述文字描述文字描述文字描述文字描述文字描述文字描述文字描述文字描述</div>
-                    <div class="aui-card-list-footer">
-                      <div class="price">价格：100</div>
-                      <div class="time">刚刚来过</div>
-                  </div>
-                </div>
-            </div>
-            <div class="aui-col-xs-6">
-                <div class="aui-card-list">
-                    <div class="aui-card-list-content">
-                        <img src="../image/demo3.png">
-                    </div>
-                    <div class="aui-font-size-14">文字描述文字描述文字描述文字描述文字描述文字描述文字描述文字描述文字描述文字描述</div>
-                    <div class="aui-card-list-footer">
-              <div class="price">价格：100</div>
-              <div class="time">刚刚来过</div>
-          </div>
-                </div>
-
-            </div>
->>>>>>> deadd48e33efd2cf312bb711d8cc191e8be96b03
         </div>
     </section>
     <script type="text/template" id="template">
@@ -97,7 +68,6 @@
         api.parseTapmode();
         fnGetInfo()
     };
-<<<<<<< HEAD
     function fnGetInfo(){
       api.ajax({
           url: 'http://lhtcshop.com/public/index/Ajax/get_ershou',
@@ -112,22 +82,14 @@
       });
 
     }
-=======
->>>>>>> deadd48e33efd2cf312bb711d8cc191e8be96b03
     // 打开二手物品详情Window，指定商品Id
     function fnOpenWareWin(wareId_) {
         api.openWin({
             name: 'infoDetail_win',
             url: './infoDetail_win.html',
-<<<<<<< HEAD
             pageParam: {
                 wareId: wareId_,
             },
-=======
-            // pageParam: {
-            //     wareId: wareId_,
-            // },
->>>>>>> deadd48e33efd2cf312bb711d8cc191e8be96b03
             animation: {
                 type: "fade"
             }
